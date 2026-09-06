@@ -261,6 +261,66 @@ html, body {
 }
 
 /* =====================================================
+   RESPONSIVE: HUD & NAV TABS
+   Below 1024px the HUD's 4 stat pills + title + character badges no
+   longer fit in one row (measured overflow: 50px at 960px, growing to
+   620px at 390px) and the nav tabs clip whole tabs off-screen with no way
+   to reach them (e.g. "Thống kê" becomes unclickable below ~700px) since
+   neither row could scroll or wrap. This is a real bug for a desktop app
+   too — a Tauri window resized smaller than 1024px hit it — not just a
+   phone/tablet concern the Vertical Slice DoD never promised (that only
+   commits to 1280×720 / 1920×1080, both unaffected by any of this).
+   ===================================================== */
+
+@media (max-width: 1024px) {
+  .hud {
+    padding: 0 1rem;
+  }
+
+  .hud-subtitle {
+    display: none;
+  }
+
+  .hud-stats {
+    gap: 0.5rem;
+  }
+
+  .hud-stat {
+    padding: 5px 8px;
+    gap: 6px;
+  }
+
+  /* Keep the icon + numeric value (still legible at a glance); drop the
+     label and mini progress bar, the two widest parts of each pill. */
+  .hud-stat-label,
+  .hud-stat-bar {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .hud-char-name {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Last resort before the age/money badges themselves get squeezed out:
+     drop the "LIFE" wordmark (pure branding, redundant once already
+     in-game) to keep the actually useful info — stats, age, money — on
+     screen without the HUD needing its own horizontal scroll. */
+  .hud {
+    padding: 0 0.6rem;
+  }
+  .hud-title-wrap {
+    display: none;
+  }
+  .hud-stats {
+    gap: 0.35rem;
+  }
+}
+
+/* =====================================================
    2. NAVIGATION TABS (NEVER STRETCHES)
    ===================================================== */
 
@@ -277,6 +337,17 @@ html, body {
   border-bottom: 1px solid var(--border-subtle);
   z-index: 15;
   flex-shrink: 0;
+}
+
+@media (max-width: 1024px) {
+  /* Guarantee every tab stays reachable: scroll horizontally instead of
+     clipping tabs off-screen with no way to get to them. */
+  .nav-tabs {
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
 }
 
 .nav-tab {
@@ -1029,14 +1100,54 @@ html, body {
 
 /* Character Creation Screen */
 .creation-screen {
-  min-height: 100vh;
+  /* height (not min-height) + overflow-y:auto makes this element its own
+     scroll container. Without it, content taller than the viewport (a
+     short/landscape window, a long name-validation message, etc.) grew
+     silently past 100vh and was clipped with no way to scroll to it,
+     since `body` has `overflow: hidden` globally. `safe center` keeps the
+     centering for the common case but — on engines that support it, which
+     includes the Chromium/WebView2 runtime this app ships in via Tauri —
+     falls back to top-aligned instead of clipping the start of the content
+     when it overflows. */
+  height: 100vh;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: safe center;
   padding: 2rem 1.5rem;
   position: relative;
   background: radial-gradient(circle at 50% 20%, #151e30 0%, #06090e 75%);
+}
+
+/* Life Summary screen (end of a run) — was entirely unstyled: no CSS rule
+   existed for .summary-screen or .summary-epitaph at all, so this content
+   rendered left-aligned at the raw viewport edge with no spacing between
+   sections instead of the centered, breathing layout every other screen
+   gets. This is the emotional payoff screen of the whole Vertical Slice
+   (blueprint §29/§7), so it matters more than most that it looks intentional. */
+.summary-screen {
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: safe center;
+  gap: 2rem;
+  padding: 3rem 1.5rem 4rem;
+  text-align: center;
+  position: relative;
+  background: radial-gradient(circle at 50% 15%, #151e30 0%, #06090e 75%);
+}
+
+.summary-epitaph {
+  font-family: var(--font-narrative);
+  font-size: 1.35rem;
+  font-style: italic;
+  color: var(--text-secondary);
+  max-width: 560px;
+  line-height: 1.6;
+  margin-top: 0.5rem;
 }
 
 .creation-hero {
@@ -1081,13 +1192,17 @@ html, body {
   margin-bottom: 8px;
 }
 
-.creation-options-grid {
+/* NOTE: these must match the classNames CharacterCreation.tsx actually
+   renders (.creation-options / .creation-option) — a prior mismatch here
+   (creation-options-grid / creation-option-btn) left the gender and
+   location buttons rendering with default browser button styling. */
+.creation-options {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
   gap: 10px;
 }
 
-.creation-option-btn {
+.creation-option {
   padding: 10px 12px;
   background: var(--bg-surface-elevated);
   border: 1px solid var(--border-subtle);
@@ -1100,12 +1215,12 @@ html, body {
   text-align: center;
 }
 
-.creation-option-btn:hover {
+.creation-option:hover {
   background: var(--bg-surface-hover);
   border-color: var(--border-medium);
 }
 
-.creation-option-btn.selected {
+.creation-option.selected {
   background: var(--gold-dim);
   border-color: var(--gold-primary);
   color: var(--gold-light);
