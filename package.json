@@ -1,0 +1,18 @@
+{
+  "name": "life-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck",
+    "validate:content": "pnpm --filter @life/validator start",
+    "sim": "pnpm --filter @life/sim start"
+  },
+  "devDependencies": {
+    "turbo": "^2.4.4",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.7"
+  }
+}
