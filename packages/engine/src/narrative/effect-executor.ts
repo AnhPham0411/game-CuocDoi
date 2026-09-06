@@ -242,8 +242,16 @@ export class EffectExecutor {
 
         case 'CREATE_NPC': {
           if (effect.npcPayload) {
+            // Defense in depth: never create a second relationship entry for
+            // an npcId that already exists. This should be unreachable now
+            // that EventSelector enforces `repeatable: false` as "at most
+            // once" (see event-selector.ts), but relying on that alone would
+            // mean any future content/engine bug that re-fires a CREATE_NPC
+            // effect corrupts state again with a duplicate — exactly the
+            // React "two children with the same key" bug this was found from.
+            const alreadyExists = current.relationships.some((r) => r.npcId === effect.npcPayload!.npcId);
             // Quota check (§43): activeRelationships <= 100
-            if (current.relationships.length < 100) {
+            if (!alreadyExists && current.relationships.length < 100) {
               const newRel: RelationshipState = {
                 npcId: effect.npcPayload.npcId,
                 name: effect.npcPayload.name,

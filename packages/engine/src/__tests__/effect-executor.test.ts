@@ -187,6 +187,33 @@ describe('EffectExecutor & Clamping Table Tests (E4)', () => {
     expect(created?.name).toBe('Bạn học đầu tiên');
   });
 
+  it('CREATE_NPC never produces a duplicate relationship for the same npcId (defense in depth for the E6 fix)', () => {
+    // Should be unreachable now that EventSelector enforces repeatable:false
+    // as "at most once" (event-selector.test.ts), but a duplicate npcId here
+    // is exactly what produced a real React "two children with the same
+    // key" warning on npc_first_crush — the executor itself must not trust
+    // that invariant to always hold upstream.
+    const char = createMockCharacter();
+    const effect: Effect = {
+      type: 'CREATE_NPC',
+      npcPayload: {
+        npcId: 'npc_first_crush',
+        name: 'Người thương đầu tiên',
+        relationshipType: 'romantic_interest',
+        initialCloseness: 40,
+        initialTrust: 30,
+        initialRespect: 50,
+        tier: 2,
+      },
+    };
+
+    const afterFirst = EffectExecutor.execute(char, [effect], prov).nextState;
+    expect(afterFirst.relationships.filter((r) => r.npcId === 'npc_first_crush')).toHaveLength(1);
+
+    const afterSecond = EffectExecutor.execute(afterFirst, [effect], prov).nextState;
+    expect(afterSecond.relationships.filter((r) => r.npcId === 'npc_first_crush')).toHaveLength(1);
+  });
+
   it('EDUCATION_CHANGE sets a valid level and ignores an invalid one (regression: was writing raw target as level via `as any`)', () => {
     // Real content bug found via B5 UI wiring: some events (e.g.
     // evt_teen_high_school_choice) write { target: 'education_track', value:

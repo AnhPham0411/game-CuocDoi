@@ -84,8 +84,21 @@ export class EventSelector {
 
       // 2. Check repetition limits
       const seenCount = context.seenEvents?.[event.id] ?? 0;
-      if (!event.repeatable && seenCount >= 3) {
-        continue; // Anti-repetition rule (§E6)
+      // `repeatable: false` means exactly that — a one-time milestone (first
+      // crush, first job, birth...) must never fire twice in one life, no
+      // matter how wide its age window is relative to its cooldown. The
+      // previous `seenCount >= 3` threshold let 30/56 non-repeatable events
+      // in real content (e.g. evt_teen_first_crush: age 12-14 but only an
+      // 18-month cooldown inside that 36-month window) fire 2-3 times per
+      // run — duplicating CREATE_NPC'd relationships (a real React
+      // duplicate-key warning on npc_first_crush is what surfaced this) and
+      // undermining the exact "no fake, repeated firsts" narrative integrity
+      // blueprint P3 asks for. Repeatable events are intentionally uncapped
+      // here — their frequency is governed by noveltyFactor's weight decay
+      // instead (§E6/§10), which is the right tool for "can recur, but
+      // increasingly rarely."
+      if (!event.repeatable && seenCount >= 1) {
+        continue;
       }
 
       // 3. Evaluate conditions
