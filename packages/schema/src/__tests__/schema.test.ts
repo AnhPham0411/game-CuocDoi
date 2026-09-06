@@ -143,6 +143,7 @@ function createSampleCharacter(seed = 1): CharacterState {
       family_responsibility: 50,
     },
     schemaVersion: 1,
+    idCounter: 0,
   };
 }
 

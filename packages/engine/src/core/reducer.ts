@@ -93,11 +93,18 @@ export class GameEngine {
     return outcome;
   }
 
-  public exportSave(slot: number = 1, isIronLife: boolean = false): SaveData {
+  /**
+   * `savedAt` is wall-clock metadata about *when the player saved*, not
+   * simulation state — it must come from the caller (real I/O), never be
+   * fabricated inside the engine. Passing it explicitly keeps `exportSave`
+   * itself a pure function of engine state, so two identical runs still
+   * produce byte-identical saves when given the same `savedAt` (L1).
+   */
+  public exportSave(slot: number = 1, isIronLife: boolean = false, savedAt: string = new Date(0).toISOString()): SaveData {
     return {
       slot,
       version: 1,
-      savedAt: new Date(1772800000000).toISOString(),
+      savedAt,
       rngSeed: this.state.rngSeed,
       characterState: this.state.character,
       worldState: {

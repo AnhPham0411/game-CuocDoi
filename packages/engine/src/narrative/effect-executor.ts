@@ -22,6 +22,17 @@ function clamp(value: number, min: number, max: number): number {
   return Math.max(min, Math.min(max, value));
 }
 
+/**
+ * Mints a deterministic, collision-free ID from the character's own monotonic
+ * counter — never Date.now()/Math.random() (blueprint L1: engine must be a
+ * pure, deterministic function of state + choice). Returns the id and the
+ * state with the counter advanced.
+ */
+function mintId(state: CharacterState, prefix: string): [string, CharacterState] {
+  const n = state.idCounter;
+  return [`${prefix}_${n}`, { ...state, idCounter: n + 1 }];
+}
+
 export class EffectExecutor {
   public static execute(
     state: CharacterState,
@@ -167,8 +178,11 @@ export class EffectExecutor {
           const { type, tags, emotionalWeight, importance, description, participants } =
             effect.memoryPayload;
 
+          const [memoryId, stateWithId] = mintId(current, 'mem');
+          current = stateWithId;
+
           const newMemory: Memory = {
-            id: `mem_${Date.now()}_${Math.floor(Math.random() * 1000)}`.slice(0, 20),
+            id: memoryId,
             timestamp: { year: 2000 + current.age, month: current.ageMonths + 1, day: 1 },
             age: current.age,
             type,
@@ -303,8 +317,10 @@ export class EffectExecutor {
 
         case 'SCHEDULE_EVENT': {
           if (effect.schedulePayload) {
+            const [schedId, stateWithId] = mintId(current, 'sched');
+            current = stateWithId;
             const sched: ScheduledEvent = {
-              id: `sched_${Date.now()}_${scheduledEvents.length}`,
+              id: schedId,
               eventId: effect.schedulePayload.eventId,
               triggerAge: effect.schedulePayload.targetAge,
               triggerAgeMonths: effect.schedulePayload.monthsFromNow ?? 0,

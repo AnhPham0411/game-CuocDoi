@@ -13,7 +13,16 @@ export class MemorySystem {
     return memories.filter((m) => m.type === type);
   }
 
-  public static compressIfExceedsLimit(memories: readonly Memory[], limit: number = 500): Memory[] {
+  /**
+   * `archiveId` must come from the caller's own deterministic ID source
+   * (e.g. CharacterState.idCounter) — never Date.now()/Math.random(), so
+   * that compression is reproducible from the same state + choices (L1).
+   */
+  public static compressIfExceedsLimit(
+    memories: readonly Memory[],
+    limit: number = 500,
+    archiveId: string = 'mem_summary_archive'
+  ): Memory[] {
     if (memories.length <= limit) return [...memories];
 
     const copy = [...memories];
@@ -25,7 +34,7 @@ export class MemorySystem {
 
     const allPrunedTags = Array.from(new Set(pruned.flatMap((m) => m.tags)));
     const summaryMemory: Memory = {
-      id: `mem_summary_archive_${Date.now()}`,
+      id: archiveId,
       timestamp: { year: 2000, month: 1, day: 1 },
       age: kept[kept.length - 1]?.age ?? 0,
       type: 'misc',

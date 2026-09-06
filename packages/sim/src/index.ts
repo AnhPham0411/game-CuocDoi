@@ -238,6 +238,7 @@ export function runSimulation(config: SimConfig, customDb?: EventDatabase): SimR
         family_responsibility: 50,
       },
       schemaVersion: 1,
+      idCounter: 0,
     };
 
     const engine = new GameEngine(initialCharacter, db, lifeSeed);

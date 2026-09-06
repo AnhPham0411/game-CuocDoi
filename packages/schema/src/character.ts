@@ -284,5 +284,11 @@ export const CharacterStateSchema = z.object({
 
   // Meta
   schemaVersion: z.literal(1).default(1),
+  /**
+   * Monotonic counter used to mint deterministic, collision-free IDs
+   * (memories, scheduled events, ...) without touching Date.now()/Math.random().
+   * See docs/ADR/001-determinism.md — L1.
+   */
+  idCounter: z.number().int().min(0).default(0),
 });
 export type CharacterState = z.infer<typeof CharacterStateSchema>;

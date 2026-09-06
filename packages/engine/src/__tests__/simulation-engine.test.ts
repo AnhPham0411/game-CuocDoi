@@ -77,6 +77,7 @@ function createNewBornCharacter(seed = 100): CharacterState {
       family_responsibility: 50,
     },
     schemaVersion: 1,
+    idCounter: 0,
   };
 }
 
@@ -321,6 +322,85 @@ describe('Master Simulation Engine & Blueprint §99 Verification (Gate G1)', () 
     expect(saveA).toEqual(saveB);
   });
 
+  it('golden replay: identical save even when runs are separated by real wall-clock time and exercise MEMORY_ADD/SCHEDULE_EVENT (regression guard for L1)', async () => {
+    // This is the regression test for the bug found in code review: memory
+    // and scheduled-event IDs were minted from Date.now()/Math.random(),
+    // which made two runs of the exact same RunLog diverge whenever they
+    // happened to execute at different wall-clock moments — exactly the kind
+    // of gap a real player introduces just by taking longer to click. The
+    // two earlier determinism tests never caught it because their fixture
+    // events never reach a MEMORY_ADD or SCHEDULE_EVENT effect. This one
+    // does, and it inserts a real delay between the two runs.
+    const db = new EventDatabase();
+    db.loadBulk([
+      {
+        id: 'evt_memory_and_schedule',
+        schemaVersion: 1,
+        contentVersion: 1,
+        category: 'LIFE',
+        importance: 50,
+        decisionType: 'INSTANT',
+        title: 'A day to remember',
+        description: 'Something happens that you will not forget.',
+        conditions: [{ type: 'age', min: 0, max: 20 }],
+        weight: 100,
+        choices: [
+          {
+            id: 'remember_it',
+            text: 'Take it in',
+            effects: [
+              {
+                type: 'MEMORY_ADD',
+                memoryPayload: {
+                  type: 'family',
+                  tags: ['golden_replay_probe'],
+                  emotionalWeight: 50,
+                  importance: 50,
+                },
+              },
+              {
+                type: 'SCHEDULE_EVENT',
+                schedulePayload: { eventId: 'evt_memory_and_schedule', targetAge: 25, monthsFromNow: 0, priority: 1 },
+              },
+            ],
+          },
+        ],
+        cooldownMonths: 0,
+        tags: ['probe'],
+        maxChainDepth: 5,
+        repeatable: true,
+        isWowMoment: false,
+      },
+    ]);
+
+    const SEED = 777;
+    const runLife = (): GameEngine => {
+      const engine = new GameEngine(createNewBornCharacter(SEED), db, SEED);
+      for (let turn = 0; turn < 10; turn++) {
+        const evt = engine.nextTurn(3);
+        engine.makeChoice(evt.choices[0]!.id);
+      }
+      return engine;
+    };
+
+    const engineA = runLife();
+    await new Promise((resolve) => setTimeout(resolve, 50)); // real wall-clock gap
+    const engineB = runLife();
+
+    const saveA = engineA.exportSave();
+    const saveB = engineB.exportSave();
+
+    // Same RunLog -> byte-identical save, regardless of when it was produced.
+    expect(JSON.stringify(saveA)).toEqual(JSON.stringify(saveB));
+
+    // And the bug's specific symptom: memory/scheduled-event IDs must be
+    // stable, not derived from the clock.
+    expect(saveA.characterState.memories.map((m) => m.id)).toEqual(
+      saveB.characterState.memories.map((m) => m.id)
+    );
+    expect(saveA.characterState.memories.length).toBeGreaterThan(0);
+  });
+
   it('satisfies Blueprint §99: same seed but different choices generate radically different lives', () => {
     const db = buildTestDatabase();
     const SEED = 98765;
@@ -360,9 +440,14 @@ describe('Master Simulation Engine & Blueprint §99 Verification (Gate G1)', () 
     // 3. Check memory differences
     expect(state1.memories.length).not.toEqual(state2.memories.length);
 
-    // 4. Divergence rate between the two paths
-    const commonEvents = seenEvents1.filter((id) => seenEvents2.includes(id));
-    const divergencePercent = ((seenEvents1.length - commonEvents.length) / seenEvents1.length) * 100;
+    // 4. Divergence rate between the two paths.
+    // NOTE: this fixture's event pool is intentionally tiny (4 events) so
+    // that the test runs fast and deterministically; it cannot exhibit the
+    // full ≥40% event-divergence bar from Gate G1 (ROADMAP.md), which is
+    // measured against real content by `pnpm sim` (see packages/sim).
+    // What this test *can* prove with 4 events is that the exact sequence of
+    // events experienced differs when choices differ — asserted below.
+    expect(seenEvents1).not.toEqual(seenEvents2);
 
     // Blueprint §99 criteria: two runs diverge naturally
     expect(state1).not.toEqual(state2);
