@@ -29,8 +29,9 @@ export function RelationshipsTab({ character }: { character: UICharacterState })
 
   return (
     <div className="tab-panel">
-      <h2 style={{ fontFamily: 'var(--font-narrative)', fontSize: '1.5rem', color: 'var(--color-text-primary)', marginBottom: 'var(--space-5)' }}>
-        Mối quan hệ ({character.relationships.length} người)
+      <h2 className="tab-panel-title">
+        <span>💛 Mối quan hệ</span>
+        <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontFamily: 'var(--font-ui)', fontWeight: 600 }}>{character.relationships.length} người</span>
       </h2>
       <div className="relationship-list">
         {character.relationships.map(npc => (
@@ -85,8 +86,9 @@ export function FamilyTab({ character }: { character: UICharacterState }) {
 
   return (
     <div className="tab-panel">
-      <h2 style={{ fontFamily: 'var(--font-narrative)', fontSize: '1.5rem', color: 'var(--color-text-primary)', marginBottom: 'var(--space-5)' }}>
-        Gia đình
+      <h2 className="tab-panel-title">
+        <span>🏠 Gia đình</span>
+        <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontFamily: 'var(--font-ui)', fontWeight: 600 }}>{family.length} thành viên</span>
       </h2>
       {family.length === 0 ? (
         <div className="empty-state">
@@ -150,8 +152,8 @@ const CAREER_STAT_COLORS = {
 export function CareerTab({ character }: { character: UICharacterState }) {
   return (
     <div className="tab-panel">
-      <h2 style={{ fontFamily: 'var(--font-narrative)', fontSize: '1.5rem', color: 'var(--color-text-primary)', marginBottom: 'var(--space-2)' }}>
-        Sự nghiệp
+      <h2 className="tab-panel-title">
+        <span>💼 Sự nghiệp & Định hướng</span>
       </h2>
       {character.currentCareer && (
         <div className="panel-card" style={{ marginBottom: 'var(--space-5)', borderColor: 'rgba(212, 168, 85, 0.4)', background: 'var(--color-gold-dim)' }}>
@@ -224,8 +226,9 @@ export function MemoriesTab({ character }: { character: UICharacterState }) {
 
   return (
     <div className="tab-panel">
-      <h2 style={{ fontFamily: 'var(--font-narrative)', fontSize: '1.5rem', color: 'var(--color-text-primary)', marginBottom: 'var(--space-5)' }}>
-        Ký ức ({character.memories.length} kỷ niệm)
+      <h2 className="tab-panel-title">
+        <span>📖 Dòng thời gian ký ức</span>
+        <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontFamily: 'var(--font-ui)', fontWeight: 600 }}>{character.memories.length} kỷ niệm</span>
       </h2>
       <div className="memories-timeline">
         {character.memories.map(mem => (
@@ -266,8 +269,8 @@ export function StatisticsTab({ character }: { character: UICharacterState }) {
 
   return (
     <div className="tab-panel">
-      <h2 style={{ fontFamily: 'var(--font-narrative)', fontSize: '1.5rem', color: 'var(--color-text-primary)', marginBottom: 'var(--space-5)' }}>
-        Thống kê cuộc đời
+      <h2 className="tab-panel-title">
+        <span>📊 Thống kê cuộc đời</span>
       </h2>
 
       <div className="stats-grid" style={{ marginBottom: 'var(--space-6)' }}>

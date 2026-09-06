@@ -3,48 +3,77 @@ import type { UICharacterState } from '../hooks/useGameEngine';
 // ─── HUD ─────────────────────────────────────────────────────────────────────
 interface HUDProps { char: UICharacterState; }
 
+const STAT_ICONS = {
+  health: '❤️',
+  happiness: '😊',
+  stress: '⚡',
+  education: '🎓',
+};
+
 export function HUD({ char }: HUDProps) {
-  const formatMoney = (n: number) =>
-    n >= 1000000 ? `${(n / 1000000).toFixed(1)}M` :
-    n >= 1000 ? `${(n / 1000).toFixed(0)}K` : `${n}`;
+  const formatMoney = (n: number) => {
+    if (n >= 1000000) return `${(n / 1000000).toFixed(1)}M`;
+    if (n >= 1000) return `${(n / 1000).toFixed(0)}K`;
+    return `${n}`;
+  };
 
   return (
-    <div className="hud">
-      <span className="hud-title">LIFE</span>
+    <header className="hud">
+      <div className="hud-title-wrap">
+        <span className="hud-title">LIFE</span>
+        <span className="hud-subtitle">Mô Phỏng Cuộc Đời</span>
+      </div>
 
       <div className="hud-stats">
-        <HUDStat label="Sức khỏe" value={char.health} color="health" />
-        <HUDStat label="Hạnh phúc" value={char.happiness} color="happiness" />
-        <HUDStat label="Stress" value={char.stress} color="stress" />
-        <HUDStat label="Học vấn" value={char.education} color="education" />
+        <HUDStat icon={STAT_ICONS.health} label="Sức khỏe" value={char.health} color="health" />
+        <HUDStat icon={STAT_ICONS.happiness} label="Hạnh phúc" value={char.happiness} color="happiness" />
+        <HUDStat icon={STAT_ICONS.stress} label="Stress" value={char.stress} color="stress" />
+        <HUDStat icon={STAT_ICONS.education} label="Học vấn" value={char.education} color="education" />
       </div>
 
       <div className="hud-char">
         <span className="hud-age-badge">
-          {char.age === 0 ? 'Sơ sinh' : `${char.age} tuổi`}
+          🎂 {char.age === 0 ? 'Sơ sinh' : `${char.age} tuổi`}
         </span>
-        <span className="hud-money">₫{formatMoney(char.money)}</span>
+        <span className="hud-money">
+          💰 ₫{formatMoney(char.money)}
+        </span>
         {char.name && (
-          <span style={{ fontSize: '0.8rem', color: 'var(--color-text-secondary)' }}>
-            {char.name}
+          <span className="hud-char-name" title={char.name}>
+            👤 {char.name}
           </span>
         )}
       </div>
-    </div>
+    </header>
   );
 }
 
-function HUDStat({ label, value, color }: { label: string; value: number; color: string }) {
+function HUDStat({
+  icon,
+  label,
+  value,
+  color,
+}: {
+  icon: string;
+  label: string;
+  value: number;
+  color: string;
+}) {
   return (
     <div className="hud-stat">
-      <span className="hud-stat-label">{label}</span>
-      <div className="hud-stat-bar">
-        <div
-          className={`hud-stat-fill hud-stat-fill--${color}`}
-          style={{ width: `${Math.max(0, Math.min(100, value))}%` }}
-        />
+      <span style={{ fontSize: '0.9rem', lineHeight: 1 }} aria-hidden="true">{icon}</span>
+      <div className="hud-stat-info">
+        <span className="hud-stat-label">{label}</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '2px' }}>
+          <div className="hud-stat-bar">
+            <div
+              className={`hud-stat-fill hud-stat-fill--${color}`}
+              style={{ width: `${Math.max(0, Math.min(100, value))}%` }}
+            />
+          </div>
+          <span className="hud-stat-value">{Math.round(value)}</span>
+        </div>
       </div>
-      <span className="hud-stat-value">{Math.round(value)}</span>
     </div>
   );
 }
@@ -79,7 +108,7 @@ export function NavTabs({ active, onChange }: NavTabsProps) {
           onClick={() => onChange(tab.id)}
         >
           <span className="nav-tab-icon" aria-hidden="true">{tab.icon}</span>
-          {tab.label}
+          <span>{tab.label}</span>
         </button>
       ))}
     </nav>

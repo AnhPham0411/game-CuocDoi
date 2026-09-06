@@ -45,8 +45,8 @@ export function EventScreen({ event, character, onChoice }: EventScreenProps) {
         <div className={`event-card ${event.importance >= 81 ? 'glow-important' : ''}`}>
           {/* Visual header */}
           <div className="event-image-placeholder">
-            <span style={{ fontSize: '4rem', position: 'relative', zIndex: 1 }}>{catEmoji}</span>
-            <span className={`event-category-badge badge cat-${event.category}`}>
+            <span className="event-image-icon">{catEmoji}</span>
+            <span className={`event-category-badge cat-${event.category}`}>
               {event.category}
             </span>
           </div>
