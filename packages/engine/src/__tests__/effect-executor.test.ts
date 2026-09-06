@@ -187,6 +187,38 @@ describe('EffectExecutor & Clamping Table Tests (E4)', () => {
     expect(created?.name).toBe('Bạn học đầu tiên');
   });
 
+  it('EDUCATION_CHANGE sets a valid level and ignores an invalid one (regression: was writing raw target as level via `as any`)', () => {
+    // Real content bug found via B5 UI wiring: some events (e.g.
+    // evt_teen_high_school_choice) write { target: 'education_track', value:
+    // 'academic' } — a field EducationState doesn't have. The old code read
+    // `effect.target` itself as the new level (wrong field entirely) with an
+    // `as any` cast, so `education.level` could become "education_track" or
+    // "level" (the literal target-selector strings), which then rendered as
+    // NaN wherever the UI mapped level -> a display score.
+    const char = createMockCharacter();
+
+    const validResult = EffectExecutor.execute(
+      char,
+      [{ type: 'EDUCATION_CHANGE', target: 'level', value: 'bachelor' }],
+      prov
+    );
+    expect(validResult.nextState.education.level).toBe('bachelor');
+
+    const invalidResult = EffectExecutor.execute(
+      char,
+      [{ type: 'EDUCATION_CHANGE', target: 'education_track', value: 'academic' }],
+      prov
+    );
+    expect(invalidResult.nextState.education.level).toBe(char.education.level); // unchanged
+
+    const invalidLevelValue = EffectExecutor.execute(
+      char,
+      [{ type: 'EDUCATION_CHANGE', target: 'level', value: 'university_prep' }],
+      prov
+    );
+    expect(invalidLevelValue.nextState.education.level).toBe(char.education.level); // unchanged
+  });
+
   it('adds and removes traits without duplication', () => {
     const char = createMockCharacter();
     const addEffects: Effect[] = [

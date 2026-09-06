@@ -1,6 +1,7 @@
 import {
   CharacterState,
   Effect,
+  EducationLevelSchema,
   Memory,
   PersonalityAxis,
   Provenance,
@@ -304,14 +305,36 @@ export class EffectExecutor {
         }
 
         case 'EDUCATION_CHANGE': {
-          if (effect.target) {
-            const newEducation = {
-              ...current.education,
-              level: effect.target as any,
-              completed: effect.value === true,
-            };
+          // `target` selects which EducationState field to write, `value` is
+          // the new value for it — e.g. { target: 'level', value: 'bachelor' }
+          // or { target: 'completed', value: true }. Content that names a
+          // field EducationState doesn't have (e.g. an invented
+          // 'education_track') is a content bug, not a reason to write
+          // garbage into `level` — validate and warn instead of silently
+          // corrupting state with an `as any` cast (regression: an
+          // unrecognized level used to flow straight into education.level,
+          // producing NaN wherever the UI maps level -> a display score).
+          if (effect.target === 'level') {
+            const parsedLevel = EducationLevelSchema.safeParse(effect.value);
+            if (parsedLevel.success) {
+              const newEducation = { ...current.education, level: parsedLevel.data };
+              current = { ...current, education: newEducation };
+              deltas.push({ path: 'education', before: current.education, after: newEducation, provenance });
+            } else if (typeof console !== 'undefined') {
+              console.warn(
+                `[EffectExecutor] EDUCATION_CHANGE ignored: "${String(effect.value)}" is not a valid EducationLevel ` +
+                `(source: ${provenance.sourceEventId}/${provenance.sourceChoiceId})`
+              );
+            }
+          } else if (effect.target === 'completed') {
+            const newEducation = { ...current.education, completed: effect.value === true };
             current = { ...current, education: newEducation };
             deltas.push({ path: 'education', before: current.education, after: newEducation, provenance });
+          } else if (typeof console !== 'undefined') {
+            console.warn(
+              `[EffectExecutor] EDUCATION_CHANGE ignored: unknown target field "${String(effect.target)}" ` +
+              `(source: ${provenance.sourceEventId}/${provenance.sourceChoiceId})`
+            );
           }
           break;
         }

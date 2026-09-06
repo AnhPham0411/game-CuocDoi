@@ -185,7 +185,10 @@ function toUICharacterState(state: CharacterState, wowMomentsEncountered: number
     health: state.health,
     happiness: state.happiness,
     stress: state.stress,
-    education: EDUCATION_LEVEL_SCORE[state.education.level],
+    // Defensive fallback: a content bug that lets an unrecognized level
+    // through would otherwise render as NaN in the HUD's stat bar (see the
+    // EDUCATION_CHANGE fix in effect-executor.ts, the actual source of truth).
+    education: EDUCATION_LEVEL_SCORE[state.education.level] ?? 0,
     personality: { ...state.personality },
     currentCareer: state.career.jobTitle,
     relationships: toNPCList(state),

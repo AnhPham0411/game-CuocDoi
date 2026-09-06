@@ -1,7 +1,7 @@
 # LIFE — AUTOMATED BALANCE REPORT
 
-Generated: 2026-09-06T10:41:14.577Z
-Lives Simulated: 5000 | Seed: 42 | Time: 14.88s
+Generated: 2026-09-06T11:33:10.610Z
+Lives Simulated: 5000 | Seed: 42 | Time: 9.79s
 
 > ⚠️ **Content only defines age conditions up to 26, but each life is simulated up to ~75 years. Every turn past age 26 falls through to the filler event, so wealth/happiness/career averages below are diluted by 49+ years of "nothing happens" and do not reflect the Birth→26 slice this project is currently balancing (ROADMAP Gate G2).**
 
