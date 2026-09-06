@@ -81,6 +81,10 @@ export interface Memory {
   tags: string[];
   emotionalWeight: number;
   importance: number;
+  /** The event that created this memory — this, not `id` (the memory's own
+   * id), is what CausalGraphTracker.explain() can actually look up (it
+   * indexes nodes by eventId/choiceId/tags, never by a memory id). */
+  sourceEventId: string;
 }
 
 export interface UICharacterState {
@@ -172,6 +176,7 @@ function toMemoryList(state: CharacterState): Memory[] {
     tags: m.tags,
     emotionalWeight: m.emotionalWeight,
     importance: m.importance,
+    sourceEventId: m.sourceEventId,
   }));
 }
 
@@ -425,6 +430,10 @@ export function useGameEngine() {
     setState((prev) => ({ ...prev, phase: 'character_creation' }));
   }, []);
 
+  const explainOutcome = useCallback((outcomeId: string) => {
+    return engineRef.current?.getCausalTracker().explain(outcomeId) ?? [];
+  }, []);
+
   return {
     state,
     startGame,
@@ -432,5 +441,6 @@ export function useGameEngine() {
     continueAfterWow,
     returnToMenu,
     goToCreation,
+    explainOutcome,
   };
 }

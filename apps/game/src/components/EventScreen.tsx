@@ -1,4 +1,5 @@
 import type { ActiveEvent, UICharacterState } from '../hooks/useGameEngine';
+import { useState, useEffect } from 'react';
 
 interface EventScreenProps {
   event: ActiveEvent;
@@ -31,6 +32,28 @@ const importanceLabel = (n: number) => {
 };
 
 export function EventScreen({ event, character, onChoice }: EventScreenProps) {
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  // Depend on the whole `event` object, not `event.id`: useGameEngine's
+  // toActiveEvent() builds a fresh object every turn, but the id string can
+  // repeat on consecutive turns (e.g. the filler event is
+  // `evt_filler_generic_${age}`, stable for the ~2 turns spent at one age).
+  // Keying on event.id alone meant this effect never re-fired when that
+  // happened, leaving isTransitioning stuck true and every choice button
+  // permanently disabled — a real softlock reproduced by playing past the
+  // first same-age filler repeat.
+  useEffect(() => {
+    setIsTransitioning(false);
+  }, [event]);
+
+  const handleChoice = (choiceId: string) => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setTimeout(() => {
+      onChoice(choiceId);
+    }, 300);
+  };
+
   const imp = importanceLabel(event.importance);
   const catEmoji = CATEGORY_EMOJI[event.category] ?? '📍';
   const isIrreversible = event.decisionType === 'IRREVERSIBLE';
@@ -42,7 +65,7 @@ export function EventScreen({ event, character, onChoice }: EventScreenProps) {
       <div className="event-main-col">
 
         {/* Event card */}
-        <div className={`event-card ${event.importance >= 81 ? 'glow-important' : ''}`}>
+        <div key={event.id} className={`event-card ${event.importance >= 81 ? 'glow-important' : ''} ${isTransitioning ? 'event-exiting' : ''}`}>
           {/* Visual header */}
           <div className="event-image-placeholder">
             <span className="event-image-icon">{catEmoji}</span>
@@ -83,7 +106,8 @@ export function EventScreen({ event, character, onChoice }: EventScreenProps) {
               key={choice.id}
               id={`choice-${choice.id}`}
               className="choice-btn"
-              onClick={() => onChoice(choice.id)}
+              onClick={() => handleChoice(choice.id)}
+              disabled={isTransitioning}
               title={isIrreversible ? 'Quyết định này không thể thay đổi' : undefined}
             >
               <span className="choice-btn-letter">{CHOICE_LETTERS[i] ?? String.fromCharCode(65 + i)}</span>

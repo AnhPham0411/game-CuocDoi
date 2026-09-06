@@ -1,4 +1,5 @@
 import type { UICharacterState } from '../hooks/useGameEngine';
+import { useState } from 'react';
 
 // ─── Relationships Tab ────────────────────────────────────────────────────────
 
@@ -212,7 +213,9 @@ const MEMORY_EMOJI: Record<string, string> = {
   trauma: '⚡', loss: '🕯️', hobby: '🎨', sport: '⚽',
 };
 
-export function MemoriesTab({ character }: { character: UICharacterState }) {
+export function MemoriesTab({ character, explainOutcome }: { character: UICharacterState; explainOutcome?: (id: string) => any[] }) {
+  const [explaining, setExplaining] = useState<string | null>(null);
+
   if (character.memories.length === 0) {
     return (
       <div className="tab-panel">
@@ -223,6 +226,27 @@ export function MemoriesTab({ character }: { character: UICharacterState }) {
       </div>
     );
   }
+
+  const renderExplanation = (mem: { id: string; sourceEventId: string }) => {
+    if (!explainOutcome || explaining !== mem.id) return null;
+    // Query by the event that created this memory, not the memory's own id —
+    // CausalGraphTracker.explain() indexes nodes by eventId/choiceId/tags,
+    // never by a memory id, so passing mem.id here always returned an empty
+    // chain (button did nothing, no error — silently broken).
+    const steps = explainOutcome(mem.sourceEventId);
+    if (!steps || steps.length === 0) return null;
+    
+    return (
+      <div style={{ marginTop: 'var(--space-3)', padding: 'var(--space-3)', background: 'var(--color-surface-2)', borderRadius: 'var(--radius-sm)', borderLeft: '2px solid var(--color-gold)' }}>
+        <div style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)', marginBottom: 'var(--space-2)' }}>Chuỗi sự kiện dẫn đến ký ức này:</div>
+        <ul style={{ margin: 0, paddingLeft: 'var(--space-4)', fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>
+          {steps.map((step, idx) => (
+            <li key={idx}>Tuổi {step.atAge}: {step.title} — <i>{step.choiceText}</i></li>
+          ))}
+        </ul>
+      </div>
+    );
+  };
 
   return (
     <div className="tab-panel">
@@ -246,7 +270,16 @@ export function MemoriesTab({ character }: { character: UICharacterState }) {
             )}
             <div style={{ marginTop: 'var(--space-2)', display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
               <EmotionBar weight={mem.emotionalWeight} />
+              {explainOutcome && (
+                <button 
+                  style={{ fontSize: '0.65rem', background: 'none', border: '1px solid var(--color-border)', borderRadius: '4px', padding: '2px 6px', color: 'var(--color-text-muted)', cursor: 'pointer' }}
+                  onClick={() => setExplaining(explaining === mem.id ? null : mem.id)}
+                >
+                  Vì sao?
+                </button>
+              )}
             </div>
+            {renderExplanation(mem)}
           </div>
         ))}
       </div>

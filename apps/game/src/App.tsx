@@ -24,6 +24,7 @@ export default function App() {
     continueAfterWow,
     returnToMenu,
     goToCreation,
+    explainOutcome,
   } = useGameEngine();
 
   const [activeTab, setActiveTab] = useState<Tab>('event');
@@ -52,6 +53,7 @@ export default function App() {
       <LifeSummaryScreen
         character={state.character}
         onRestart={goToCreation}
+        explainOutcome={explainOutcome}
       />
     );
   }
@@ -104,7 +106,7 @@ export default function App() {
         )}
 
         {activeTab === 'memories' && (
-          <MemoriesTab character={state.character} />
+          <MemoriesTab character={state.character} explainOutcome={explainOutcome} />
         )}
 
         {activeTab === 'statistics' && (

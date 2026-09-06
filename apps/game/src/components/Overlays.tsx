@@ -1,4 +1,5 @@
 import type { ActiveEvent } from '../hooks/useGameEngine';
+import { useState } from 'react';
 
 interface WowMomentProps {
   event: ActiveEvent;
@@ -135,9 +136,12 @@ export function MenuScreen({ onStartNew }: MenuScreenProps) {
 interface LifeSummaryProps {
   character: ReturnType<typeof import('../hooks/useGameEngine').useGameEngine>['state']['character'];
   onRestart: () => void;
+  explainOutcome?: (id: string) => any[];
 }
 
-export function LifeSummaryScreen({ character, onRestart }: LifeSummaryProps) {
+export function LifeSummaryScreen({ character, onRestart, explainOutcome }: LifeSummaryProps) {
+  const [explaining, setExplaining] = useState<string | null>(null);
+
   const topMemories = [...character.memories]
     .sort((a, b) => Math.abs(b.emotionalWeight) - Math.abs(a.emotionalWeight))
     .slice(0, 5);
@@ -169,10 +173,38 @@ export function LifeSummaryScreen({ character, onRestart }: LifeSummaryProps) {
           <div className="panel-card-title">📖 Những ký ức đáng nhớ nhất</div>
           {topMemories.map(mem => (
             <div key={mem.id} style={{ marginBottom: 'var(--space-4)', paddingBottom: 'var(--space-4)', borderBottom: '1px solid var(--color-border)' }}>
-              <div style={{ fontSize: '0.65rem', color: 'var(--color-gold)', marginBottom: '4px' }}>{mem.age} tuổi</div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
+                <div style={{ fontSize: '0.65rem', color: 'var(--color-gold)' }}>{mem.age} tuổi</div>
+                {explainOutcome && (
+                  <button 
+                    style={{ fontSize: '0.65rem', background: 'none', border: '1px solid var(--color-border)', borderRadius: '4px', padding: '2px 6px', color: 'var(--color-text-muted)', cursor: 'pointer' }}
+                    onClick={() => setExplaining(explaining === mem.id ? null : mem.id)}
+                  >
+                    Vì sao?
+                  </button>
+                )}
+              </div>
               <div style={{ fontFamily: 'var(--font-narrative)', fontSize: '0.95rem', color: 'var(--color-text-secondary)' }}>
                 {mem.description}
               </div>
+              {explainOutcome && explaining === mem.id && (() => {
+                // Query by the event that created this memory, not the
+                // memory's own id — see the matching fix in Tabs.tsx's
+                // MemoriesTab for why explainOutcome(mem.id) always returned
+                // an empty chain (silently broken: no visible change, no error).
+                const steps = explainOutcome(mem.sourceEventId);
+                if (!steps || steps.length === 0) return null;
+                return (
+                  <div style={{ marginTop: 'var(--space-3)', padding: 'var(--space-3)', background: 'var(--color-surface-2)', borderRadius: 'var(--radius-sm)', borderLeft: '2px solid var(--color-gold)' }}>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)', marginBottom: 'var(--space-2)' }}>Chuỗi sự kiện dẫn đến ký ức này:</div>
+                    <ul style={{ margin: 0, paddingLeft: 'var(--space-4)', fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>
+                      {steps.map((step: any, idx: number) => (
+                        <li key={idx}>Tuổi {step.atAge}: {step.title} — <i>{step.choiceText}</i></li>
+                      ))}
+                    </ul>
+                  </div>
+                );
+              })()}
             </div>
           ))}
         </div>

@@ -21,6 +21,12 @@ export class CausalGraphTracker {
     return this.graph;
   }
 
+  public findNodeId(eventId: string, choiceId: string, atAge: number): string | undefined {
+    return this.graph.nodes.find(
+      n => n.eventId === eventId && n.choiceId === choiceId && n.atAge === atAge
+    )?.id;
+  }
+
   public recordDecision(
     eventId: string,
     choiceId: string,

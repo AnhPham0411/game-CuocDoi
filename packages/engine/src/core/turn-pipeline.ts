@@ -31,6 +31,7 @@ export interface PreparedTurn {
   event: EventDefinition;
   state: CharacterState;
   dueFromQueue: boolean;
+  triggeringSchedule?: ScheduledEvent;
 }
 
 export interface StepOutcome {
@@ -107,9 +108,10 @@ export class TurnPipeline {
 
     if (dueRes.readyEvents.length > 0 && dueRes.readyEvents[0]) {
       return {
-        event: dueRes.readyEvents[0],
+        event: dueRes.readyEvents[0].event,
         state,
         dueFromQueue: true,
+        triggeringSchedule: dueRes.readyEvents[0].schedule,
       };
     }
 
@@ -174,13 +176,21 @@ export class TurnPipeline {
 
     // 16. Record to Causal Graph (§40.16, §92)
     if (event.importance >= 30) {
+      const causedByNodeId = prepared.triggeringSchedule
+        ? context.causalTracker.findNodeId(
+            prepared.triggeringSchedule.provenance.sourceEventId,
+            prepared.triggeringSchedule.provenance.sourceChoiceId,
+            prepared.triggeringSchedule.provenance.atAge
+          )
+        : undefined;
+
       context.causalTracker.recordDecision(
         event.id,
         choice.id,
         state.age,
         event.title,
         choice.text,
-        undefined,
+        causedByNodeId,
         event.tags
       );
     }

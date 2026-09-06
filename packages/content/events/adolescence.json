@@ -1,91 +1,564 @@
 [
   {
     "id": "evt_teen_first_crush",
-    "schemaVersion": 1, "contentVersion": 1,
-    "category": "ROMANCE", "importance": 65, "decisionType": "SOCIAL",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "ROMANCE",
+    "importance": 65,
+    "decisionType": "SOCIAL",
     "title": "Rung động đầu đời",
     "description": "Bạn nhận ra mình thích một người trong lớp. Tim đập nhanh mỗi khi họ nhìn sang.",
-    "conditions": [{ "type": "age", "min": 12, "max": 14 }],
+    "conditions": [
+      {
+        "type": "and",
+        "conditions": [
+          {
+            "type": "age",
+            "min": 12,
+            "max": 14
+          },
+          {
+            "type": "personality",
+            "axis": "risk_tolerance",
+            "op": ">=",
+            "value": 50
+          }
+        ]
+      }
+    ],
     "weight": 120,
     "choices": [
       {
         "id": "confess_feelings",
         "text": "Viết thư tỏ tình gửi cho họ",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "personality", "target": "risk_tolerance", "value": 4 },
-          { "type": "MEMORY_ADD", "memoryPayload": { "type": "romance", "tags": ["first_crush", "confession", "teen_love"], "emotionalWeight": 85, "importance": 65 } },
-          { "type": "CREATE_NPC", "npcPayload": { "npcId": "npc_first_crush", "name": "Người thương đầu tiên", "relationshipType": "romantic_interest", "initialCloseness": 40, "initialTrust": 30, "initialRespect": 50, "tier": 2 } }
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "risk_tolerance",
+            "value": 4
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "romance",
+              "tags": [
+                "first_crush",
+                "confession",
+                "teen_love"
+              ],
+              "emotionalWeight": 85,
+              "importance": 65,
+              "description": "Nhịp đập loạn nhịp đầu đời mà bạn sẽ không quên."
+            }
+          },
+          {
+            "type": "CREATE_NPC",
+            "npcPayload": {
+              "npcId": "npc_first_crush",
+              "name": "Người thương đầu tiên",
+              "relationshipType": "romantic_interest",
+              "initialCloseness": 40,
+              "initialTrust": 30,
+              "initialRespect": 50,
+              "tier": 2
+            }
+          }
         ]
       },
       {
         "id": "admire_from_afar",
         "text": "Âm thầm ngắm nhìn từ xa, không dám nói",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "personality", "target": "neuroticism", "value": 3 },
-          { "type": "MEMORY_ADD", "memoryPayload": { "type": "romance", "tags": ["first_crush", "secret_love", "teen"], "emotionalWeight": 60, "importance": 65 } }
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "neuroticism",
+            "value": 3
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "romance",
+              "tags": [
+                "first_crush",
+                "secret_love",
+                "teen"
+              ],
+              "emotionalWeight": 60,
+              "importance": 65,
+              "description": "Nhịp đập loạn nhịp đầu đời mà bạn sẽ không quên."
+            }
+          }
         ]
       },
       {
         "id": "tell_best_friend",
         "text": "Kể cho bạn thân nghe và nhờ tư vấn",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "personality", "target": "agreeableness", "value": 2 },
-          { "type": "RELATIONSHIP_CHANGE", "relationshipPayload": { "target": "npc_first_friend", "field": "closeness", "delta": 10 } }
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "agreeableness",
+            "value": 2
+          },
+          {
+            "type": "RELATIONSHIP_CHANGE",
+            "relationshipPayload": {
+              "target": "npc_first_friend",
+              "field": "closeness",
+              "delta": 10
+            }
+          }
         ]
       }
     ],
-    "cooldownMonths": 18, "tags": ["romance", "teen", "first_crush"], "maxChainDepth": 5, "repeatable": false, "isWowMoment": true
+    "cooldownMonths": 18,
+    "tags": [
+      "romance",
+      "teen",
+      "first_crush"
+    ],
+    "maxChainDepth": 5,
+    "repeatable": false,
+    "isWowMoment": false
+  },
+  {
+    "id": "evt_teen_first_crush_alt",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "ROMANCE",
+    "importance": 65,
+    "decisionType": "SOCIAL",
+    "title": "Rung động đầu đời (Góc nhìn khác)",
+    "description": "Bạn nhận ra mình thích một người trong lớp. Tim đập nhanh mỗi khi họ nhìn sang.",
+    "conditions": [
+      {
+        "type": "and",
+        "conditions": [
+          {
+            "type": "age",
+            "min": 12,
+            "max": 14
+          },
+          {
+            "type": "personality",
+            "axis": "risk_tolerance",
+            "op": "<",
+            "value": 50
+          }
+        ]
+      }
+    ],
+    "weight": 120,
+    "choices": [
+      {
+        "id": "confess_feelings",
+        "text": "Viết thư tỏ tình gửi cho họ",
+        "effects": [
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "risk_tolerance",
+            "value": 4
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "romance",
+              "tags": [
+                "first_crush",
+                "confession",
+                "teen_love"
+              ],
+              "emotionalWeight": 85,
+              "importance": 65,
+              "description": "Nhịp đập loạn nhịp đầu đời mà bạn sẽ không quên."
+            }
+          },
+          {
+            "type": "CREATE_NPC",
+            "npcPayload": {
+              "npcId": "npc_first_crush",
+              "name": "Người thương đầu tiên",
+              "relationshipType": "romantic_interest",
+              "initialCloseness": 40,
+              "initialTrust": 30,
+              "initialRespect": 50,
+              "tier": 2
+            }
+          }
+        ]
+      },
+      {
+        "id": "admire_from_afar",
+        "text": "Âm thầm ngắm nhìn từ xa, không dám nói",
+        "effects": [
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "neuroticism",
+            "value": 3
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "romance",
+              "tags": [
+                "first_crush",
+                "secret_love",
+                "teen"
+              ],
+              "emotionalWeight": 60,
+              "importance": 65,
+              "description": "Nhịp đập loạn nhịp đầu đời mà bạn sẽ không quên."
+            }
+          }
+        ]
+      },
+      {
+        "id": "tell_best_friend",
+        "text": "Kể cho bạn thân nghe và nhờ tư vấn",
+        "effects": [
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "agreeableness",
+            "value": 2
+          },
+          {
+            "type": "RELATIONSHIP_CHANGE",
+            "relationshipPayload": {
+              "target": "npc_first_friend",
+              "field": "closeness",
+              "delta": 10
+            }
+          }
+        ]
+      }
+    ],
+    "cooldownMonths": 18,
+    "tags": [
+      "romance",
+      "teen",
+      "first_crush"
+    ],
+    "maxChainDepth": 5,
+    "repeatable": false,
+    "isWowMoment": false
   },
   {
     "id": "evt_teen_high_school_choice",
-    "schemaVersion": 1, "contentVersion": 1,
-    "category": "SCHOOL", "importance": 85, "decisionType": "IRREVERSIBLE",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "SCHOOL",
+    "importance": 85,
+    "decisionType": "IRREVERSIBLE",
     "title": "Chọn trường cấp 3",
     "description": "Sau khi tốt nghiệp cấp 2, bạn phải quyết định sẽ vào trường THPT nào. Đây là quyết định định hướng cả con đường học vấn và sự nghiệp tương lai.",
-    "conditions": [{ "type": "age", "min": 14, "max": 15 }],
+    "conditions": [
+      {
+        "type": "and",
+        "conditions": [
+          {
+            "type": "age",
+            "min": 14,
+            "max": 15
+          },
+          {
+            "type": "personality",
+            "axis": "empathy",
+            "op": ">=",
+            "value": 50
+          }
+        ]
+      }
+    ],
     "weight": 9999,
     "choices": [
       {
         "id": "chuyên_academic",
         "text": "Thi vào trường chuyên — học nặng nhưng mở nhiều cửa đại học",
         "effects": [
-          { "type": "EDUCATION_CHANGE", "target": "education_track", "value": "academic" },
-          { "type": "STAT_CHANGE", "field": "personality", "target": "discipline", "value": 5 },
-          { "type": "STAT_CHANGE", "field": "stress", "target": "stress", "value": 15 },
-          { "type": "MEMORY_ADD", "memoryPayload": { "type": "school", "tags": ["high_school_choice", "academic_track", "milestone"], "emotionalWeight": 50, "importance": 85 } }
+          {
+            "type": "EDUCATION_CHANGE",
+            "target": "education_track",
+            "value": "academic"
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "discipline",
+            "value": 5
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "stress",
+            "target": "stress",
+            "value": 15
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "school",
+              "tags": [
+                "high_school_choice",
+                "academic_track",
+                "milestone"
+              ],
+              "emotionalWeight": 50,
+              "importance": 85,
+              "description": "Kỷ niệm ngày đi học: thi vào trường chuyên — học nặng nhưng mở nhiều cửa đại học."
+            }
+          }
         ]
       },
       {
         "id": "regular_school",
         "text": "Trường phổ thông bình thường — cân bằng học và sống",
         "effects": [
-          { "type": "EDUCATION_CHANGE", "target": "education_track", "value": "general" },
-          { "type": "STAT_CHANGE", "field": "personality", "target": "extraversion", "value": 3 },
-          { "type": "MEMORY_ADD", "memoryPayload": { "type": "school", "tags": ["high_school_choice", "general_track", "milestone"], "emotionalWeight": 40, "importance": 85 } }
+          {
+            "type": "EDUCATION_CHANGE",
+            "target": "education_track",
+            "value": "general"
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "extraversion",
+            "value": 3
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "school",
+              "tags": [
+                "high_school_choice",
+                "general_track",
+                "milestone"
+              ],
+              "emotionalWeight": 40,
+              "importance": 85,
+              "description": "Kỷ niệm ngày đi học: trường phổ thông bình thường — cân bằng học và sống."
+            }
+          }
         ]
       },
       {
         "id": "vocational_school",
         "text": "Trường nghề — học kỹ năng thực tế và đi làm sớm",
         "effects": [
-          { "type": "EDUCATION_CHANGE", "target": "education_track", "value": "vocational" },
-          { "type": "STAT_CHANGE", "field": "personality", "target": "conscientiousness", "value": 4 },
-          { "type": "SKILL_CHANGE", "target": "trade_skills", "value": 10 },
-          { "type": "MEMORY_ADD", "memoryPayload": { "type": "school", "tags": ["high_school_choice", "vocational_track", "milestone"], "emotionalWeight": 35, "importance": 85 } }
+          {
+            "type": "EDUCATION_CHANGE",
+            "target": "education_track",
+            "value": "vocational"
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "conscientiousness",
+            "value": 4
+          },
+          {
+            "type": "SKILL_CHANGE",
+            "target": "trade_skills",
+            "value": 10
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "school",
+              "tags": [
+                "high_school_choice",
+                "vocational_track",
+                "milestone"
+              ],
+              "emotionalWeight": 35,
+              "importance": 85,
+              "description": "Kỷ niệm ngày đi học: trường nghề — học kỹ năng thực tế và đi làm sớm."
+            }
+          }
         ]
       }
     ],
-    "cooldownMonths": 9999, "tags": ["school", "milestone", "education", "irreversible"], "maxChainDepth": 5, "repeatable": false, "isWowMoment": true
+    "cooldownMonths": 9999,
+    "tags": [
+      "school",
+      "milestone",
+      "education",
+      "irreversible"
+    ],
+    "maxChainDepth": 5,
+    "repeatable": false,
+    "isWowMoment": false
+  },
+  {
+    "id": "evt_teen_high_school_choice_alt",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "SCHOOL",
+    "importance": 85,
+    "decisionType": "IRREVERSIBLE",
+    "title": "Chọn trường cấp 3 (Góc nhìn khác)",
+    "description": "Sau khi tốt nghiệp cấp 2, bạn phải quyết định sẽ vào trường THPT nào. Đây là quyết định định hướng cả con đường học vấn và sự nghiệp tương lai.",
+    "conditions": [
+      {
+        "type": "and",
+        "conditions": [
+          {
+            "type": "age",
+            "min": 14,
+            "max": 15
+          },
+          {
+            "type": "personality",
+            "axis": "empathy",
+            "op": "<",
+            "value": 50
+          }
+        ]
+      }
+    ],
+    "weight": 9999,
+    "choices": [
+      {
+        "id": "chuyên_academic",
+        "text": "Thi vào trường chuyên — học nặng nhưng mở nhiều cửa đại học",
+        "effects": [
+          {
+            "type": "EDUCATION_CHANGE",
+            "target": "education_track",
+            "value": "academic"
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "discipline",
+            "value": 5
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "stress",
+            "target": "stress",
+            "value": 15
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "school",
+              "tags": [
+                "high_school_choice",
+                "academic_track",
+                "milestone"
+              ],
+              "emotionalWeight": 50,
+              "importance": 85,
+              "description": "Kỷ niệm ngày đi học: thi vào trường chuyên — học nặng nhưng mở nhiều cửa đại học."
+            }
+          }
+        ]
+      },
+      {
+        "id": "regular_school",
+        "text": "Trường phổ thông bình thường — cân bằng học và sống",
+        "effects": [
+          {
+            "type": "EDUCATION_CHANGE",
+            "target": "education_track",
+            "value": "general"
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "extraversion",
+            "value": 3
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "school",
+              "tags": [
+                "high_school_choice",
+                "general_track",
+                "milestone"
+              ],
+              "emotionalWeight": 40,
+              "importance": 85,
+              "description": "Kỷ niệm ngày đi học: trường phổ thông bình thường — cân bằng học và sống."
+            }
+          }
+        ]
+      },
+      {
+        "id": "vocational_school",
+        "text": "Trường nghề — học kỹ năng thực tế và đi làm sớm",
+        "effects": [
+          {
+            "type": "EDUCATION_CHANGE",
+            "target": "education_track",
+            "value": "vocational"
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "conscientiousness",
+            "value": 4
+          },
+          {
+            "type": "SKILL_CHANGE",
+            "target": "trade_skills",
+            "value": 10
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "school",
+              "tags": [
+                "high_school_choice",
+                "vocational_track",
+                "milestone"
+              ],
+              "emotionalWeight": 35,
+              "importance": 85,
+              "description": "Kỷ niệm ngày đi học: trường nghề — học kỹ năng thực tế và đi làm sớm."
+            }
+          }
+        ]
+      }
+    ],
+    "cooldownMonths": 9999,
+    "tags": [
+      "school",
+      "milestone",
+      "education",
+      "irreversible"
+    ],
+    "maxChainDepth": 5,
+    "repeatable": false,
+    "isWowMoment": false
   },
   {
     "id": "evt_teen_friend_bully",
-    "schemaVersion": 1, "contentVersion": 1,
-    "category": "FRIENDSHIP", "importance": 65, "decisionType": "MORAL",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "FRIENDSHIP",
+    "importance": 65,
+    "decisionType": "MORAL",
     "title": "Bảo vệ bạn bè",
     "description": "Bạn thân của bạn đang bị một nhóm học sinh cá biệt chặn đường bắt nạt. Bạn là người duy nhất chứng kiến.",
     "conditions": [
-      { "type": "age", "min": 12, "max": 16 },
-      { "type": "relationship", "target": "npc_first_friend", "field": "closeness", "op": ">=", "value": 50 }
+      {
+        "type": "age",
+        "min": 12,
+        "max": 16
+      },
+      {
+        "type": "relationship",
+        "target": "npc_first_friend",
+        "field": "closeness",
+        "op": ">=",
+        "value": 50
+      }
     ],
     "weight": 120,
     "choices": [
@@ -93,42 +566,137 @@
         "id": "stand_up_friend",
         "text": "Lao vào can ngăn và đứng ra bảo vệ bạn",
         "effects": [
-          { "type": "RELATIONSHIP_CHANGE", "relationshipPayload": { "target": "npc_first_friend", "field": "trust", "delta": 25 } },
-          { "type": "RELATIONSHIP_CHANGE", "relationshipPayload": { "target": "npc_first_friend", "field": "respect", "delta": 15 } },
-          { "type": "STAT_CHANGE", "field": "personality", "target": "agreeableness", "value": 3 },
-          { "type": "MEMORY_ADD", "memoryPayload": { "type": "friendship", "tags": ["protected_friend_youth", "loyalty", "bravery"], "emotionalWeight": 90, "importance": 85 } },
-          { "type": "SCHEDULE_EVENT", "schedulePayload": { "eventId": "evt_friend_future_job_recommendation", "targetAge": 23, "priority": 2 } }
+          {
+            "type": "RELATIONSHIP_CHANGE",
+            "relationshipPayload": {
+              "target": "npc_first_friend",
+              "field": "trust",
+              "delta": 25
+            }
+          },
+          {
+            "type": "RELATIONSHIP_CHANGE",
+            "relationshipPayload": {
+              "target": "npc_first_friend",
+              "field": "respect",
+              "delta": 15
+            }
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "agreeableness",
+            "value": 3
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "friendship",
+              "tags": [
+                "protected_friend_youth",
+                "loyalty",
+                "bravery"
+              ],
+              "emotionalWeight": 90,
+              "importance": 85,
+              "description": "Một kỷ niệm khó quên: bảo vệ bạn bè."
+            }
+          },
+          {
+            "type": "SCHEDULE_EVENT",
+            "schedulePayload": {
+              "eventId": "evt_adult_friend_job_recommendation",
+              "targetAge": 23,
+              "priority": 2
+            }
+          }
         ]
       },
       {
         "id": "run_call_teacher",
         "text": "Chạy đi tìm giáo viên hoặc bảo vệ",
         "effects": [
-          { "type": "RELATIONSHIP_CHANGE", "relationshipPayload": { "target": "npc_first_friend", "field": "trust", "delta": 10 } },
-          { "type": "STAT_CHANGE", "field": "personality", "target": "conscientiousness", "value": 2 }
+          {
+            "type": "RELATIONSHIP_CHANGE",
+            "relationshipPayload": {
+              "target": "npc_first_friend",
+              "field": "trust",
+              "delta": 10
+            }
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "conscientiousness",
+            "value": 2
+          }
         ]
       },
       {
         "id": "walk_away_afraid",
         "text": "Sợ hãi bước đi và làm như không thấy",
         "effects": [
-          { "type": "RELATIONSHIP_CHANGE", "relationshipPayload": { "target": "npc_first_friend", "field": "trust", "delta": -15 } },
-          { "type": "STAT_CHANGE", "field": "personality", "target": "neuroticism", "value": 4 },
-          { "type": "MEMORY_ADD", "memoryPayload": { "type": "trauma", "tags": ["abandoned_friend", "cowardice", "regret_youth"], "emotionalWeight": -70, "importance": 65 } }
+          {
+            "type": "RELATIONSHIP_CHANGE",
+            "relationshipPayload": {
+              "target": "npc_first_friend",
+              "field": "trust",
+              "delta": -15
+            }
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "neuroticism",
+            "value": 4
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "trauma",
+              "tags": [
+                "abandoned_friend",
+                "cowardice",
+                "regret_youth"
+              ],
+              "emotionalWeight": -70,
+              "importance": 65,
+              "description": "Một kỷ niệm khó quên: bảo vệ bạn bè."
+            }
+          }
         ]
       }
     ],
-    "cooldownMonths": 36, "tags": ["friendship", "moral", "teen", "loyalty"], "maxChainDepth": 5, "repeatable": false, "isWowMoment": true
+    "cooldownMonths": 36,
+    "tags": [
+      "friendship",
+      "moral",
+      "teen",
+      "loyalty"
+    ],
+    "maxChainDepth": 5,
+    "repeatable": false,
+    "isWowMoment": false
   },
   {
     "id": "evt_teen_first_heartbreak",
-    "schemaVersion": 1, "contentVersion": 1,
-    "category": "ROMANCE", "importance": 72, "decisionType": "SOCIAL",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "ROMANCE",
+    "importance": 72,
+    "decisionType": "SOCIAL",
     "title": "Lần chia tay đầu tiên",
     "description": "Người bạn thích đã chọn người khác. Hoặc bạn đã dũng cảm tỏ tình nhưng bị từ chối. Cảm giác đau này — bạn chưa bao giờ cảm thấy như vậy.",
     "conditions": [
-      { "type": "age", "min": 13, "max": 17 },
-      { "type": "memory", "tag": "first_crush" }
+      {
+        "type": "age",
+        "min": 13,
+        "max": 17
+      },
+      {
+        "type": "memory",
+        "tag": "first_crush"
+      }
     ],
     "weight": 100,
     "choices": [
@@ -136,203 +704,921 @@
         "id": "cry_and_recover",
         "text": "Cho phép bản thân khóc và nói chuyện với bạn bè",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "personality", "target": "empathy", "value": 4 },
-          { "type": "STAT_CHANGE", "field": "happiness", "target": "happiness", "value": -12 },
-          { "type": "MEMORY_ADD", "memoryPayload": { "type": "romance", "tags": ["first_heartbreak", "grief_love", "teen_pain"], "emotionalWeight": -75, "importance": 72 } }
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "empathy",
+            "value": 4
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "happiness",
+            "target": "happiness",
+            "value": -12
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "romance",
+              "tags": [
+                "first_heartbreak",
+                "grief_love",
+                "teen_pain"
+              ],
+              "emotionalWeight": -75,
+              "importance": 72,
+              "description": "Một kỷ niệm khó quên: lần chia tay đầu tiên."
+            }
+          }
         ]
       },
       {
         "id": "suppress_move_on",
         "text": "Giả vờ không sao và chôn cảm xúc vào lòng",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "personality", "target": "neuroticism", "value": 5 },
-          { "type": "MEMORY_ADD", "memoryPayload": { "type": "trauma", "tags": ["first_heartbreak", "suppressed_emotion", "teen"], "emotionalWeight": -80, "importance": 72 } }
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "neuroticism",
+            "value": 5
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "trauma",
+              "tags": [
+                "first_heartbreak",
+                "suppressed_emotion",
+                "teen"
+              ],
+              "emotionalWeight": -80,
+              "importance": 72,
+              "description": "Một kỷ niệm khó quên: lần chia tay đầu tiên."
+            }
+          }
         ]
       },
       {
         "id": "redirect_to_study",
         "text": "Dồn toàn bộ năng lượng vào học và hoạt động ngoại khóa",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "education", "target": "education", "value": 8 },
-          { "type": "STAT_CHANGE", "field": "personality", "target": "ambition", "value": 3 },
-          { "type": "MEMORY_ADD", "memoryPayload": { "type": "romance", "tags": ["first_heartbreak", "sublimation", "growth"], "emotionalWeight": -40, "importance": 72 } }
+          {
+            "type": "STAT_CHANGE",
+            "field": "education",
+            "target": "education",
+            "value": 8
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "ambition",
+            "value": 3
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "romance",
+              "tags": [
+                "first_heartbreak",
+                "sublimation",
+                "growth"
+              ],
+              "emotionalWeight": -40,
+              "importance": 72,
+              "description": "Một kỷ niệm khó quên: lần chia tay đầu tiên."
+            }
+          }
         ]
       }
     ],
-    "cooldownMonths": 9999, "tags": ["romance", "teen", "heartbreak", "milestone"], "maxChainDepth": 5, "repeatable": false, "isWowMoment": true
+    "cooldownMonths": 9999,
+    "tags": [
+      "romance",
+      "teen",
+      "heartbreak",
+      "milestone"
+    ],
+    "maxChainDepth": 5,
+    "repeatable": false,
+    "isWowMoment": false
   },
   {
     "id": "evt_teen_exam_pressure",
-    "schemaVersion": 1, "contentVersion": 1,
-    "category": "SCHOOL", "importance": 60, "decisionType": "STRATEGIC",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "SCHOOL",
+    "importance": 60,
+    "decisionType": "STRATEGIC",
     "title": "Áp lực thi cử",
     "description": "Kỳ thi quan trọng đang đến gần. Ba mẹ, thầy cô và chính bản thân bạn đều đặt kỳ vọng cao.",
-    "conditions": [{ "type": "age", "min": 14, "max": 17 }],
+    "conditions": [
+      {
+        "type": "and",
+        "conditions": [
+          {
+            "type": "age",
+            "min": 14,
+            "max": 17
+          },
+          {
+            "type": "personality",
+            "axis": "openness",
+            "op": ">=",
+            "value": 50
+          }
+        ]
+      }
+    ],
     "weight": 110,
     "choices": [
       {
         "id": "burn_the_midnight_oil",
         "text": "Thức khuya học mỗi đêm, hy sinh giấc ngủ",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "education", "target": "education", "value": 12 },
-          { "type": "STAT_CHANGE", "field": "health", "target": "health", "value": -8 },
-          { "type": "STAT_CHANGE", "field": "stress", "target": "stress", "value": 20 }
+          {
+            "type": "STAT_CHANGE",
+            "field": "education",
+            "target": "education",
+            "value": 12
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "health",
+            "target": "health",
+            "value": -8
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "stress",
+            "target": "stress",
+            "value": 20
+          }
         ]
       },
       {
         "id": "smart_study_plan",
         "text": "Lên kế hoạch học tập theo giờ, nghỉ ngơi đúng giờ",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "education", "target": "education", "value": 8 },
-          { "type": "STAT_CHANGE", "field": "personality", "target": "discipline", "value": 4 }
+          {
+            "type": "STAT_CHANGE",
+            "field": "education",
+            "target": "education",
+            "value": 8
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "discipline",
+            "value": 4
+          }
         ]
       },
       {
         "id": "panic_and_freeze",
         "text": "Quá sợ hãi, không học được gì",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "personality", "target": "neuroticism", "value": 5 },
-          { "type": "STAT_CHANGE", "field": "stress", "target": "stress", "value": 25 }
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "neuroticism",
+            "value": 5
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "stress",
+            "target": "stress",
+            "value": 25
+          }
         ]
       }
     ],
-    "cooldownMonths": 6, "tags": ["school", "exam", "stress", "teen"], "maxChainDepth": 3, "repeatable": true, "isWowMoment": false
+    "cooldownMonths": 6,
+    "tags": [
+      "school",
+      "exam",
+      "stress",
+      "teen"
+    ],
+    "maxChainDepth": 3,
+    "repeatable": true,
+    "isWowMoment": false
+  },
+  {
+    "id": "evt_teen_exam_pressure_alt",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "SCHOOL",
+    "importance": 60,
+    "decisionType": "STRATEGIC",
+    "title": "Áp lực thi cử (Góc nhìn khác)",
+    "description": "Kỳ thi quan trọng đang đến gần. Ba mẹ, thầy cô và chính bản thân bạn đều đặt kỳ vọng cao.",
+    "conditions": [
+      {
+        "type": "and",
+        "conditions": [
+          {
+            "type": "age",
+            "min": 14,
+            "max": 17
+          },
+          {
+            "type": "personality",
+            "axis": "openness",
+            "op": "<",
+            "value": 50
+          }
+        ]
+      }
+    ],
+    "weight": 110,
+    "choices": [
+      {
+        "id": "burn_the_midnight_oil",
+        "text": "Thức khuya học mỗi đêm, hy sinh giấc ngủ",
+        "effects": [
+          {
+            "type": "STAT_CHANGE",
+            "field": "education",
+            "target": "education",
+            "value": 12
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "health",
+            "target": "health",
+            "value": -8
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "stress",
+            "target": "stress",
+            "value": 20
+          }
+        ]
+      },
+      {
+        "id": "smart_study_plan",
+        "text": "Lên kế hoạch học tập theo giờ, nghỉ ngơi đúng giờ",
+        "effects": [
+          {
+            "type": "STAT_CHANGE",
+            "field": "education",
+            "target": "education",
+            "value": 8
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "discipline",
+            "value": 4
+          }
+        ]
+      },
+      {
+        "id": "panic_and_freeze",
+        "text": "Quá sợ hãi, không học được gì",
+        "effects": [
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "neuroticism",
+            "value": 5
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "stress",
+            "target": "stress",
+            "value": 25
+          }
+        ]
+      }
+    ],
+    "cooldownMonths": 6,
+    "tags": [
+      "school",
+      "exam",
+      "stress",
+      "teen"
+    ],
+    "maxChainDepth": 3,
+    "repeatable": true,
+    "isWowMoment": false
   },
   {
     "id": "evt_teen_part_time_job",
-    "schemaVersion": 1, "contentVersion": 1,
-    "category": "CAREER", "importance": 58, "decisionType": "STRATEGIC",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "CAREER",
+    "importance": 58,
+    "decisionType": "STRATEGIC",
     "title": "Công việc bán thời gian đầu tiên",
     "description": "Một người quen giới thiệu cho bạn cơ hội làm thêm cuối tuần. Vừa kiếm được tiền, vừa có trải nghiệm thực tế.",
-    "conditions": [{ "type": "age", "min": 15, "max": 17 }],
+    "conditions": [
+      {
+        "type": "age",
+        "min": 15,
+        "max": 17
+      }
+    ],
     "weight": 90,
     "choices": [
       {
         "id": "take_the_job",
         "text": "Nhận việc làm thêm, dù vất vả",
         "effects": [
-          { "type": "MONEY_CHANGE", "value": 500 },
-          { "type": "SKILL_CHANGE", "target": "work_ethic", "value": 8 },
-          { "type": "STAT_CHANGE", "field": "personality", "target": "conscientiousness", "value": 3 },
-          { "type": "MEMORY_ADD", "memoryPayload": { "type": "career", "tags": ["first_job", "part_time", "responsibility"], "emotionalWeight": 55, "importance": 58 } }
+          {
+            "type": "MONEY_CHANGE",
+            "value": 500
+          },
+          {
+            "type": "SKILL_CHANGE",
+            "target": "work_ethic",
+            "value": 8
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "conscientiousness",
+            "value": 3
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "career",
+              "tags": [
+                "first_job",
+                "part_time",
+                "responsibility"
+              ],
+              "emotionalWeight": 55,
+              "importance": 58,
+              "description": "Một kỷ niệm khó quên: công việc bán thời gian đầu tiên."
+            }
+          }
         ]
       },
       {
         "id": "focus_on_school",
         "text": "Từ chối, cần tập trung vào học",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "education", "target": "education", "value": 5 },
-          { "type": "STAT_CHANGE", "field": "personality", "target": "discipline", "value": 2 }
+          {
+            "type": "STAT_CHANGE",
+            "field": "education",
+            "target": "education",
+            "value": 5
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "discipline",
+            "value": 2
+          }
         ]
       }
     ],
-    "cooldownMonths": 24, "tags": ["career", "work", "teen", "money"], "maxChainDepth": 5, "repeatable": false, "isWowMoment": false
+    "cooldownMonths": 24,
+    "tags": [
+      "career",
+      "work",
+      "teen",
+      "money"
+    ],
+    "maxChainDepth": 5,
+    "repeatable": false,
+    "isWowMoment": false
   },
   {
     "id": "evt_teen_drug_temptation",
-    "schemaVersion": 1, "contentVersion": 1,
-    "category": "CRIME", "importance": 78, "decisionType": "MORAL",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "CRIME",
+    "importance": 78,
+    "decisionType": "MORAL",
     "title": "Cám dỗ nguy hiểm",
     "description": "Trong một buổi tiệc, một nhóm bạn mời bạn thử thuốc lá hoặc thứ gì đó nặng hơn. 'Một lần thôi mà, không chết đâu.'",
-    "conditions": [{ "type": "age", "min": 14, "max": 17 }],
+    "conditions": [
+      {
+        "type": "and",
+        "conditions": [
+          {
+            "type": "age",
+            "min": 14,
+            "max": 17
+          },
+          {
+            "type": "personality",
+            "axis": "extraversion",
+            "op": ">=",
+            "value": 50
+          }
+        ]
+      }
+    ],
     "weight": 70,
     "choices": [
       {
         "id": "refuse_firmly",
         "text": "Từ chối dứt khoát và rời khỏi buổi tiệc",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "personality", "target": "conscientiousness", "value": 4 },
-          { "type": "STAT_CHANGE", "field": "health", "target": "health", "value": 3 },
-          { "type": "MEMORY_ADD", "memoryPayload": { "type": "life", "tags": ["refused_drugs", "integrity", "teen_choice"], "emotionalWeight": 40, "importance": 78 } }
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "conscientiousness",
+            "value": 4
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "health",
+            "target": "health",
+            "value": 3
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "life",
+              "tags": [
+                "refused_drugs",
+                "integrity",
+                "teen_choice"
+              ],
+              "emotionalWeight": 40,
+              "importance": 78,
+              "description": "Khoảnh khắc bạn phải đối mặt với thử thách cám dỗ."
+            }
+          }
         ]
       },
       {
         "id": "try_once",
         "text": "Thử một lần xem thế nào",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "health", "target": "health", "value": -10 },
-          { "type": "STAT_CHANGE", "field": "personality", "target": "risk_tolerance", "value": 5 },
-          { "type": "TRAIT_ADD", "target": "substance_experimentation" },
-          { "type": "MEMORY_ADD", "memoryPayload": { "type": "trauma", "tags": ["substance_use", "peer_pressure", "teen_mistake"], "emotionalWeight": -60, "importance": 78 } }
+          {
+            "type": "STAT_CHANGE",
+            "field": "health",
+            "target": "health",
+            "value": -10
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "risk_tolerance",
+            "value": 5
+          },
+          {
+            "type": "TRAIT_ADD",
+            "target": "substance_experimentation"
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "trauma",
+              "tags": [
+                "substance_use",
+                "peer_pressure",
+                "teen_mistake"
+              ],
+              "emotionalWeight": -60,
+              "importance": 78,
+              "description": "Khoảnh khắc bạn phải đối mặt với thử thách cám dỗ."
+            }
+          }
         ]
       },
       {
         "id": "watch_but_not_try",
         "text": "Ở lại xem nhưng không dùng, cho vui",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "personality", "target": "risk_tolerance", "value": 2 }
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "risk_tolerance",
+            "value": 2
+          }
         ]
       }
     ],
-    "cooldownMonths": 36, "tags": ["crime", "moral", "teen", "drugs"], "maxChainDepth": 5, "repeatable": false, "isWowMoment": false
+    "cooldownMonths": 36,
+    "tags": [
+      "crime",
+      "moral",
+      "teen",
+      "drugs"
+    ],
+    "maxChainDepth": 5,
+    "repeatable": false,
+    "isWowMoment": false
+  },
+  {
+    "id": "evt_teen_drug_temptation_alt",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "CRIME",
+    "importance": 78,
+    "decisionType": "MORAL",
+    "title": "Cám dỗ nguy hiểm (Góc nhìn khác)",
+    "description": "Trong một buổi tiệc, một nhóm bạn mời bạn thử thuốc lá hoặc thứ gì đó nặng hơn. 'Một lần thôi mà, không chết đâu.'",
+    "conditions": [
+      {
+        "type": "and",
+        "conditions": [
+          {
+            "type": "age",
+            "min": 14,
+            "max": 17
+          },
+          {
+            "type": "personality",
+            "axis": "extraversion",
+            "op": "<",
+            "value": 50
+          }
+        ]
+      }
+    ],
+    "weight": 70,
+    "choices": [
+      {
+        "id": "refuse_firmly",
+        "text": "Từ chối dứt khoát và rời khỏi buổi tiệc",
+        "effects": [
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "conscientiousness",
+            "value": 4
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "health",
+            "target": "health",
+            "value": 3
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "life",
+              "tags": [
+                "refused_drugs",
+                "integrity",
+                "teen_choice"
+              ],
+              "emotionalWeight": 40,
+              "importance": 78,
+              "description": "Khoảnh khắc bạn phải đối mặt với thử thách cám dỗ."
+            }
+          }
+        ]
+      },
+      {
+        "id": "try_once",
+        "text": "Thử một lần xem thế nào",
+        "effects": [
+          {
+            "type": "STAT_CHANGE",
+            "field": "health",
+            "target": "health",
+            "value": -10
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "risk_tolerance",
+            "value": 5
+          },
+          {
+            "type": "TRAIT_ADD",
+            "target": "substance_experimentation"
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "trauma",
+              "tags": [
+                "substance_use",
+                "peer_pressure",
+                "teen_mistake"
+              ],
+              "emotionalWeight": -60,
+              "importance": 78,
+              "description": "Khoảnh khắc bạn phải đối mặt với thử thách cám dỗ."
+            }
+          }
+        ]
+      },
+      {
+        "id": "watch_but_not_try",
+        "text": "Ở lại xem nhưng không dùng, cho vui",
+        "effects": [
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "risk_tolerance",
+            "value": 2
+          }
+        ]
+      }
+    ],
+    "cooldownMonths": 36,
+    "tags": [
+      "crime",
+      "moral",
+      "teen",
+      "drugs"
+    ],
+    "maxChainDepth": 5,
+    "repeatable": false,
+    "isWowMoment": false
   },
   {
     "id": "evt_teen_graduation_cap2",
-    "schemaVersion": 1, "contentVersion": 1,
-    "category": "SCHOOL", "importance": 80, "decisionType": "INSTANT",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "SCHOOL",
+    "importance": 80,
+    "decisionType": "INSTANT",
     "title": "Tốt nghiệp cấp 2",
     "description": "Buổi lễ tốt nghiệp trung học cơ sở. Cô giáo chủ nhiệm đọc danh sách học sinh xuất sắc. Cuốn sổ kỷ niệm đầy chữ ký.",
-    "conditions": [{ "type": "age", "min": 14, "max": 15 }],
+    "conditions": [
+      {
+        "type": "and",
+        "conditions": [
+          {
+            "type": "age",
+            "min": 14,
+            "max": 15
+          },
+          {
+            "type": "personality",
+            "axis": "conscientiousness",
+            "op": ">=",
+            "value": 50
+          }
+        ]
+      }
+    ],
     "weight": 9999,
     "choices": [
       {
         "id": "celebrate_with_friends",
         "text": "Ăn mừng rầm rộ với bạn bè",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "happiness", "target": "happiness", "value": 15 },
-          { "type": "STAT_CHANGE", "field": "personality", "target": "extraversion", "value": 2 },
-          { "type": "MEMORY_ADD", "memoryPayload": { "type": "school", "tags": ["graduation_middle_school", "celebration", "milestone"], "emotionalWeight": 80, "importance": 80 } }
+          {
+            "type": "STAT_CHANGE",
+            "field": "happiness",
+            "target": "happiness",
+            "value": 15
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "extraversion",
+            "value": 2
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "school",
+              "tags": [
+                "graduation_middle_school",
+                "celebration",
+                "milestone"
+              ],
+              "emotionalWeight": 80,
+              "importance": 80,
+              "description": "Cầm tấm bằng trên tay, tự hào và đầy hy vọng."
+            }
+          }
         ]
       },
       {
         "id": "reflect_quietly",
         "text": "Ngồi lặng lẽ nghĩ về tương lai",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "happiness", "target": "happiness", "value": 8 },
-          { "type": "STAT_CHANGE", "field": "personality", "target": "openness", "value": 2 },
-          { "type": "MEMORY_ADD", "memoryPayload": { "type": "school", "tags": ["graduation_middle_school", "reflection", "milestone"], "emotionalWeight": 65, "importance": 80 } }
+          {
+            "type": "STAT_CHANGE",
+            "field": "happiness",
+            "target": "happiness",
+            "value": 8
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "openness",
+            "value": 2
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "school",
+              "tags": [
+                "graduation_middle_school",
+                "reflection",
+                "milestone"
+              ],
+              "emotionalWeight": 65,
+              "importance": 80,
+              "description": "Cầm tấm bằng trên tay, tự hào và đầy hy vọng."
+            }
+          }
         ]
       }
     ],
-    "cooldownMonths": 9999, "tags": ["school", "graduation", "milestone"], "maxChainDepth": 3, "repeatable": false, "isWowMoment": true
+    "cooldownMonths": 9999,
+    "tags": [
+      "school",
+      "graduation",
+      "milestone"
+    ],
+    "maxChainDepth": 3,
+    "repeatable": false,
+    "isWowMoment": false
+  },
+  {
+    "id": "evt_teen_graduation_cap2_alt",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "SCHOOL",
+    "importance": 80,
+    "decisionType": "INSTANT",
+    "title": "Tốt nghiệp cấp 2 (Góc nhìn khác)",
+    "description": "Buổi lễ tốt nghiệp trung học cơ sở. Cô giáo chủ nhiệm đọc danh sách học sinh xuất sắc. Cuốn sổ kỷ niệm đầy chữ ký.",
+    "conditions": [
+      {
+        "type": "and",
+        "conditions": [
+          {
+            "type": "age",
+            "min": 14,
+            "max": 15
+          },
+          {
+            "type": "personality",
+            "axis": "conscientiousness",
+            "op": "<",
+            "value": 50
+          }
+        ]
+      }
+    ],
+    "weight": 9999,
+    "choices": [
+      {
+        "id": "celebrate_with_friends",
+        "text": "Ăn mừng rầm rộ với bạn bè",
+        "effects": [
+          {
+            "type": "STAT_CHANGE",
+            "field": "happiness",
+            "target": "happiness",
+            "value": 15
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "extraversion",
+            "value": 2
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "school",
+              "tags": [
+                "graduation_middle_school",
+                "celebration",
+                "milestone"
+              ],
+              "emotionalWeight": 80,
+              "importance": 80,
+              "description": "Cầm tấm bằng trên tay, tự hào và đầy hy vọng."
+            }
+          }
+        ]
+      },
+      {
+        "id": "reflect_quietly",
+        "text": "Ngồi lặng lẽ nghĩ về tương lai",
+        "effects": [
+          {
+            "type": "STAT_CHANGE",
+            "field": "happiness",
+            "target": "happiness",
+            "value": 8
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "openness",
+            "value": 2
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "school",
+              "tags": [
+                "graduation_middle_school",
+                "reflection",
+                "milestone"
+              ],
+              "emotionalWeight": 65,
+              "importance": 80,
+              "description": "Cầm tấm bằng trên tay, tự hào và đầy hy vọng."
+            }
+          }
+        ]
+      }
+    ],
+    "cooldownMonths": 9999,
+    "tags": [
+      "school",
+      "graduation",
+      "milestone"
+    ],
+    "maxChainDepth": 3,
+    "repeatable": false,
+    "isWowMoment": false
   },
   {
     "id": "evt_teen_social_media_fame",
-    "schemaVersion": 1, "contentVersion": 1,
-    "category": "SOCIAL", "importance": 48, "decisionType": "STRATEGIC",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "SOCIAL",
+    "importance": 48,
+    "decisionType": "STRATEGIC",
     "title": "Nổi tiếng trên mạng xã hội",
     "description": "Một bài đăng ngẫu nhiên của bạn lan truyền rộng rãi và thu hút hàng nghìn lượt thích và bình luận.",
-    "conditions": [{ "type": "age", "min": 13, "max": 17 }],
+    "conditions": [
+      {
+        "type": "age",
+        "min": 13,
+        "max": 17
+      }
+    ],
     "weight": 65,
     "choices": [
       {
         "id": "build_audience",
         "text": "Tận dụng cơ hội xây dựng kênh nội dung",
         "effects": [
-          { "type": "SKILL_CHANGE", "target": "communication", "value": 8 },
-          { "type": "STAT_CHANGE", "field": "personality", "target": "extraversion", "value": 3 },
-          { "type": "MONEY_CHANGE", "value": 200 }
+          {
+            "type": "SKILL_CHANGE",
+            "target": "communication",
+            "value": 8
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "extraversion",
+            "value": 3
+          },
+          {
+            "type": "MONEY_CHANGE",
+            "value": 200
+          }
         ]
       },
       {
         "id": "enjoy_then_move_on",
         "text": "Thích thú rồi quên đi, không muốn áp lực",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "happiness", "target": "happiness", "value": 5 }
+          {
+            "type": "STAT_CHANGE",
+            "field": "happiness",
+            "target": "happiness",
+            "value": 5
+          }
         ]
       }
     ],
-    "cooldownMonths": 18, "tags": ["social", "teen", "fame", "media"], "maxChainDepth": 3, "repeatable": false, "isWowMoment": false
+    "cooldownMonths": 18,
+    "tags": [
+      "social",
+      "teen",
+      "fame",
+      "media"
+    ],
+    "maxChainDepth": 3,
+    "repeatable": false,
+    "isWowMoment": false
   },
   {
     "id": "evt_teen_parent_divorce",
-    "schemaVersion": 1, "contentVersion": 1,
-    "category": "FAMILY", "importance": 90, "decisionType": "MORAL",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "FAMILY",
+    "importance": 90,
+    "decisionType": "MORAL",
     "title": "Ba mẹ ly hôn",
     "description": "Ba và mẹ quyết định chia tay. Căn nhà sẽ không còn như cũ. Bạn phải chọn sẽ sống với ai.",
     "conditions": [
-      { "type": "age", "min": 12, "max": 17 },
-      { "type": "memory", "tag": "parents_fight" }
+      {
+        "type": "age",
+        "min": 12,
+        "max": 17
+      },
+      {
+        "type": "memory",
+        "tag": "parents_fight"
+      }
     ],
     "weight": 40,
     "choices": [
@@ -340,162 +1626,648 @@
         "id": "live_with_mom",
         "text": "Ở với mẹ",
         "effects": [
-          { "type": "RELATIONSHIP_CHANGE", "relationshipPayload": { "target": "mother", "field": "closeness", "delta": 15 } },
-          { "type": "RELATIONSHIP_CHANGE", "relationshipPayload": { "target": "father", "field": "closeness", "delta": -10 } },
-          { "type": "MEMORY_ADD", "memoryPayload": { "type": "trauma", "tags": ["parents_divorce", "family_broken", "teen_trauma"], "emotionalWeight": -85, "importance": 90 } },
-          { "type": "STAT_CHANGE", "field": "personality", "target": "neuroticism", "value": 5 }
+          {
+            "type": "RELATIONSHIP_CHANGE",
+            "relationshipPayload": {
+              "target": "mother",
+              "field": "closeness",
+              "delta": 15
+            }
+          },
+          {
+            "type": "RELATIONSHIP_CHANGE",
+            "relationshipPayload": {
+              "target": "father",
+              "field": "closeness",
+              "delta": -10
+            }
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "trauma",
+              "tags": [
+                "parents_divorce",
+                "family_broken",
+                "teen_trauma"
+              ],
+              "emotionalWeight": -85,
+              "importance": 90,
+              "description": "Một kỷ niệm khó quên: ba mẹ ly hôn."
+            }
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "neuroticism",
+            "value": 5
+          }
         ]
       },
       {
         "id": "live_with_dad",
         "text": "Ở với ba",
         "effects": [
-          { "type": "RELATIONSHIP_CHANGE", "relationshipPayload": { "target": "father", "field": "closeness", "delta": 15 } },
-          { "type": "RELATIONSHIP_CHANGE", "relationshipPayload": { "target": "mother", "field": "closeness", "delta": -10 } },
-          { "type": "MEMORY_ADD", "memoryPayload": { "type": "trauma", "tags": ["parents_divorce", "family_broken", "teen_trauma"], "emotionalWeight": -85, "importance": 90 } },
-          { "type": "STAT_CHANGE", "field": "personality", "target": "neuroticism", "value": 5 }
+          {
+            "type": "RELATIONSHIP_CHANGE",
+            "relationshipPayload": {
+              "target": "father",
+              "field": "closeness",
+              "delta": 15
+            }
+          },
+          {
+            "type": "RELATIONSHIP_CHANGE",
+            "relationshipPayload": {
+              "target": "mother",
+              "field": "closeness",
+              "delta": -10
+            }
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "trauma",
+              "tags": [
+                "parents_divorce",
+                "family_broken",
+                "teen_trauma"
+              ],
+              "emotionalWeight": -85,
+              "importance": 90,
+              "description": "Một kỷ niệm khó quên: ba mẹ ly hôn."
+            }
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "neuroticism",
+            "value": 5
+          }
         ]
       },
       {
         "id": "shuttle_between_both",
         "text": "Tự nguyện ở lại với cả hai theo tuần",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "personality", "target": "agreeableness", "value": 3 },
-          { "type": "STAT_CHANGE", "field": "stress", "target": "stress", "value": 20 },
-          { "type": "MEMORY_ADD", "memoryPayload": { "type": "trauma", "tags": ["parents_divorce", "family_broken", "peacekeeping"], "emotionalWeight": -75, "importance": 90 } }
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "agreeableness",
+            "value": 3
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "stress",
+            "target": "stress",
+            "value": 20
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "trauma",
+              "tags": [
+                "parents_divorce",
+                "family_broken",
+                "peacekeeping"
+              ],
+              "emotionalWeight": -75,
+              "importance": 90,
+              "description": "Một kỷ niệm khó quên: ba mẹ ly hôn."
+            }
+          }
         ]
       }
     ],
-    "cooldownMonths": 9999, "tags": ["family", "divorce", "trauma", "milestone", "irreversible"], "maxChainDepth": 5, "repeatable": false, "isWowMoment": true
+    "cooldownMonths": 9999,
+    "tags": [
+      "family",
+      "divorce",
+      "trauma",
+      "milestone",
+      "irreversible"
+    ],
+    "maxChainDepth": 5,
+    "repeatable": false,
+    "isWowMoment": true
   },
   {
     "id": "evt_teen_protest_cause",
-    "schemaVersion": 1, "contentVersion": 1,
-    "category": "SOCIAL", "importance": 52, "decisionType": "MORAL",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "SOCIAL",
+    "importance": 52,
+    "decisionType": "MORAL",
     "title": "Lên tiếng cho điều mình tin",
     "description": "Trường bạn có một quy định bất công. Nhiều bạn học đang tổ chức kiến nghị và muốn bạn tham gia.",
-    "conditions": [{ "type": "age", "min": 14, "max": 17 }],
+    "conditions": [
+      {
+        "type": "age",
+        "min": 14,
+        "max": 17
+      }
+    ],
     "weight": 75,
     "choices": [
       {
         "id": "lead_the_petition",
         "text": "Đứng ra làm người dẫn đầu cuộc kiến nghị",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "personality", "target": "ambition", "value": 3 },
-          { "type": "STAT_CHANGE", "field": "personality", "target": "agreeableness", "value": 3 },
-          { "type": "SKILL_CHANGE", "target": "leadership", "value": 6 }
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "ambition",
+            "value": 3
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "agreeableness",
+            "value": 3
+          },
+          {
+            "type": "SKILL_CHANGE",
+            "target": "leadership",
+            "value": 6
+          }
         ]
       },
       {
         "id": "sign_but_quiet",
         "text": "Ký tên vào đơn nhưng không muốn nổi bật",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "personality", "target": "conscientiousness", "value": 2 }
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "conscientiousness",
+            "value": 2
+          }
         ]
       },
       {
         "id": "stay_out",
         "text": "Không muốn rắc rối, tránh xa",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "personality", "target": "risk_tolerance", "value": -2 }
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "risk_tolerance",
+            "value": -2
+          }
         ]
       }
     ],
-    "cooldownMonths": 24, "tags": ["social", "teen", "leadership", "justice"], "maxChainDepth": 3, "repeatable": false, "isWowMoment": false
+    "cooldownMonths": 24,
+    "tags": [
+      "social",
+      "teen",
+      "leadership",
+      "justice"
+    ],
+    "maxChainDepth": 3,
+    "repeatable": false,
+    "isWowMoment": false
   },
   {
     "id": "evt_teen_career_dream",
-    "schemaVersion": 1, "contentVersion": 1,
-    "category": "CAREER", "importance": 65, "decisionType": "STRATEGIC",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "CAREER",
+    "importance": 65,
+    "decisionType": "STRATEGIC",
     "title": "Ước mơ nghề nghiệp đầu tiên",
     "description": "Thầy cô yêu cầu viết bài về nghề bạn muốn làm sau này. Bạn dừng lại và thực sự suy nghĩ lần đầu tiên.",
-    "conditions": [{ "type": "age", "min": 13, "max": 16 }],
+    "conditions": [
+      {
+        "type": "and",
+        "conditions": [
+          {
+            "type": "age",
+            "min": 13,
+            "max": 16
+          },
+          {
+            "type": "personality",
+            "axis": "risk_tolerance",
+            "op": ">=",
+            "value": 50
+          }
+        ]
+      }
+    ],
     "weight": 85,
     "choices": [
       {
         "id": "dream_medicine",
         "text": "Muốn trở thành bác sĩ — cứu người",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "personality", "target": "empathy", "value": 3 },
-          { "type": "STAT_CHANGE", "field": "personality", "target": "ambition", "value": 4 },
-          { "type": "MEMORY_ADD", "memoryPayload": { "type": "career", "tags": ["career_dream", "medicine_aspiration"], "emotionalWeight": 65, "importance": 65 } }
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "empathy",
+            "value": 3
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "ambition",
+            "value": 4
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "career",
+              "tags": [
+                "career_dream",
+                "medicine_aspiration"
+              ],
+              "emotionalWeight": 65,
+              "importance": 65,
+              "description": "Khoảnh khắc nhận ra đam mê thực sự của mình."
+            }
+          }
         ]
       },
       {
         "id": "dream_engineer",
         "text": "Muốn làm kỹ sư — xây dựng những thứ to lớn",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "personality", "target": "curiosity", "value": 3 },
-          { "type": "STAT_CHANGE", "field": "personality", "target": "discipline", "value": 3 },
-          { "type": "MEMORY_ADD", "memoryPayload": { "type": "career", "tags": ["career_dream", "engineering_aspiration"], "emotionalWeight": 60, "importance": 65 } }
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "curiosity",
+            "value": 3
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "discipline",
+            "value": 3
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "career",
+              "tags": [
+                "career_dream",
+                "engineering_aspiration"
+              ],
+              "emotionalWeight": 60,
+              "importance": 65,
+              "description": "Khoảnh khắc nhận ra đam mê thực sự của mình."
+            }
+          }
         ]
       },
       {
         "id": "dream_artist",
         "text": "Muốn làm nghệ sĩ — nhưng sợ ba mẹ không đồng ý",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "personality", "target": "openness", "value": 4 },
-          { "type": "STAT_CHANGE", "field": "personality", "target": "neuroticism", "value": 2 },
-          { "type": "MEMORY_ADD", "memoryPayload": { "type": "career", "tags": ["career_dream", "art_aspiration", "family_pressure"], "emotionalWeight": 50, "importance": 65 } }
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "openness",
+            "value": 4
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "neuroticism",
+            "value": 2
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "career",
+              "tags": [
+                "career_dream",
+                "art_aspiration",
+                "family_pressure"
+              ],
+              "emotionalWeight": 50,
+              "importance": 65,
+              "description": "Khoảnh khắc nhận ra đam mê thực sự của mình."
+            }
+          }
         ]
       },
       {
         "id": "dream_entrepreneur",
         "text": "Muốn tự kinh doanh — không muốn làm cho ai",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "personality", "target": "ambition", "value": 5 },
-          { "type": "STAT_CHANGE", "field": "personality", "target": "risk_tolerance", "value": 4 },
-          { "type": "MEMORY_ADD", "memoryPayload": { "type": "career", "tags": ["career_dream", "entrepreneur_aspiration"], "emotionalWeight": 65, "importance": 65 } }
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "ambition",
+            "value": 5
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "risk_tolerance",
+            "value": 4
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "career",
+              "tags": [
+                "career_dream",
+                "entrepreneur_aspiration"
+              ],
+              "emotionalWeight": 65,
+              "importance": 65,
+              "description": "Khoảnh khắc nhận ra đam mê thực sự của mình."
+            }
+          }
         ]
       }
     ],
-    "cooldownMonths": 9999, "tags": ["career", "dream", "teen", "milestone"], "maxChainDepth": 5, "repeatable": false, "isWowMoment": false
+    "cooldownMonths": 9999,
+    "tags": [
+      "career",
+      "dream",
+      "teen",
+      "milestone"
+    ],
+    "maxChainDepth": 5,
+    "repeatable": false,
+    "isWowMoment": false
+  },
+  {
+    "id": "evt_teen_career_dream_alt",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "CAREER",
+    "importance": 65,
+    "decisionType": "STRATEGIC",
+    "title": "Ước mơ nghề nghiệp đầu tiên (Góc nhìn khác)",
+    "description": "Thầy cô yêu cầu viết bài về nghề bạn muốn làm sau này. Bạn dừng lại và thực sự suy nghĩ lần đầu tiên.",
+    "conditions": [
+      {
+        "type": "and",
+        "conditions": [
+          {
+            "type": "age",
+            "min": 13,
+            "max": 16
+          },
+          {
+            "type": "personality",
+            "axis": "risk_tolerance",
+            "op": "<",
+            "value": 50
+          }
+        ]
+      }
+    ],
+    "weight": 85,
+    "choices": [
+      {
+        "id": "dream_medicine",
+        "text": "Muốn trở thành bác sĩ — cứu người",
+        "effects": [
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "empathy",
+            "value": 3
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "ambition",
+            "value": 4
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "career",
+              "tags": [
+                "career_dream",
+                "medicine_aspiration"
+              ],
+              "emotionalWeight": 65,
+              "importance": 65,
+              "description": "Khoảnh khắc nhận ra đam mê thực sự của mình."
+            }
+          }
+        ]
+      },
+      {
+        "id": "dream_engineer",
+        "text": "Muốn làm kỹ sư — xây dựng những thứ to lớn",
+        "effects": [
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "curiosity",
+            "value": 3
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "discipline",
+            "value": 3
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "career",
+              "tags": [
+                "career_dream",
+                "engineering_aspiration"
+              ],
+              "emotionalWeight": 60,
+              "importance": 65,
+              "description": "Khoảnh khắc nhận ra đam mê thực sự của mình."
+            }
+          }
+        ]
+      },
+      {
+        "id": "dream_artist",
+        "text": "Muốn làm nghệ sĩ — nhưng sợ ba mẹ không đồng ý",
+        "effects": [
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "openness",
+            "value": 4
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "neuroticism",
+            "value": 2
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "career",
+              "tags": [
+                "career_dream",
+                "art_aspiration",
+                "family_pressure"
+              ],
+              "emotionalWeight": 50,
+              "importance": 65,
+              "description": "Khoảnh khắc nhận ra đam mê thực sự của mình."
+            }
+          }
+        ]
+      },
+      {
+        "id": "dream_entrepreneur",
+        "text": "Muốn tự kinh doanh — không muốn làm cho ai",
+        "effects": [
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "ambition",
+            "value": 5
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "risk_tolerance",
+            "value": 4
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "career",
+              "tags": [
+                "career_dream",
+                "entrepreneur_aspiration"
+              ],
+              "emotionalWeight": 65,
+              "importance": 65,
+              "description": "Khoảnh khắc nhận ra đam mê thực sự của mình."
+            }
+          }
+        ]
+      }
+    ],
+    "cooldownMonths": 9999,
+    "tags": [
+      "career",
+      "dream",
+      "teen",
+      "milestone"
+    ],
+    "maxChainDepth": 5,
+    "repeatable": false,
+    "isWowMoment": false
   },
   {
     "id": "evt_teen_friend_group_conflict",
-    "schemaVersion": 1, "contentVersion": 1,
-    "category": "FRIENDSHIP", "importance": 55, "decisionType": "SOCIAL",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "FRIENDSHIP",
+    "importance": 55,
+    "decisionType": "SOCIAL",
     "title": "Mâu thuẫn trong nhóm bạn",
     "description": "Nhóm bạn thân của bạn đang có mâu thuẫn lớn. Bạn bị kéo vào giữa và buộc phải chọn phe.",
-    "conditions": [{ "type": "age", "min": 13, "max": 17 }],
+    "conditions": [
+      {
+        "type": "age",
+        "min": 13,
+        "max": 17
+      }
+    ],
     "weight": 90,
     "choices": [
       {
         "id": "mediate",
         "text": "Cố gắng hòa giải hai bên",
         "effects": [
-          { "type": "SKILL_CHANGE", "target": "communication", "value": 5 },
-          { "type": "STAT_CHANGE", "field": "personality", "target": "agreeableness", "value": 3 },
-          { "type": "STAT_CHANGE", "field": "stress", "target": "stress", "value": 10 }
+          {
+            "type": "SKILL_CHANGE",
+            "target": "communication",
+            "value": 5
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "agreeableness",
+            "value": 3
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "stress",
+            "target": "stress",
+            "value": 10
+          }
         ]
       },
       {
         "id": "choose_one_side",
         "text": "Chọn một phe và trung thành với họ",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "personality", "target": "conscientiousness", "value": 2 },
-          { "type": "MEMORY_ADD", "memoryPayload": { "type": "friendship", "tags": ["friend_conflict", "loyalty_tested"], "emotionalWeight": -40, "importance": 55 } }
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "conscientiousness",
+            "value": 2
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "friendship",
+              "tags": [
+                "friend_conflict",
+                "loyalty_tested"
+              ],
+              "emotionalWeight": -40,
+              "importance": 55,
+              "description": "Một kỷ niệm khó quên: mâu thuẫn trong nhóm bạn."
+            }
+          }
         ]
       },
       {
         "id": "stay_neutral",
         "text": "Tuyên bố trung lập và tránh xa cả hai",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "personality", "target": "risk_tolerance", "value": -2 }
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "risk_tolerance",
+            "value": -2
+          }
         ]
       }
     ],
-    "cooldownMonths": 12, "tags": ["friendship", "conflict", "teen"], "maxChainDepth": 3, "repeatable": false, "isWowMoment": false
+    "cooldownMonths": 12,
+    "tags": [
+      "friendship",
+      "conflict",
+      "teen"
+    ],
+    "maxChainDepth": 3,
+    "repeatable": false,
+    "isWowMoment": false
   },
   {
     "id": "evt_teen_first_relationship",
-    "schemaVersion": 1, "contentVersion": 1,
-    "category": "ROMANCE", "importance": 76, "decisionType": "SOCIAL",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "ROMANCE",
+    "importance": 76,
+    "decisionType": "SOCIAL",
     "title": "Mối tình đầu",
     "description": "Người bạn thích cũng có cảm xúc với bạn. Đây là mối tình đầu thực sự — vụng về, hồi hộp và đẹp.",
     "conditions": [
-      { "type": "age", "min": 14, "max": 17 },
-      { "type": "memory", "tag": "first_crush" }
+      {
+        "type": "age",
+        "min": 14,
+        "max": 17
+      },
+      {
+        "type": "memory",
+        "tag": "first_crush"
+      }
     ],
     "weight": 90,
     "choices": [
@@ -503,70 +2275,339 @@
         "id": "start_dating",
         "text": "Bắt đầu qua lại và hẹn hò",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "happiness", "target": "happiness", "value": 18 },
-          { "type": "RELATIONSHIP_CHANGE", "relationshipPayload": { "target": "npc_first_crush", "field": "closeness", "delta": 30 } },
-          { "type": "RELATIONSHIP_CHANGE", "relationshipPayload": { "target": "npc_first_crush", "field": "trust", "delta": 20 } },
-          { "type": "MEMORY_ADD", "memoryPayload": { "type": "romance", "tags": ["first_relationship", "teen_love", "milestone"], "emotionalWeight": 90, "importance": 76 } }
+          {
+            "type": "STAT_CHANGE",
+            "field": "happiness",
+            "target": "happiness",
+            "value": 18
+          },
+          {
+            "type": "RELATIONSHIP_CHANGE",
+            "relationshipPayload": {
+              "target": "npc_first_crush",
+              "field": "closeness",
+              "delta": 30
+            }
+          },
+          {
+            "type": "RELATIONSHIP_CHANGE",
+            "relationshipPayload": {
+              "target": "npc_first_crush",
+              "field": "trust",
+              "delta": 20
+            }
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "romance",
+              "tags": [
+                "first_relationship",
+                "teen_love",
+                "milestone"
+              ],
+              "emotionalWeight": 90,
+              "importance": 76,
+              "description": "Một kỷ niệm khó quên: mối tình đầu."
+            }
+          }
         ]
       },
       {
         "id": "too_young_focus_school",
         "text": "Giải thích là chưa sẵn sàng, muốn tập trung vào học",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "education", "target": "education", "value": 5 },
-          { "type": "STAT_CHANGE", "field": "personality", "target": "conscientiousness", "value": 3 }
+          {
+            "type": "STAT_CHANGE",
+            "field": "education",
+            "target": "education",
+            "value": 5
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "conscientiousness",
+            "value": 3
+          }
         ]
       }
     ],
-    "cooldownMonths": 9999, "tags": ["romance", "teen", "relationship", "milestone"], "maxChainDepth": 5, "repeatable": false, "isWowMoment": true
+    "cooldownMonths": 9999,
+    "tags": [
+      "romance",
+      "teen",
+      "relationship",
+      "milestone"
+    ],
+    "maxChainDepth": 5,
+    "repeatable": false,
+    "isWowMoment": false
   },
   {
     "id": "evt_teen_financial_struggle",
-    "schemaVersion": 1, "contentVersion": 1,
-    "category": "MONEY", "importance": 68, "decisionType": "MORAL",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "MONEY",
+    "importance": 68,
+    "decisionType": "MORAL",
     "title": "Gia đình khó khăn tài chính",
     "description": "Ba mẹ nói chuyện nghiêm túc với bạn: năm nay gia đình gặp khó khăn, có thể phải cắt giảm nhiều thứ.",
-    "conditions": [{ "type": "age", "min": 13, "max": 17 }],
+    "conditions": [
+      {
+        "type": "and",
+        "conditions": [
+          {
+            "type": "age",
+            "min": 13,
+            "max": 17
+          },
+          {
+            "type": "personality",
+            "axis": "empathy",
+            "op": ">=",
+            "value": 50
+          }
+        ]
+      }
+    ],
     "weight": 55,
     "choices": [
       {
         "id": "help_family",
         "text": "Tự nguyện đi làm thêm để phụ giúp gia đình",
         "effects": [
-          { "type": "MONEY_CHANGE", "value": 800 },
-          { "type": "STAT_CHANGE", "field": "personality", "target": "conscientiousness", "value": 4 },
-          { "type": "STAT_CHANGE", "field": "personality", "target": "empathy", "value": 3 },
-          { "type": "MEMORY_ADD", "memoryPayload": { "type": "family", "tags": ["family_hardship", "sacrifice", "responsibility"], "emotionalWeight": -30, "importance": 68 } }
+          {
+            "type": "MONEY_CHANGE",
+            "value": 800
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "conscientiousness",
+            "value": 4
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "empathy",
+            "value": 3
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "family",
+              "tags": [
+                "family_hardship",
+                "sacrifice",
+                "responsibility"
+              ],
+              "emotionalWeight": -30,
+              "importance": 68,
+              "description": "Bài học đầu tiên về giá trị của đồng tiền."
+            }
+          }
         ]
       },
       {
         "id": "demand_same_lifestyle",
         "text": "Phàn nàn và muốn cuộc sống như cũ",
         "effects": [
-          { "type": "RELATIONSHIP_CHANGE", "relationshipPayload": { "target": "father", "field": "respect", "delta": -10 } },
-          { "type": "STAT_CHANGE", "field": "personality", "target": "agreeableness", "value": -3 }
+          {
+            "type": "RELATIONSHIP_CHANGE",
+            "relationshipPayload": {
+              "target": "father",
+              "field": "respect",
+              "delta": -10
+            }
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "agreeableness",
+            "value": -3
+          }
         ]
       },
       {
         "id": "accept_quietly",
         "text": "Chấp nhận và không đòi hỏi thêm",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "personality", "target": "agreeableness", "value": 2 },
-          { "type": "MEMORY_ADD", "memoryPayload": { "type": "family", "tags": ["family_hardship", "acceptance", "humble"], "emotionalWeight": -20, "importance": 68 } }
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "agreeableness",
+            "value": 2
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "family",
+              "tags": [
+                "family_hardship",
+                "acceptance",
+                "humble"
+              ],
+              "emotionalWeight": -20,
+              "importance": 68,
+              "description": "Bài học đầu tiên về giá trị của đồng tiền."
+            }
+          }
         ]
       }
     ],
-    "cooldownMonths": 24, "tags": ["money", "family", "hardship", "teen"], "maxChainDepth": 5, "repeatable": false, "isWowMoment": false
+    "cooldownMonths": 24,
+    "tags": [
+      "money",
+      "family",
+      "hardship",
+      "teen"
+    ],
+    "maxChainDepth": 5,
+    "repeatable": false,
+    "isWowMoment": false
+  },
+  {
+    "id": "evt_teen_financial_struggle_alt",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "MONEY",
+    "importance": 68,
+    "decisionType": "MORAL",
+    "title": "Gia đình khó khăn tài chính (Góc nhìn khác)",
+    "description": "Ba mẹ nói chuyện nghiêm túc với bạn: năm nay gia đình gặp khó khăn, có thể phải cắt giảm nhiều thứ.",
+    "conditions": [
+      {
+        "type": "and",
+        "conditions": [
+          {
+            "type": "age",
+            "min": 13,
+            "max": 17
+          },
+          {
+            "type": "personality",
+            "axis": "empathy",
+            "op": "<",
+            "value": 50
+          }
+        ]
+      }
+    ],
+    "weight": 55,
+    "choices": [
+      {
+        "id": "help_family",
+        "text": "Tự nguyện đi làm thêm để phụ giúp gia đình",
+        "effects": [
+          {
+            "type": "MONEY_CHANGE",
+            "value": 800
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "conscientiousness",
+            "value": 4
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "empathy",
+            "value": 3
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "family",
+              "tags": [
+                "family_hardship",
+                "sacrifice",
+                "responsibility"
+              ],
+              "emotionalWeight": -30,
+              "importance": 68,
+              "description": "Bài học đầu tiên về giá trị của đồng tiền."
+            }
+          }
+        ]
+      },
+      {
+        "id": "demand_same_lifestyle",
+        "text": "Phàn nàn và muốn cuộc sống như cũ",
+        "effects": [
+          {
+            "type": "RELATIONSHIP_CHANGE",
+            "relationshipPayload": {
+              "target": "father",
+              "field": "respect",
+              "delta": -10
+            }
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "agreeableness",
+            "value": -3
+          }
+        ]
+      },
+      {
+        "id": "accept_quietly",
+        "text": "Chấp nhận và không đòi hỏi thêm",
+        "effects": [
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "agreeableness",
+            "value": 2
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "family",
+              "tags": [
+                "family_hardship",
+                "acceptance",
+                "humble"
+              ],
+              "emotionalWeight": -20,
+              "importance": 68,
+              "description": "Bài học đầu tiên về giá trị của đồng tiền."
+            }
+          }
+        ]
+      }
+    ],
+    "cooldownMonths": 24,
+    "tags": [
+      "money",
+      "family",
+      "hardship",
+      "teen"
+    ],
+    "maxChainDepth": 5,
+    "repeatable": false,
+    "isWowMoment": false
   },
   {
     "id": "evt_teen_mentor_wow",
-    "schemaVersion": 1, "contentVersion": 1,
-    "category": "SCHOOL", "importance": 82, "decisionType": "SOCIAL",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "SCHOOL",
+    "importance": 82,
+    "decisionType": "SOCIAL",
     "title": "Khoảnh khắc người thầy thay đổi tất cả",
     "description": "Người thầy cô từng truyền cảm hứng cho bạn năm nhỏ tình cờ gặp lại bạn và nói: 'Em vẫn giỏi như ngày xưa thầy đoán.'",
     "conditions": [
-      { "type": "age", "min": 14, "max": 17 },
-      { "type": "memory", "tag": "mentor_teacher" }
+      {
+        "type": "age",
+        "min": 14,
+        "max": 17
+      },
+      {
+        "type": "memory",
+        "tag": "mentor_teacher"
+      }
     ],
     "weight": 150,
     "choices": [
@@ -574,182 +2615,883 @@
         "id": "reconnect_share",
         "text": "Kể cho thầy/cô nghe về hành trình từ ngày đó đến giờ",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "personality", "target": "conscientiousness", "value": 3 },
-          { "type": "STAT_CHANGE", "field": "personality", "target": "ambition", "value": 4 },
-          { "type": "MEMORY_ADD", "memoryPayload": { "type": "school", "tags": ["mentor_reunion", "inspired_again", "wow_moment"], "emotionalWeight": 90, "importance": 82 } }
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "conscientiousness",
+            "value": 3
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "ambition",
+            "value": 4
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "school",
+              "tags": [
+                "mentor_reunion",
+                "inspired_again",
+                "wow_moment"
+              ],
+              "emotionalWeight": 90,
+              "importance": 82,
+              "description": "Một kỷ niệm khó quên: khoảnh khắc người thầy thay đổi tất cả."
+            }
+          }
         ]
       },
       {
         "id": "awkward_goodbye",
         "text": "Nói vài câu xã giao rồi đi vì không biết nói gì",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "personality", "target": "neuroticism", "value": 2 }
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "neuroticism",
+            "value": 2
+          }
         ]
       }
     ],
-    "cooldownMonths": 9999, "tags": ["school", "mentor", "wow", "teen"], "maxChainDepth": 3, "repeatable": false, "isWowMoment": true
+    "cooldownMonths": 9999,
+    "tags": [
+      "school",
+      "mentor",
+      "wow",
+      "teen"
+    ],
+    "maxChainDepth": 3,
+    "repeatable": false,
+    "isWowMoment": false
   },
   {
     "id": "evt_teen_university_entrance_exam",
-    "schemaVersion": 1, "contentVersion": 1,
-    "category": "SCHOOL", "importance": 92, "decisionType": "IRREVERSIBLE",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "SCHOOL",
+    "importance": 92,
+    "decisionType": "IRREVERSIBLE",
     "title": "Kỳ thi đại học",
     "description": "Kỳ thi tuyển sinh đại học — được gọi là 'một kỳ thi quyết định cả đời'. Phòng thi yên lặng đến ngột ngạt.",
-    "conditions": [{ "type": "age", "min": 17, "max": 18 }],
+    "conditions": [
+      {
+        "type": "and",
+        "conditions": [
+          {
+            "type": "age",
+            "min": 17,
+            "max": 18
+          },
+          {
+            "type": "personality",
+            "axis": "openness",
+            "op": ">=",
+            "value": 50
+          }
+        ]
+      }
+    ],
     "weight": 9999,
     "choices": [
       {
         "id": "high_score_university",
         "text": "Làm bài tốt — đủ điểm vào đại học top",
         "effects": [
-          { "type": "EDUCATION_CHANGE", "target": "level", "value": "university_prep" },
-          { "type": "STAT_CHANGE", "field": "education", "target": "education", "value": 20 },
-          { "type": "MEMORY_ADD", "memoryPayload": { "type": "school", "tags": ["university_exam", "success", "milestone"], "emotionalWeight": 90, "importance": 92 } }
+          {
+            "type": "EDUCATION_CHANGE",
+            "target": "level",
+            "value": "university_prep"
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "education",
+            "target": "education",
+            "value": 20
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "school",
+              "tags": [
+                "university_exam",
+                "success",
+                "milestone"
+              ],
+              "emotionalWeight": 90,
+              "importance": 92,
+              "description": "Bắt đầu chương mới của cuộc đời tại giảng đường."
+            }
+          }
         ]
       },
       {
         "id": "ok_score_local",
         "text": "Điểm tạm — vào được đại học địa phương",
         "effects": [
-          { "type": "EDUCATION_CHANGE", "target": "level", "value": "some_university" },
-          { "type": "STAT_CHANGE", "field": "education", "target": "education", "value": 10 },
-          { "type": "MEMORY_ADD", "memoryPayload": { "type": "school", "tags": ["university_exam", "acceptable", "milestone"], "emotionalWeight": 50, "importance": 92 } }
+          {
+            "type": "EDUCATION_CHANGE",
+            "target": "level",
+            "value": "some_university"
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "education",
+            "target": "education",
+            "value": 10
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "school",
+              "tags": [
+                "university_exam",
+                "acceptable",
+                "milestone"
+              ],
+              "emotionalWeight": 50,
+              "importance": 92,
+              "description": "Bắt đầu chương mới của cuộc đời tại giảng đường."
+            }
+          }
         ]
       },
       {
         "id": "fail_exam",
         "text": "Thi trượt — phải nghĩ lại kế hoạch",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "happiness", "target": "happiness", "value": -20 },
-          { "type": "STAT_CHANGE", "field": "personality", "target": "neuroticism", "value": 6 },
-          { "type": "MEMORY_ADD", "memoryPayload": { "type": "school", "tags": ["university_exam", "failure", "life_turning_point"], "emotionalWeight": -85, "importance": 92 } }
+          {
+            "type": "STAT_CHANGE",
+            "field": "happiness",
+            "target": "happiness",
+            "value": -20
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "neuroticism",
+            "value": 6
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "school",
+              "tags": [
+                "university_exam",
+                "failure",
+                "life_turning_point"
+              ],
+              "emotionalWeight": -85,
+              "importance": 92,
+              "description": "Bắt đầu chương mới của cuộc đời tại giảng đường."
+            }
+          }
         ]
       }
     ],
-    "cooldownMonths": 9999, "tags": ["school", "exam", "milestone", "university", "irreversible"], "maxChainDepth": 5, "repeatable": false, "isWowMoment": true
+    "cooldownMonths": 9999,
+    "tags": [
+      "school",
+      "exam",
+      "milestone",
+      "university",
+      "irreversible"
+    ],
+    "maxChainDepth": 5,
+    "repeatable": false,
+    "isWowMoment": true
+  },
+  {
+    "id": "evt_teen_university_entrance_exam_alt",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "SCHOOL",
+    "importance": 92,
+    "decisionType": "IRREVERSIBLE",
+    "title": "Kỳ thi đại học (Góc nhìn khác)",
+    "description": "Kỳ thi tuyển sinh đại học — được gọi là 'một kỳ thi quyết định cả đời'. Phòng thi yên lặng đến ngột ngạt.",
+    "conditions": [
+      {
+        "type": "and",
+        "conditions": [
+          {
+            "type": "age",
+            "min": 17,
+            "max": 18
+          },
+          {
+            "type": "personality",
+            "axis": "openness",
+            "op": "<",
+            "value": 50
+          }
+        ]
+      }
+    ],
+    "weight": 9999,
+    "choices": [
+      {
+        "id": "high_score_university",
+        "text": "Làm bài tốt — đủ điểm vào đại học top",
+        "effects": [
+          {
+            "type": "EDUCATION_CHANGE",
+            "target": "level",
+            "value": "university_prep"
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "education",
+            "target": "education",
+            "value": 20
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "school",
+              "tags": [
+                "university_exam",
+                "success",
+                "milestone"
+              ],
+              "emotionalWeight": 90,
+              "importance": 92,
+              "description": "Bắt đầu chương mới của cuộc đời tại giảng đường."
+            }
+          }
+        ]
+      },
+      {
+        "id": "ok_score_local",
+        "text": "Điểm tạm — vào được đại học địa phương",
+        "effects": [
+          {
+            "type": "EDUCATION_CHANGE",
+            "target": "level",
+            "value": "some_university"
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "education",
+            "target": "education",
+            "value": 10
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "school",
+              "tags": [
+                "university_exam",
+                "acceptable",
+                "milestone"
+              ],
+              "emotionalWeight": 50,
+              "importance": 92,
+              "description": "Bắt đầu chương mới của cuộc đời tại giảng đường."
+            }
+          }
+        ]
+      },
+      {
+        "id": "fail_exam",
+        "text": "Thi trượt — phải nghĩ lại kế hoạch",
+        "effects": [
+          {
+            "type": "STAT_CHANGE",
+            "field": "happiness",
+            "target": "happiness",
+            "value": -20
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "neuroticism",
+            "value": 6
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "school",
+              "tags": [
+                "university_exam",
+                "failure",
+                "life_turning_point"
+              ],
+              "emotionalWeight": -85,
+              "importance": 92,
+              "description": "Bắt đầu chương mới của cuộc đời tại giảng đường."
+            }
+          }
+        ]
+      }
+    ],
+    "cooldownMonths": 9999,
+    "tags": [
+      "school",
+      "exam",
+      "milestone",
+      "university",
+      "irreversible"
+    ],
+    "maxChainDepth": 5,
+    "repeatable": false,
+    "isWowMoment": true
   },
   {
     "id": "evt_teen_summer_internship",
-    "schemaVersion": 1, "contentVersion": 1,
-    "category": "CAREER", "importance": 55, "decisionType": "STRATEGIC",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "CAREER",
+    "importance": 55,
+    "decisionType": "STRATEGIC",
     "title": "Cơ hội thực tập hè",
     "description": "Một công ty nhỏ tuyển thực tập sinh hè, không lương nhưng có cơ hội học hỏi.",
-    "conditions": [{ "type": "age", "min": 16, "max": 17 }],
+    "conditions": [
+      {
+        "type": "age",
+        "min": 16,
+        "max": 17
+      }
+    ],
     "weight": 70,
     "choices": [
       {
         "id": "join_internship",
         "text": "Tham gia — kinh nghiệm quý hơn tiền",
         "effects": [
-          { "type": "SKILL_CHANGE", "target": "work_ethic", "value": 6 },
-          { "type": "SKILL_CHANGE", "target": "communication", "value": 4 },
-          { "type": "MEMORY_ADD", "memoryPayload": { "type": "career", "tags": ["internship", "teen_work", "learning"], "emotionalWeight": 50, "importance": 55 } }
+          {
+            "type": "SKILL_CHANGE",
+            "target": "work_ethic",
+            "value": 6
+          },
+          {
+            "type": "SKILL_CHANGE",
+            "target": "communication",
+            "value": 4
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "career",
+              "tags": [
+                "internship",
+                "teen_work",
+                "learning"
+              ],
+              "emotionalWeight": 50,
+              "importance": 55,
+              "description": "Một kỷ niệm khó quên: cơ hội thực tập hè."
+            }
+          }
         ]
       },
       {
         "id": "enjoy_summer",
         "text": "Nghỉ ngơi, tận hưởng mùa hè cuối trung học",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "happiness", "target": "happiness", "value": 10 },
-          { "type": "STAT_CHANGE", "field": "health", "target": "health", "value": 5 }
+          {
+            "type": "STAT_CHANGE",
+            "field": "happiness",
+            "target": "happiness",
+            "value": 10
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "health",
+            "target": "health",
+            "value": 5
+          }
         ]
       }
     ],
-    "cooldownMonths": 12, "tags": ["career", "teen", "summer", "internship"], "maxChainDepth": 3, "repeatable": false, "isWowMoment": false
+    "cooldownMonths": 12,
+    "tags": [
+      "career",
+      "teen",
+      "summer",
+      "internship"
+    ],
+    "maxChainDepth": 3,
+    "repeatable": false,
+    "isWowMoment": false
   },
   {
     "id": "evt_teen_wow_chance_encounter",
-    "schemaVersion": 1, "contentVersion": 1,
-    "category": "RANDOM", "importance": 85, "decisionType": "SOCIAL",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "RANDOM",
+    "importance": 85,
+    "decisionType": "SOCIAL",
     "title": "Gặp gỡ định mệnh",
     "description": "Trong lúc chờ xe buýt, bạn vô tình ngồi cạnh một người lạ. Câu chuyện ngắn ngủi đó thay đổi cách bạn nhìn nhận bản thân mình.",
-    "conditions": [{ "type": "age", "min": 14, "max": 17 }],
+    "conditions": [
+      {
+        "type": "and",
+        "conditions": [
+          {
+            "type": "age",
+            "min": 14,
+            "max": 17
+          },
+          {
+            "type": "personality",
+            "axis": "extraversion",
+            "op": ">=",
+            "value": 50
+          }
+        ]
+      }
+    ],
     "weight": 40,
     "choices": [
       {
         "id": "open_up",
         "text": "Mở lòng và nói thật những gì bạn đang nghĩ",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "personality", "target": "openness", "value": 5 },
-          { "type": "STAT_CHANGE", "field": "personality", "target": "agreeableness", "value": 3 },
-          { "type": "MEMORY_ADD", "memoryPayload": { "type": "life", "tags": ["stranger_encounter", "life_changing", "wow_moment"], "emotionalWeight": 85, "importance": 85 } }
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "openness",
+            "value": 5
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "agreeableness",
+            "value": 3
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "life",
+              "tags": [
+                "stranger_encounter",
+                "life_changing",
+                "wow_moment"
+              ],
+              "emotionalWeight": 85,
+              "importance": 85,
+              "description": "Một cuộc gặp gỡ tình cờ thay đổi mọi thứ."
+            }
+          }
         ]
       },
       {
         "id": "polite_small_talk",
         "text": "Nói chuyện xã giao bình thường",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "personality", "target": "extraversion", "value": 1 }
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "extraversion",
+            "value": 1
+          }
         ]
       }
     ],
-    "cooldownMonths": 9999, "tags": ["random", "wow", "encounter", "teen"], "maxChainDepth": 3, "repeatable": false, "isWowMoment": true
+    "cooldownMonths": 9999,
+    "tags": [
+      "random",
+      "wow",
+      "encounter",
+      "teen"
+    ],
+    "maxChainDepth": 3,
+    "repeatable": false,
+    "isWowMoment": true
+  },
+  {
+    "id": "evt_teen_wow_chance_encounter_alt",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "RANDOM",
+    "importance": 85,
+    "decisionType": "SOCIAL",
+    "title": "Gặp gỡ định mệnh (Góc nhìn khác)",
+    "description": "Trong lúc chờ xe buýt, bạn vô tình ngồi cạnh một người lạ. Câu chuyện ngắn ngủi đó thay đổi cách bạn nhìn nhận bản thân mình.",
+    "conditions": [
+      {
+        "type": "and",
+        "conditions": [
+          {
+            "type": "age",
+            "min": 14,
+            "max": 17
+          },
+          {
+            "type": "personality",
+            "axis": "extraversion",
+            "op": "<",
+            "value": 50
+          }
+        ]
+      }
+    ],
+    "weight": 40,
+    "choices": [
+      {
+        "id": "open_up",
+        "text": "Mở lòng và nói thật những gì bạn đang nghĩ",
+        "effects": [
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "openness",
+            "value": 5
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "agreeableness",
+            "value": 3
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "life",
+              "tags": [
+                "stranger_encounter",
+                "life_changing",
+                "wow_moment"
+              ],
+              "emotionalWeight": 85,
+              "importance": 85,
+              "description": "Một cuộc gặp gỡ tình cờ thay đổi mọi thứ."
+            }
+          }
+        ]
+      },
+      {
+        "id": "polite_small_talk",
+        "text": "Nói chuyện xã giao bình thường",
+        "effects": [
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "extraversion",
+            "value": 1
+          }
+        ]
+      }
+    ],
+    "cooldownMonths": 9999,
+    "tags": [
+      "random",
+      "wow",
+      "encounter",
+      "teen"
+    ],
+    "maxChainDepth": 3,
+    "repeatable": false,
+    "isWowMoment": true
   },
   {
     "id": "evt_teen_school_rebellion",
-    "schemaVersion": 1, "contentVersion": 1,
-    "category": "SCHOOL", "importance": 58, "decisionType": "MORAL",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "SCHOOL",
+    "importance": 58,
+    "decisionType": "MORAL",
     "title": "Nổi loạn học đường",
     "description": "Bạn cảm thấy chán ghét hệ thống. Bạn muốn cắt học, phá quy tắc và thể hiện bản thân khác đi.",
-    "conditions": [{ "type": "age", "min": 14, "max": 16 }],
+    "conditions": [
+      {
+        "type": "age",
+        "min": 14,
+        "max": 16
+      }
+    ],
     "weight": 60,
     "choices": [
       {
         "id": "full_rebellion",
         "text": "Cắt học, tụ tập bạn bè và sống ngược lại mọi quy tắc",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "personality", "target": "risk_tolerance", "value": 5 },
-          { "type": "STAT_CHANGE", "field": "education", "target": "education", "value": -10 },
-          { "type": "STAT_CHANGE", "field": "personality", "target": "conscientiousness", "value": -4 },
-          { "type": "MEMORY_ADD", "memoryPayload": { "type": "life", "tags": ["school_rebellion", "teen_identity", "risk"], "emotionalWeight": 30, "importance": 58 } }
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "risk_tolerance",
+            "value": 5
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "education",
+            "target": "education",
+            "value": -10
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "conscientiousness",
+            "value": -4
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "life",
+              "tags": [
+                "school_rebellion",
+                "teen_identity",
+                "risk"
+              ],
+              "emotionalWeight": 30,
+              "importance": 58,
+              "description": "Một kỷ niệm khó quên: nổi loạn học đường."
+            }
+          }
         ]
       },
       {
         "id": "express_through_art",
         "text": "Nổi loạn qua nghệ thuật và sáng tạo",
         "effects": [
-          { "type": "SKILL_CHANGE", "target": "art", "value": 6 },
-          { "type": "STAT_CHANGE", "field": "personality", "target": "openness", "value": 4 }
+          {
+            "type": "SKILL_CHANGE",
+            "target": "art",
+            "value": 6
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "openness",
+            "value": 4
+          }
         ]
       },
       {
         "id": "channel_into_study",
         "text": "Thay đổi trong giới hạn cho phép, vẫn đến trường",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "personality", "target": "agreeableness", "value": 2 }
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "agreeableness",
+            "value": 2
+          }
         ]
       }
     ],
-    "cooldownMonths": 18, "tags": ["school", "teen", "rebellion", "identity"], "maxChainDepth": 3, "repeatable": false, "isWowMoment": false
+    "cooldownMonths": 18,
+    "tags": [
+      "school",
+      "teen",
+      "rebellion",
+      "identity"
+    ],
+    "maxChainDepth": 3,
+    "repeatable": false,
+    "isWowMoment": false
   },
   {
     "id": "evt_teen_graduation_cap3",
-    "schemaVersion": 1, "contentVersion": 1,
-    "category": "SCHOOL", "importance": 88, "decisionType": "STRATEGIC",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "SCHOOL",
+    "importance": 88,
+    "decisionType": "STRATEGIC",
     "title": "Tốt nghiệp cấp 3 — bước ngoặt",
     "description": "Lễ tốt nghiệp trung học phổ thông. Phía trước là bầu trời mở toang. Nhưng con đường thì chưa rõ.",
-    "conditions": [{ "type": "age", "min": 17, "max": 18 }],
+    "conditions": [
+      {
+        "type": "and",
+        "conditions": [
+          {
+            "type": "age",
+            "min": 17,
+            "max": 18
+          },
+          {
+            "type": "personality",
+            "axis": "conscientiousness",
+            "op": ">=",
+            "value": 50
+          }
+        ]
+      }
+    ],
     "weight": 9999,
     "choices": [
       {
         "id": "ready_for_next_chapter",
         "text": "Sẵn sàng — bước vào chương tiếp theo của cuộc đời",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "happiness", "target": "happiness", "value": 15 },
-          { "type": "STAT_CHANGE", "field": "personality", "target": "ambition", "value": 3 },
-          { "type": "MEMORY_ADD", "memoryPayload": { "type": "school", "tags": ["graduation_high_school", "milestone", "new_beginning"], "emotionalWeight": 85, "importance": 88 } }
+          {
+            "type": "STAT_CHANGE",
+            "field": "happiness",
+            "target": "happiness",
+            "value": 15
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "ambition",
+            "value": 3
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "school",
+              "tags": [
+                "graduation_high_school",
+                "milestone",
+                "new_beginning"
+              ],
+              "emotionalWeight": 85,
+              "importance": 88,
+              "description": "Cầm tấm bằng trên tay, tự hào và đầy hy vọng."
+            }
+          }
         ]
       },
       {
         "id": "bittersweet_farewell",
         "text": "Buồn vì phải chia xa mái trường, bạn bè — nhưng vẫn bước đi",
         "effects": [
-          { "type": "STAT_CHANGE", "field": "happiness", "target": "happiness", "value": 8 },
-          { "type": "STAT_CHANGE", "field": "personality", "target": "openness", "value": 2 },
-          { "type": "MEMORY_ADD", "memoryPayload": { "type": "school", "tags": ["graduation_high_school", "milestone", "nostalgia"], "emotionalWeight": 70, "importance": 88 } }
+          {
+            "type": "STAT_CHANGE",
+            "field": "happiness",
+            "target": "happiness",
+            "value": 8
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "openness",
+            "value": 2
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "school",
+              "tags": [
+                "graduation_high_school",
+                "milestone",
+                "nostalgia"
+              ],
+              "emotionalWeight": 70,
+              "importance": 88,
+              "description": "Cầm tấm bằng trên tay, tự hào và đầy hy vọng."
+            }
+          }
         ]
       }
     ],
-    "cooldownMonths": 9999, "tags": ["school", "graduation", "milestone", "teen"], "maxChainDepth": 3, "repeatable": false, "isWowMoment": true
+    "cooldownMonths": 9999,
+    "tags": [
+      "school",
+      "graduation",
+      "milestone",
+      "teen"
+    ],
+    "maxChainDepth": 3,
+    "repeatable": false,
+    "isWowMoment": false
+  },
+  {
+    "id": "evt_teen_graduation_cap3_alt",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "SCHOOL",
+    "importance": 88,
+    "decisionType": "STRATEGIC",
+    "title": "Tốt nghiệp cấp 3 — bước ngoặt (Góc nhìn khác)",
+    "description": "Lễ tốt nghiệp trung học phổ thông. Phía trước là bầu trời mở toang. Nhưng con đường thì chưa rõ.",
+    "conditions": [
+      {
+        "type": "and",
+        "conditions": [
+          {
+            "type": "age",
+            "min": 17,
+            "max": 18
+          },
+          {
+            "type": "personality",
+            "axis": "conscientiousness",
+            "op": "<",
+            "value": 50
+          }
+        ]
+      }
+    ],
+    "weight": 9999,
+    "choices": [
+      {
+        "id": "ready_for_next_chapter",
+        "text": "Sẵn sàng — bước vào chương tiếp theo của cuộc đời",
+        "effects": [
+          {
+            "type": "STAT_CHANGE",
+            "field": "happiness",
+            "target": "happiness",
+            "value": 15
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "ambition",
+            "value": 3
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "school",
+              "tags": [
+                "graduation_high_school",
+                "milestone",
+                "new_beginning"
+              ],
+              "emotionalWeight": 85,
+              "importance": 88,
+              "description": "Cầm tấm bằng trên tay, tự hào và đầy hy vọng."
+            }
+          }
+        ]
+      },
+      {
+        "id": "bittersweet_farewell",
+        "text": "Buồn vì phải chia xa mái trường, bạn bè — nhưng vẫn bước đi",
+        "effects": [
+          {
+            "type": "STAT_CHANGE",
+            "field": "happiness",
+            "target": "happiness",
+            "value": 8
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "openness",
+            "value": 2
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "school",
+              "tags": [
+                "graduation_high_school",
+                "milestone",
+                "nostalgia"
+              ],
+              "emotionalWeight": 70,
+              "importance": 88,
+              "description": "Cầm tấm bằng trên tay, tự hào và đầy hy vọng."
+            }
+          }
+        ]
+      }
+    ],
+    "cooldownMonths": 9999,
+    "tags": [
+      "school",
+      "graduation",
+      "milestone",
+      "teen"
+    ],
+    "maxChainDepth": 3,
+    "repeatable": false,
+    "isWowMoment": false
   }
 ]

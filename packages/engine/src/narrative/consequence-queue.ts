@@ -3,7 +3,7 @@ import { ConditionEvaluator } from './condition-evaluator.js';
 import { EventDatabase } from './event-database.js';
 
 export interface DueEventResult {
-  readyEvents: EventDefinition[];
+  readyEvents: { event: EventDefinition, schedule: ScheduledEvent }[];
   cancelledEvents: { eventId: string; reason: string }[];
   remainingQueue: ScheduledEvent[];
 }
@@ -14,7 +14,7 @@ export class ConsequenceQueue {
     state: CharacterState,
     db: EventDatabase
   ): DueEventResult {
-    const readyEvents: EventDefinition[] = [];
+    const readyEvents: { event: EventDefinition, schedule: ScheduledEvent }[] = [];
     const cancelledEvents: { eventId: string; reason: string }[] = [];
     const remainingQueue: ScheduledEvent[] = [];
 
@@ -37,7 +37,7 @@ export class ConsequenceQueue {
       // Check whether prerequisites and conditions still hold (§41)
       const valid = ConditionEvaluator.evaluateAll(eventDef.conditions, state);
       if (valid) {
-        readyEvents.push(eventDef);
+        readyEvents.push({ event: eventDef, schedule: item });
       } else {
         cancelledEvents.push({
           eventId: item.eventId,
