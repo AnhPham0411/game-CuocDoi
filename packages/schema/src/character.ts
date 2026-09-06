@@ -38,6 +38,10 @@ export type RelationshipType = z.infer<typeof RelationshipTypeSchema>;
 /** 5-dimensional relationship vector (0-100) from blueprint §7 */
 export const RelationshipStateSchema = z.object({
   npcId: z.string().min(1),
+  /** Display name, when the NPC was created with one (e.g. CREATE_NPC's
+   * npcPayload.name). Absent for family members, whose name lives on
+   * FamilyMember instead — UI layers should fall back to that lookup. */
+  name: z.string().min(1).optional(),
   closeness: z.number().min(0).max(100),
   trust: z.number().min(0).max(100),
   respect: z.number().min(0).max(100),

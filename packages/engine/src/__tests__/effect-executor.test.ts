@@ -92,6 +92,7 @@ function createMockCharacter(): CharacterState {
       family_responsibility: 50,
     },
     schemaVersion: 1,
+    idCounter: 0,
   };
 }
 
@@ -157,6 +158,33 @@ describe('EffectExecutor & Clamping Table Tests (E4)', () => {
     const result = EffectExecutor.execute(char, effects, prov);
     const rel = result.nextState.relationships.find((r) => r.npcId === 'npc_mate');
     expect(rel?.trust).toBe(65);
+  });
+
+  it('CREATE_NPC persists the display name from content (regression: was silently dropped)', () => {
+    // Content authors write npcPayload.name (required by EffectSchema, and every
+    // real CREATE_NPC event in packages/content sets it) so the UI can show a
+    // real name instead of a raw npcId like "npc_first_friend". The executor
+    // used to read every other npcPayload field but never wrote `name` into
+    // the resulting RelationshipState, silently discarding content data.
+    const char = createMockCharacter();
+    const effects: Effect[] = [
+      {
+        type: 'CREATE_NPC',
+        npcPayload: {
+          npcId: 'npc_first_friend',
+          name: 'Bạn học đầu tiên',
+          relationshipType: 'friend',
+          initialCloseness: 30,
+          initialTrust: 40,
+          initialRespect: 30,
+          tier: 2,
+        },
+      },
+    ];
+
+    const result = EffectExecutor.execute(char, effects, prov);
+    const created = result.nextState.relationships.find((r) => r.npcId === 'npc_first_friend');
+    expect(created?.name).toBe('Bạn học đầu tiên');
   });
 
   it('adds and removes traits without duplication', () => {

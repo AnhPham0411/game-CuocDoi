@@ -245,6 +245,7 @@ export class EffectExecutor {
             if (current.relationships.length < 100) {
               const newRel: RelationshipState = {
                 npcId: effect.npcPayload.npcId,
+                name: effect.npcPayload.name,
                 closeness: effect.npcPayload.initialCloseness,
                 trust: effect.npcPayload.initialTrust,
                 respect: effect.npcPayload.initialRespect,
