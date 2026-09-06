@@ -95,6 +95,9 @@ importers:
       '@life/schema':
         specifier: workspace:*
         version: link:../schema
+      '@life/validator':
+        specifier: workspace:*
+        version: link:../validator
       zod:
         specifier: ^3.24.2
         version: 3.25.76

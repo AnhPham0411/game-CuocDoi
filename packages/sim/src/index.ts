@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import {
   CharacterState,
   EventDefinition,
@@ -10,6 +11,7 @@ import {
   GameEngine,
   RNG,
 } from '@life/engine';
+import { loadEventsFromDirectory } from '@life/validator';
 
 export interface SimConfig {
   lives: number;
@@ -17,6 +19,11 @@ export interface SimConfig {
   maxTurnsPerLife?: number;
   monthsPerTurn?: number;
 }
+
+// Shared with runCLI's content-coverage warning below — keep these in sync
+// with the defaults actually applied inside runSimulation.
+export const DEFAULT_MAX_TURNS_PER_LIFE = 150;
+export const DEFAULT_MONTHS_PER_TURN = 6;
 
 export interface SimReport {
   totalLives: number;
@@ -162,8 +169,8 @@ export function runSimulation(config: SimConfig, customDb?: EventDatabase): SimR
   const eventSeenCounts: Record<string, number> = {};
   const violations: string[] = [];
 
-  const maxTurns = config.maxTurnsPerLife ?? 150;
-  const monthsPerTurn = config.monthsPerTurn ?? 6;
+  const maxTurns = config.maxTurnsPerLife ?? DEFAULT_MAX_TURNS_PER_LIFE;
+  const monthsPerTurn = config.monthsPerTurn ?? DEFAULT_MONTHS_PER_TURN;
 
   for (let lifeIdx = 0; lifeIdx < config.lives; lifeIdx++) {
     const lifeSeed = masterRng.nextInt(1, 10000000);
@@ -316,6 +323,71 @@ export function runSimulation(config: SimConfig, customDb?: EventDatabase): SimR
   };
 }
 
+function findRepoRoot(startDir: string): string {
+  let cur = startDir;
+  while (cur !== path.dirname(cur)) {
+    if (fs.existsSync(path.join(cur, 'pnpm-workspace.yaml'))) {
+      return cur;
+    }
+    cur = path.dirname(cur);
+  }
+  return startDir;
+}
+
+/**
+ * Loads the real event content from packages/content/events. This is what
+ * makes `pnpm sim` measure the actual game instead of the 3-event fixture
+ * (Dead Content Events / Billionaire Rate / event frequency all previously
+ * described `createSampleEventDatabase()`, not the 69+ events designers
+ * actually wrote). Fails fast on any schema/structural error — a broken
+ * sim run must not silently report balance numbers for less content than
+ * actually exists (blueprint E5 policy: fail-fast in dev/CLI tooling).
+ */
+function loadContentEventDatabase(root: string): EventDatabase {
+  const contentDir = path.resolve(root, 'packages/content/events');
+  const { events, summary } = loadEventsFromDirectory(contentDir);
+
+  if (summary.errors.length > 0) {
+    console.error(`\n❌ Cannot run sim: ${summary.errors.length} content error(s) in ${contentDir}`);
+    for (const e of summary.errors) console.error(`  - ${e}`);
+    console.error('\nRun `pnpm validate:content` for full details.\n');
+    process.exit(1);
+  }
+
+  if (events.length === 0) {
+    console.error(`\n❌ Cannot run sim: 0 events loaded from ${contentDir}\n`);
+    process.exit(1);
+  }
+
+  const db = new EventDatabase();
+  db.loadBulk(events);
+  return db;
+}
+
+/**
+ * Highest age any loaded event's `age` condition can still match
+ * (undefined max = uncapped, i.e. content reaches to the end of life).
+ * Used to warn when the simulated lifespan runs far past what content
+ * actually covers — otherwise the balance report silently averages in
+ * decades of nothing-but-filler turns without anyone noticing (see the
+ * B4 code review finding: content currently reaches only ~age 26, while
+ * the sim defaults to a ~75-year lifespan).
+ */
+function getContentMaxAgeCoverage(db: EventDatabase): number | null {
+  let max: number | null = null;
+  let hasUncapped = false;
+  for (const event of db.getAll()) {
+    const ageCond = event.conditions.find((c) => c.type === 'age');
+    if (!ageCond) continue;
+    if (ageCond.max === undefined) {
+      hasUncapped = true;
+      continue;
+    }
+    if (max === null || ageCond.max > max) max = ageCond.max;
+  }
+  return hasUncapped ? null : max;
+}
+
 function runCLI() {
   const lives = process.argv.includes('--lives')
     ? parseInt(process.argv[process.argv.indexOf('--lives') + 1] ?? '1000', 10)
@@ -324,10 +396,27 @@ function runCLI() {
     ? parseInt(process.argv[process.argv.indexOf('--seed') + 1] ?? '42', 10)
     : 42;
 
+  const root = findRepoRoot(process.cwd());
+  const db = loadContentEventDatabase(root);
+
   console.log(`\n🎲 Running Headless Monte Carlo Simulation: ${lives} lives (seed: ${seed})...`);
+  console.log(`   Content: ${db.getAll().length} real event(s) from packages/content/events`);
+
+  const contentMaxAge = getContentMaxAgeCoverage(db);
+  const simulatedMaxAge = (DEFAULT_MAX_TURNS_PER_LIFE * DEFAULT_MONTHS_PER_TURN) / 12;
+  let coverageWarning: string | null = null;
+  if (contentMaxAge !== null && contentMaxAge < simulatedMaxAge) {
+    coverageWarning =
+      `Content only defines age conditions up to ${contentMaxAge}, but each life is ` +
+      `simulated up to ~${simulatedMaxAge} years. Every turn past age ${contentMaxAge} falls ` +
+      `through to the filler event, so wealth/happiness/career averages below are diluted by ` +
+      `${(simulatedMaxAge - contentMaxAge).toFixed(0)}+ years of "nothing happens" and do not ` +
+      `reflect the Birth→${contentMaxAge} slice this project is currently balancing (ROADMAP Gate G2).`;
+    console.log(`\n⚠️  ${coverageWarning}`);
+  }
 
   const start = performance.now();
-  const report = runSimulation({ lives, seed });
+  const report = runSimulation({ lives, seed }, db);
   const duration = ((performance.now() - start) / 1000).toFixed(2);
 
   console.log(`\n⏱️ Completed in ${duration}s.`);
@@ -343,7 +432,7 @@ function runCLI() {
 
 Generated: ${new Date().toISOString()}
 Lives Simulated: ${report.totalLives} | Seed: ${seed} | Time: ${duration}s
-
+${coverageWarning ? `\n> ⚠️ **${coverageWarning}**\n` : ''}
 ## Sanity Metrics (§88, §90)
 - **Average Lifespan**: ${report.avgLifespan} years
 - **Average Peak Wealth**: $${report.avgPeakWealth}
@@ -360,20 +449,11 @@ ${Object.entries(report.careersDistribution).map(([c, count]) => `- **${c}**: ${
 
 ## Top 10 Most Frequent Events
 ${report.mostSeenEvents.map(([evt, count]) => `- **${evt}**: ${count} times`).join('\n')}
+
+## Dead Content Events (never selected — §89/E16)
+${report.deadEvents.length === 0 ? 'None. Every event was reachable at least once.' : report.deadEvents.map((id) => `- ${id}`).join('\n')}
 `;
 
-  function findRepoRoot(startDir: string): string {
-    let cur = startDir;
-    while (cur !== path.dirname(cur)) {
-      if (fs.existsSync(path.join(cur, 'pnpm-workspace.yaml'))) {
-        return cur;
-      }
-      cur = path.dirname(cur);
-    }
-    return startDir;
-  }
-
-  const root = findRepoRoot(process.cwd());
   const balanceFile = path.resolve(root, 'docs/BALANCE.md');
   fs.writeFileSync(balanceFile, balanceContent, 'utf-8');
   console.log(`\n📊 Balance report updated at: ${balanceFile}`);
@@ -389,6 +469,9 @@ ${report.mostSeenEvents.map(([evt, count]) => `- **${evt}**: ${count} times`).jo
   console.log('\n✅ ALL SANITY ASSERTIONS PASSED!\n');
 }
 
-if (process.argv[1]?.includes('dist') || process.argv[1]?.includes('sim')) {
+// See @life/validator for why a precise entrypoint check matters here: this
+// module also imports @life/validator, and a loose substring guard there
+// would fire off of *this* file's own "dist" path.
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
   runCLI();
 }

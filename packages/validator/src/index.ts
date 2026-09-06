@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { EventDefinitionSchema } from '@life/schema';
+import { fileURLToPath } from 'node:url';
+import { EventDefinition, EventDefinitionSchema } from '@life/schema';
 
 export interface ValidationSummary {
   errors: string[];
@@ -8,16 +9,30 @@ export interface ValidationSummary {
   totalValidated: number;
 }
 
-export function validateEventsDirectory(dirPath: string): ValidationSummary {
+export interface LoadResult {
+  events: EventDefinition[];
+  summary: ValidationSummary;
+}
+
+/**
+ * Scans a content directory for event JSON files, validates each against
+ * EventDefinitionSchema plus the structural checks from blueprint §89, and
+ * returns both the successfully-parsed events and the validation summary.
+ * This is the single source of truth for reading event content — both the
+ * validator CLI and the sim runner (E16) load through this function, so
+ * neither can silently diverge from what content actually exists on disk.
+ */
+export function loadEventsFromDirectory(dirPath: string): LoadResult {
   const summary: ValidationSummary = {
     errors: [],
     warnings: [],
     totalValidated: 0,
   };
+  const events: EventDefinition[] = [];
 
   if (!fs.existsSync(dirPath)) {
     summary.warnings.push(`Content directory not found: ${dirPath}`);
-    return summary;
+    return { events, summary };
   }
 
   const seenIds = new Set<string>();
@@ -51,9 +66,9 @@ export function validateEventsDirectory(dirPath: string): ValidationSummary {
             // 1. Duplicate ID check (§89)
             if (seenIds.has(evt.id)) {
               summary.errors.push(`Duplicate event ID: ${evt.id} in ${entry.name}`);
-            } else {
-              seenIds.add(evt.id);
+              continue; // don't let a duplicate silently overwrite the first definition
             }
+            seenIds.add(evt.id);
 
             // 2. Age range validity check (§89)
             for (const cond of evt.conditions) {
@@ -72,6 +87,8 @@ export function validateEventsDirectory(dirPath: string): ValidationSummary {
                 summary.errors.push(`Event ${evt.id}: Choice ${choice.id} references self in followUpEventId`);
               }
             }
+
+            events.push(evt);
           }
         } catch (err) {
           summary.errors.push(`[${entry.name}] Failed to parse JSON: ${String(err)}`);
@@ -81,7 +98,11 @@ export function validateEventsDirectory(dirPath: string): ValidationSummary {
   }
 
   scanDir(dirPath);
-  return summary;
+  return { events, summary };
+}
+
+export function validateEventsDirectory(dirPath: string): ValidationSummary {
+  return loadEventsFromDirectory(dirPath).summary;
 }
 
 function findRepoRoot(startDir: string): string {
@@ -125,6 +146,12 @@ function runCLI() {
   console.log(`\n✅ Result: PASS (Errors: 0, Warnings: ${summary.warnings.length})\n`);
 }
 
-if (process.argv[1]?.includes('dist') || process.argv[1]?.includes('validator')) {
+// Only run the CLI when this file is the actual entrypoint (`node dist/index.js`),
+// never when another package imports loadEventsFromDirectory/validateEventsDirectory
+// as a library. A substring check on argv[1] (e.g. ".../dist") is not enough —
+// any consumer whose own entrypoint also lives under a "dist" folder would
+// accidentally trigger this CLI (and its process.exit(1) on content errors)
+// as a side effect of importing this module. See @life/sim for that consumer.
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
   runCLI();
 }
