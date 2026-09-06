@@ -1,0 +1,257 @@
+[
+  {
+    "id": "career_doctor",
+    "title": "Bác sĩ",
+    "description": "Chăm sóc, chẩn đoán và điều trị bệnh nhân. Áp lực cao, ý nghĩa lớn.",
+    "category": "healthcare",
+    "requiredEducation": "bachelor",
+    "requiredSkills": [
+      { "skill": "science", "minValue": 60 },
+      { "skill": "empathy_skill", "minValue": 50 }
+    ],
+    "salaryRange": [4000, 15000],
+    "stress": 75,
+    "prestige": 90,
+    "stability": 85,
+    "socialExposure": 70,
+    "promotions": ["career_specialist_doctor", "career_chief_physician"]
+  },
+  {
+    "id": "career_engineer_software",
+    "title": "Kỹ sư phần mềm",
+    "description": "Thiết kế, phát triển và bảo trì các hệ thống phần mềm.",
+    "category": "technology",
+    "requiredEducation": "bachelor",
+    "requiredSkills": [
+      { "skill": "technology", "minValue": 55 },
+      { "skill": "discipline_skill", "minValue": 40 }
+    ],
+    "salaryRange": [3000, 12000],
+    "stress": 55,
+    "prestige": 70,
+    "stability": 80,
+    "socialExposure": 40,
+    "promotions": ["career_senior_engineer", "career_tech_lead"]
+  },
+  {
+    "id": "career_teacher",
+    "title": "Giáo viên",
+    "description": "Truyền đạt kiến thức và cảm hứng cho thế hệ trẻ.",
+    "category": "education",
+    "requiredEducation": "bachelor",
+    "requiredSkills": [
+      { "skill": "communication", "minValue": 45 },
+      { "skill": "public_speaking", "minValue": 35 }
+    ],
+    "salaryRange": [1500, 4000],
+    "stress": 60,
+    "prestige": 55,
+    "stability": 85,
+    "socialExposure": 80,
+    "promotions": ["career_department_head", "career_principal"]
+  },
+  {
+    "id": "career_entrepreneur",
+    "title": "Doanh nhân / Khởi nghiệp",
+    "description": "Xây dựng doanh nghiệp từ đầu. Rủi ro cao, tự do cao.",
+    "category": "business",
+    "requiredEducation": "none",
+    "requiredSkills": [
+      { "skill": "leadership", "minValue": 45 },
+      { "skill": "financial_literacy", "minValue": 35 }
+    ],
+    "salaryRange": [0, 50000],
+    "stress": 85,
+    "prestige": 75,
+    "stability": 20,
+    "socialExposure": 65,
+    "promotions": []
+  },
+  {
+    "id": "career_artist",
+    "title": "Nghệ sĩ / Designer",
+    "description": "Tạo ra tác phẩm nghệ thuật, thiết kế đồ họa hoặc sản phẩm sáng tạo.",
+    "category": "creative",
+    "requiredEducation": "none",
+    "requiredSkills": [
+      { "skill": "art", "minValue": 55 },
+      { "skill": "creativity", "minValue": 45 }
+    ],
+    "salaryRange": [800, 8000],
+    "stress": 50,
+    "prestige": 55,
+    "stability": 35,
+    "socialExposure": 50,
+    "promotions": ["career_senior_artist", "career_creative_director"]
+  },
+  {
+    "id": "career_sales_rep",
+    "title": "Nhân viên kinh doanh",
+    "description": "Bán sản phẩm và dịch vụ, xây dựng quan hệ khách hàng.",
+    "category": "business",
+    "requiredEducation": "none",
+    "requiredSkills": [
+      { "skill": "communication", "minValue": 40 },
+      { "skill": "work_ethic", "minValue": 35 }
+    ],
+    "salaryRange": [1500, 8000],
+    "stress": 65,
+    "prestige": 45,
+    "stability": 50,
+    "socialExposure": 90,
+    "promotions": ["career_sales_manager", "career_regional_director"]
+  },
+  {
+    "id": "career_lawyer",
+    "title": "Luật sư",
+    "description": "Bảo vệ quyền lợi khách hàng trong các tranh chấp pháp lý.",
+    "category": "legal",
+    "requiredEducation": "master",
+    "requiredSkills": [
+      { "skill": "communication", "minValue": 60 },
+      { "skill": "discipline_skill", "minValue": 55 }
+    ],
+    "salaryRange": [3500, 20000],
+    "stress": 80,
+    "prestige": 85,
+    "stability": 75,
+    "socialExposure": 60,
+    "promotions": ["career_senior_partner"]
+  },
+  {
+    "id": "career_chef",
+    "title": "Đầu bếp",
+    "description": "Sáng tạo và chế biến món ăn trong nhà hàng hoặc khách sạn.",
+    "category": "food_hospitality",
+    "requiredEducation": "none",
+    "requiredSkills": [
+      { "skill": "cooking", "minValue": 55 },
+      { "skill": "creativity", "minValue": 35 }
+    ],
+    "salaryRange": [1200, 6000],
+    "stress": 70,
+    "prestige": 50,
+    "stability": 45,
+    "socialExposure": 60,
+    "promotions": ["career_head_chef", "career_restaurant_owner"]
+  },
+  {
+    "id": "career_journalist",
+    "title": "Nhà báo",
+    "description": "Điều tra và tường thuật các sự kiện, phỏng vấn nhân vật.",
+    "category": "media",
+    "requiredEducation": "bachelor",
+    "requiredSkills": [
+      { "skill": "communication", "minValue": 55 },
+      { "skill": "reading", "minValue": 40 }
+    ],
+    "salaryRange": [1500, 7000],
+    "stress": 65,
+    "prestige": 60,
+    "stability": 40,
+    "socialExposure": 75,
+    "promotions": ["career_editor", "career_chief_editor"]
+  },
+  {
+    "id": "career_nurse",
+    "title": "Điều dưỡng",
+    "description": "Chăm sóc bệnh nhân trực tiếp tại bệnh viện hoặc phòng khám.",
+    "category": "healthcare",
+    "requiredEducation": "bachelor",
+    "requiredSkills": [
+      { "skill": "empathy_skill", "minValue": 45 },
+      { "skill": "science", "minValue": 35 }
+    ],
+    "salaryRange": [1800, 5000],
+    "stress": 72,
+    "prestige": 60,
+    "stability": 82,
+    "socialExposure": 75,
+    "promotions": ["career_head_nurse"]
+  },
+  {
+    "id": "career_accountant",
+    "title": "Kế toán",
+    "description": "Quản lý sổ sách, thuế và tài chính cho cá nhân hoặc tổ chức.",
+    "category": "finance",
+    "requiredEducation": "bachelor",
+    "requiredSkills": [
+      { "skill": "financial_literacy", "minValue": 55 },
+      { "skill": "discipline_skill", "minValue": 45 }
+    ],
+    "salaryRange": [2000, 7000],
+    "stress": 50,
+    "prestige": 55,
+    "stability": 85,
+    "socialExposure": 30,
+    "promotions": ["career_senior_accountant", "career_cfo"]
+  },
+  {
+    "id": "career_athlete",
+    "title": "Vận động viên chuyên nghiệp",
+    "description": "Thi đấu thể thao ở cấp độ chuyên nghiệp.",
+    "category": "sports",
+    "requiredEducation": "none",
+    "requiredSkills": [
+      { "skill": "athletics", "minValue": 75 },
+      { "skill": "discipline_skill", "minValue": 55 }
+    ],
+    "salaryRange": [500, 30000],
+    "stress": 75,
+    "prestige": 80,
+    "stability": 30,
+    "socialExposure": 70,
+    "promotions": []
+  },
+  {
+    "id": "career_trades_electrician",
+    "title": "Thợ điện / Kỹ thuật viên",
+    "description": "Lắp đặt và sửa chữa hệ thống điện, điện tử, điều hòa.",
+    "category": "trades",
+    "requiredEducation": "vocational",
+    "requiredSkills": [
+      { "skill": "trade_skills", "minValue": 45 }
+    ],
+    "salaryRange": [1500, 5000],
+    "stress": 40,
+    "prestige": 40,
+    "stability": 80,
+    "socialExposure": 40,
+    "promotions": ["career_trades_contractor"]
+  },
+  {
+    "id": "career_musician",
+    "title": "Nhạc sĩ / Ca sĩ",
+    "description": "Sáng tác, biểu diễn âm nhạc. Con đường khó khăn nhưng đầy đam mê.",
+    "category": "creative",
+    "requiredEducation": "none",
+    "requiredSkills": [
+      { "skill": "music", "minValue": 65 },
+      { "skill": "creativity", "minValue": 40 }
+    ],
+    "salaryRange": [0, 25000],
+    "stress": 60,
+    "prestige": 65,
+    "stability": 25,
+    "socialExposure": 80,
+    "promotions": []
+  },
+  {
+    "id": "career_researcher",
+    "title": "Nhà nghiên cứu / Học giả",
+    "description": "Nghiên cứu và đóng góp tri thức trong lĩnh vực học thuật.",
+    "category": "academia",
+    "requiredEducation": "master",
+    "requiredSkills": [
+      { "skill": "science", "minValue": 60 },
+      { "skill": "reading", "minValue": 55 },
+      { "skill": "discipline_skill", "minValue": 50 }
+    ],
+    "salaryRange": [2000, 8000],
+    "stress": 55,
+    "prestige": 75,
+    "stability": 70,
+    "socialExposure": 30,
+    "promotions": ["career_professor"]
+  }
+]

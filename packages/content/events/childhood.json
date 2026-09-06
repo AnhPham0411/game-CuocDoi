@@ -1,175 +1,884 @@
 [
   {
-    "id": "evt_child_visit_grandma",
-    "schemaVersion": 1,
-    "contentVersion": 1,
-    "category": "FAMILY",
-    "importance": 50,
-    "decisionType": "SOCIAL",
-    "title": "Chuyến đi thăm bà ngoại",
-    "description": "Năm bạn 9 tuổi, mẹ rủ bạn về quê thăm bà ngoại vào dịp cuối tuần.",
-    "conditions": [
-      { "type": "age", "min": 8, "max": 11 }
+    "id": "evt_birth_welcome",
+    "schemaVersion": 1, "contentVersion": 1,
+    "category": "LIFE", "importance": 100, "decisionType": "INSTANT",
+    "title": "Chào đời",
+    "description": "Tiếng khóc đầu tiên của bạn vang lên trong phòng sinh. Thế giới bắt đầu từ khoảnh khắc này.",
+    "conditions": [{ "type": "age", "min": 0, "max": 0 }],
+    "weight": 9999,
+    "choices": [
+      {
+        "id": "cry_loud",
+        "text": "Khóc thật to — bạn đã đến!",
+        "effects": [
+          { "type": "MEMORY_ADD", "memoryPayload": { "type": "life", "tags": ["birth", "beginning"], "emotionalWeight": 50, "importance": 100, "description": "Khoảnh khắc chào đời." } }
+        ]
+      }
     ],
-    "weight": 100,
+    "cooldownMonths": 9999, "tags": ["birth", "milestone", "life"], "maxChainDepth": 1, "repeatable": false, "isWowMoment": true
+  },
+  {
+    "id": "evt_child_visit_grandma",
+    "schemaVersion": 1, "contentVersion": 1,
+    "category": "FAMILY", "importance": 55, "decisionType": "SOCIAL",
+    "title": "Chuyến đi thăm bà ngoại",
+    "description": "Mẹ rủ bạn về quê thăm bà ngoại vào dịp cuối tuần. Bà đã già yếu hơn lần trước.",
+    "conditions": [{ "type": "age", "min": 7, "max": 11 }],
+    "weight": 110,
     "choices": [
       {
         "id": "go_with_mom",
         "text": "Đồng ý đi cùng mẹ về quê thăm bà",
         "effects": [
-          {
-            "type": "RELATIONSHIP_CHANGE",
-            "relationshipPayload": { "target": "mother", "field": "closeness", "delta": 10 }
-          },
-          {
-            "type": "MEMORY_ADD",
-            "memoryPayload": {
-              "type": "family",
-              "tags": ["grandmother", "last_trip_with_grandmother", "childhood"],
-              "emotionalWeight": 85,
-              "importance": 80,
-              "description": "Kỷ niệm ngày hè câu cá bên bờ ao với bà ngoại."
-            }
-          }
+          { "type": "RELATIONSHIP_CHANGE", "relationshipPayload": { "target": "mother", "field": "closeness", "delta": 10 } },
+          { "type": "MEMORY_ADD", "memoryPayload": { "type": "family", "tags": ["grandmother", "last_trip_with_grandmother", "childhood"], "emotionalWeight": 85, "importance": 80, "description": "Kỷ niệm ngày hè câu cá bên bờ ao với bà ngoại." } }
         ]
       },
       {
         "id": "stay_home_play",
-        "text": "Từ chối, muốn ở nhà đi chơi với nhóm bạn xóm",
+        "text": "Từ chối, muốn ở nhà đi chơi với bạn bè",
         "effects": [
-          {
-            "type": "RELATIONSHIP_CHANGE",
-            "relationshipPayload": { "target": "mother", "field": "closeness", "delta": -5 }
-          },
-          {
-            "type": "STAT_CHANGE",
-            "field": "personality",
-            "target": "extraversion",
-            "value": 2
-          }
+          { "type": "RELATIONSHIP_CHANGE", "relationshipPayload": { "target": "mother", "field": "closeness", "delta": -5 } },
+          { "type": "STAT_CHANGE", "field": "personality", "target": "extraversion", "value": 2 }
         ]
       }
     ],
-    "cooldownMonths": 24,
-    "tags": ["family", "grandmother", "childhood", "milestone"],
-    "maxChainDepth": 5,
-    "repeatable": false,
-    "isWowMoment": false
+    "cooldownMonths": 36, "tags": ["family", "grandmother", "milestone"], "maxChainDepth": 5, "repeatable": false, "isWowMoment": false
   },
   {
-    "id": "evt_child_friend_bully",
-    "schemaVersion": 1,
-    "contentVersion": 1,
-    "category": "FRIENDSHIP",
-    "importance": 65,
-    "decisionType": "MORAL",
-    "title": "Bảo vệ bạn bè",
-    "description": "Năm 14 tuổi, bạn thân của bạn bị một nhóm học sinh cá biệt chặn đường bắt nạt.",
-    "conditions": [
-      { "type": "age", "min": 12, "max": 15 },
-      { "type": "relationship", "target": "friend", "field": "closeness", "op": ">=", "value": 50 }
+    "id": "evt_child_first_day_school",
+    "schemaVersion": 1, "contentVersion": 1,
+    "category": "SCHOOL", "importance": 80, "decisionType": "SOCIAL",
+    "title": "Ngày đầu tiên đi học",
+    "description": "Sáng nay, lần đầu tiên bạn khoác chiếc cặp mới và bước vào lớp học. Mọi thứ đều lạ lẫm và hơi đáng sợ.",
+    "conditions": [{ "type": "age", "min": 5, "max": 7 }],
+    "weight": 9999,
+    "choices": [
+      {
+        "id": "excited_join",
+        "text": "Hào hứng tự giới thiệu bản thân với cả lớp",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "extraversion", "value": 3 },
+          { "type": "MEMORY_ADD", "memoryPayload": { "type": "school", "tags": ["first_day_school", "milestone"], "emotionalWeight": 60, "importance": 90, "description": "Ngày đầu tiên đến trường — đứa trẻ đầy hào hứng." } },
+          { "type": "CREATE_NPC", "npcPayload": { "npcId": "npc_first_friend", "name": "Bạn học đầu tiên", "relationshipType": "friend", "initialCloseness": 30, "initialTrust": 40, "initialRespect": 30, "tier": 2 } }
+        ]
+      },
+      {
+        "id": "shy_observe",
+        "text": "Ngồi yên lặng một góc, quan sát các bạn",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "neuroticism", "value": 2 },
+          { "type": "MEMORY_ADD", "memoryPayload": { "type": "school", "tags": ["first_day_school", "milestone"], "emotionalWeight": 30, "importance": 90, "description": "Ngày đầu tiên đến trường — đứa trẻ nhút nhát ngồi góc lớp." } }
+        ]
+      }
     ],
+    "cooldownMonths": 9999, "tags": ["school", "milestone", "first_day"], "maxChainDepth": 3, "repeatable": false, "isWowMoment": false
+  },
+  {
+    "id": "evt_child_parents_argue",
+    "schemaVersion": 1, "contentVersion": 1,
+    "category": "FAMILY", "importance": 65, "decisionType": "MORAL",
+    "title": "Ba mẹ cãi nhau",
+    "description": "Đêm khuya, qua vách tường mỏng, bạn nghe tiếng ba mẹ tranh cãi gay gắt. Giọng mẹ run run, giọng ba đanh lại. Bạn nằm ôm chăn, không biết phải làm gì.",
+    "conditions": [{ "type": "age", "min": 6, "max": 11 }],
+    "weight": 80,
+    "choices": [
+      {
+        "id": "hide_under_blanket",
+        "text": "Kéo chăn trùm đầu và cố ngủ quên đi",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "neuroticism", "value": 3 },
+          { "type": "MEMORY_ADD", "memoryPayload": { "type": "trauma", "tags": ["parents_fight", "childhood_fear", "family_tension"], "emotionalWeight": -70, "importance": 65 } }
+        ]
+      },
+      {
+        "id": "go_comfort_mom",
+        "text": "Bước ra ôm mẹ và nói 'Con yêu mẹ'",
+        "effects": [
+          { "type": "RELATIONSHIP_CHANGE", "relationshipPayload": { "target": "mother", "field": "closeness", "delta": 15 } },
+          { "type": "STAT_CHANGE", "field": "personality", "target": "agreeableness", "value": 4 },
+          { "type": "MEMORY_ADD", "memoryPayload": { "type": "family", "tags": ["parents_fight", "childhood_family", "comforted_mom"], "emotionalWeight": -40, "importance": 70 } }
+        ]
+      },
+      {
+        "id": "tell_them_stop",
+        "text": "Bước ra khóc và xin ba mẹ đừng cãi nhau nữa",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "agreeableness", "value": 2 },
+          { "type": "STAT_CHANGE", "field": "personality", "target": "neuroticism", "value": 2 },
+          { "type": "MEMORY_ADD", "memoryPayload": { "type": "trauma", "tags": ["parents_fight", "childhood_fear"], "emotionalWeight": -50, "importance": 65 } }
+        ]
+      }
+    ],
+    "cooldownMonths": 18, "tags": ["family", "trauma", "childhood"], "maxChainDepth": 5, "repeatable": true, "isWowMoment": false
+  },
+  {
+    "id": "evt_child_birthday_party",
+    "schemaVersion": 1, "contentVersion": 1,
+    "category": "LIFE", "importance": 45, "decisionType": "SOCIAL",
+    "title": "Tiệc sinh nhật",
+    "description": "Ba mẹ tổ chức sinh nhật nhỏ cho bạn. Có bánh kem, nến và vài người bạn học được mời đến.",
+    "conditions": [{ "type": "age", "min": 5, "max": 10 }],
+    "weight": 90,
+    "choices": [
+      {
+        "id": "invite_many_friends",
+        "text": "Mời thêm nhiều bạn và chơi trò chơi sôi nổi",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "extraversion", "value": 2 },
+          { "type": "STAT_CHANGE", "field": "happiness", "target": "happiness", "value": 10 },
+          { "type": "MEMORY_ADD", "memoryPayload": { "type": "life", "tags": ["birthday", "childhood_joy"], "emotionalWeight": 70, "importance": 45 } }
+        ]
+      },
+      {
+        "id": "quiet_family_party",
+        "text": "Chỉ muốn ăn bánh yên tĩnh bên gia đình",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "openness", "value": -1 },
+          { "type": "STAT_CHANGE", "field": "happiness", "target": "happiness", "value": 7 },
+          { "type": "MEMORY_ADD", "memoryPayload": { "type": "family", "tags": ["birthday", "childhood_family"], "emotionalWeight": 55, "importance": 40 } }
+        ]
+      }
+    ],
+    "cooldownMonths": 12, "tags": ["birthday", "childhood", "family"], "maxChainDepth": 3, "repeatable": true, "isWowMoment": false
+  },
+  {
+    "id": "evt_child_stray_dog",
+    "schemaVersion": 1, "contentVersion": 1,
+    "category": "RANDOM", "importance": 40, "decisionType": "MORAL",
+    "title": "Chú chó lạc đường",
+    "description": "Trên đường về nhà, bạn thấy một con chó nhỏ đang run rẩy dưới mưa. Nó không có vòng cổ và trông có vẻ đói bụng.",
+    "conditions": [{ "type": "age", "min": 6, "max": 11 }],
+    "weight": 85,
+    "choices": [
+      {
+        "id": "bring_home",
+        "text": "Bế nó về nhà và xin ba mẹ nuôi",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "empathy", "value": 3 },
+          { "type": "STAT_CHANGE", "field": "happiness", "target": "happiness", "value": 8 },
+          { "type": "MEMORY_ADD", "memoryPayload": { "type": "life", "tags": ["pet", "kindness", "childhood"], "emotionalWeight": 65, "importance": 40 } }
+        ]
+      },
+      {
+        "id": "leave_it",
+        "text": "Tiếp tục đi về nhà, không phải việc của mình",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "empathy", "value": -2 }
+        ]
+      },
+      {
+        "id": "feed_but_go",
+        "text": "Cho nó ít bánh rồi chụp ảnh đăng lên mạng tìm chủ",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "empathy", "value": 2 },
+          { "type": "STAT_CHANGE", "field": "personality", "target": "openness", "value": 1 }
+        ]
+      }
+    ],
+    "cooldownMonths": 24, "tags": ["animal", "kindness", "moral"], "maxChainDepth": 3, "repeatable": false, "isWowMoment": false
+  },
+  {
+    "id": "evt_child_class_presentation",
+    "schemaVersion": 1, "contentVersion": 1,
+    "category": "SCHOOL", "importance": 42, "decisionType": "STRATEGIC",
+    "title": "Thuyết trình trước lớp",
+    "description": "Cô giáo yêu cầu mỗi học sinh thuyết trình về một chủ đề tự chọn trước cả lớp vào tuần tới.",
+    "conditions": [{ "type": "age", "min": 8, "max": 11 }],
+    "weight": 95,
+    "choices": [
+      {
+        "id": "prepare_carefully",
+        "text": "Chuẩn bị kỹ lưỡng, luyện tập nhiều lần ở nhà",
+        "effects": [
+          { "type": "SKILL_CHANGE", "target": "public_speaking", "value": 5 },
+          { "type": "STAT_CHANGE", "field": "personality", "target": "discipline", "value": 3 },
+          { "type": "MEMORY_ADD", "memoryPayload": { "type": "school", "tags": ["presentation", "success", "school"], "emotionalWeight": 50, "importance": 42 } }
+        ]
+      },
+      {
+        "id": "improvise",
+        "text": "Tự tin đứng lên nói ứng khẩu không cần chuẩn bị",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "extraversion", "value": 3 },
+          { "type": "STAT_CHANGE", "field": "personality", "target": "risk_tolerance", "value": 2 }
+        ]
+      },
+      {
+        "id": "fake_sick",
+        "text": "Giả vờ ốm để tránh phải lên bảng",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "neuroticism", "value": 3 },
+          { "type": "STAT_CHANGE", "field": "personality", "target": "conscientiousness", "value": -2 }
+        ]
+      }
+    ],
+    "cooldownMonths": 12, "tags": ["school", "skill", "presentation"], "maxChainDepth": 3, "repeatable": true, "isWowMoment": false
+  },
+  {
+    "id": "evt_child_summer_book",
+    "schemaVersion": 1, "contentVersion": 1,
+    "category": "HOBBY", "importance": 30, "decisionType": "INSTANT",
+    "title": "Hè đọc sách",
+    "description": "Kỳ nghỉ hè dài và nóng bức. Ba mẹ đưa bạn đến thư viện quận và nói bạn có thể mượn thoải mái.",
+    "conditions": [{ "type": "age", "min": 7, "max": 11 }],
+    "weight": 80,
+    "choices": [
+      {
+        "id": "read_many",
+        "text": "Đọc ngấu nghiến từ truyện thám tử đến khoa học vũ trụ",
+        "effects": [
+          { "type": "SKILL_CHANGE", "target": "reading", "value": 8 },
+          { "type": "STAT_CHANGE", "field": "personality", "target": "curiosity", "value": 4 },
+          { "type": "STAT_CHANGE", "field": "personality", "target": "openness", "value": 3 }
+        ]
+      },
+      {
+        "id": "play_outside",
+        "text": "Để sách lại và ra ngoài đá banh với bạn bè",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "extraversion", "value": 3 },
+          { "type": "STAT_CHANGE", "field": "health", "target": "health", "value": 5 }
+        ]
+      }
+    ],
+    "cooldownMonths": 12, "tags": ["hobby", "reading", "summer"], "maxChainDepth": 3, "repeatable": true, "isWowMoment": false
+  },
+  {
+    "id": "evt_child_talent_show",
+    "schemaVersion": 1, "contentVersion": 1,
+    "category": "SCHOOL", "importance": 50, "decisionType": "STRATEGIC",
+    "title": "Hội diễn văn nghệ trường",
+    "description": "Trường tổ chức hội diễn văn nghệ cuối năm. Cô giáo hỏi bạn có muốn đăng ký tiết mục không.",
+    "conditions": [{ "type": "age", "min": 8, "max": 11 }],
+    "weight": 75,
+    "choices": [
+      {
+        "id": "sign_up_sing",
+        "text": "Đăng ký hát một bài trước cả trường",
+        "effects": [
+          { "type": "SKILL_CHANGE", "target": "music", "value": 5 },
+          { "type": "STAT_CHANGE", "field": "personality", "target": "extraversion", "value": 4 },
+          { "type": "MEMORY_ADD", "memoryPayload": { "type": "school", "tags": ["performance", "school", "childhood_pride"], "emotionalWeight": 70, "importance": 50 } }
+        ]
+      },
+      {
+        "id": "sign_up_dance",
+        "text": "Tập một điệu nhảy cùng nhóm bạn",
+        "effects": [
+          { "type": "SKILL_CHANGE", "target": "athletics", "value": 3 },
+          { "type": "STAT_CHANGE", "field": "personality", "target": "extraversion", "value": 3 },
+          { "type": "STAT_CHANGE", "field": "personality", "target": "agreeableness", "value": 2 }
+        ]
+      },
+      {
+        "id": "watch_only",
+        "text": "Không tham gia, ngồi xem cũng vui",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "neuroticism", "value": 1 }
+        ]
+      }
+    ],
+    "cooldownMonths": 12, "tags": ["school", "performance", "childhood"], "maxChainDepth": 3, "repeatable": false, "isWowMoment": false
+  },
+  {
+    "id": "evt_child_fight_with_sibling",
+    "schemaVersion": 1, "contentVersion": 1,
+    "category": "FAMILY", "importance": 38, "decisionType": "SOCIAL",
+    "title": "Tranh giành với anh chị em",
+    "description": "Anh/em trai lấy đồ chơi của bạn mà không hỏi. Bạn bực bội và muốn đòi lại.",
+    "conditions": [{ "type": "age", "min": 5, "max": 11 }],
+    "weight": 100,
+    "choices": [
+      {
+        "id": "fight_back",
+        "text": "Tranh lại và cãi nhau to",
+        "effects": [
+          { "type": "RELATIONSHIP_CHANGE", "relationshipPayload": { "target": "sibling", "field": "conflict", "delta": 10 } },
+          { "type": "STAT_CHANGE", "field": "personality", "target": "agreeableness", "value": -2 }
+        ]
+      },
+      {
+        "id": "tell_parents",
+        "text": "Mách ba mẹ giải quyết",
+        "effects": [
+          { "type": "RELATIONSHIP_CHANGE", "relationshipPayload": { "target": "sibling", "field": "conflict", "delta": 5 } },
+          { "type": "STAT_CHANGE", "field": "personality", "target": "conscientiousness", "value": 1 }
+        ]
+      },
+      {
+        "id": "let_it_go",
+        "text": "Kệ đi, chỉ là đồ chơi thôi",
+        "effects": [
+          { "type": "RELATIONSHIP_CHANGE", "relationshipPayload": { "target": "sibling", "field": "closeness", "delta": 3 } },
+          { "type": "STAT_CHANGE", "field": "personality", "target": "agreeableness", "value": 2 }
+        ]
+      }
+    ],
+    "cooldownMonths": 6, "tags": ["family", "sibling", "conflict"], "maxChainDepth": 3, "repeatable": true, "isWowMoment": false
+  },
+  {
+    "id": "evt_child_discover_hobby",
+    "schemaVersion": 1, "contentVersion": 1,
+    "category": "HOBBY", "importance": 55, "decisionType": "STRATEGIC",
+    "title": "Khám phá sở thích đặc biệt",
+    "description": "Bạn tình cờ thử một hoạt động mới và cảm thấy say mê một cách lạ thường — như thể điều này được sinh ra dành cho bạn.",
+    "conditions": [{ "type": "age", "min": 7, "max": 11 }],
+    "weight": 70,
+    "choices": [
+      {
+        "id": "pursue_drawing",
+        "text": "Vẽ tranh — bạn không thể ngừng lại",
+        "effects": [
+          { "type": "SKILL_CHANGE", "target": "art", "value": 10 },
+          { "type": "STAT_CHANGE", "field": "personality", "target": "openness", "value": 4 },
+          { "type": "MEMORY_ADD", "memoryPayload": { "type": "hobby", "tags": ["art", "passion", "discovery"], "emotionalWeight": 75, "importance": 55 } }
+        ]
+      },
+      {
+        "id": "pursue_music",
+        "text": "Học nhạc cụ — bạn muốn chơi mãi không thôi",
+        "effects": [
+          { "type": "SKILL_CHANGE", "target": "music", "value": 10 },
+          { "type": "STAT_CHANGE", "field": "personality", "target": "openness", "value": 4 },
+          { "type": "MEMORY_ADD", "memoryPayload": { "type": "hobby", "tags": ["music", "passion", "discovery"], "emotionalWeight": 75, "importance": 55 } }
+        ]
+      },
+      {
+        "id": "pursue_sport",
+        "text": "Thể thao — bạn không mệt chút nào",
+        "effects": [
+          { "type": "SKILL_CHANGE", "target": "athletics", "value": 10 },
+          { "type": "STAT_CHANGE", "field": "health", "target": "health", "value": 8 },
+          { "type": "MEMORY_ADD", "memoryPayload": { "type": "hobby", "tags": ["sports", "passion", "discovery"], "emotionalWeight": 65, "importance": 55 } }
+        ]
+      },
+      {
+        "id": "pursue_coding",
+        "text": "Máy tính — bạn có thể lập trình mấy giờ liền",
+        "effects": [
+          { "type": "SKILL_CHANGE", "target": "technology", "value": 10 },
+          { "type": "STAT_CHANGE", "field": "personality", "target": "curiosity", "value": 4 },
+          { "type": "MEMORY_ADD", "memoryPayload": { "type": "hobby", "tags": ["technology", "passion", "discovery"], "emotionalWeight": 65, "importance": 55 } }
+        ]
+      }
+    ],
+    "cooldownMonths": 9999, "tags": ["hobby", "passion", "milestone", "discovery"], "maxChainDepth": 5, "repeatable": false, "isWowMoment": true
+  },
+  {
+    "id": "evt_child_grandparent_death",
+    "schemaVersion": 1, "contentVersion": 1,
+    "category": "FAMILY", "importance": 82, "decisionType": "SOCIAL",
+    "title": "Ông ngoại ra đi",
+    "description": "Mẹ ngồi xuống bên cạnh bạn, giọng nhẹ nhưng run. Ông ngoại đã mất đêm qua. Đây là lần đầu tiên bạn đối mặt với cái chết.",
+    "conditions": [
+      { "type": "age", "min": 6, "max": 11 },
+      { "type": "memory", "tag": "last_trip_with_grandmother" }
+    ],
+    "weight": 60,
+    "choices": [
+      {
+        "id": "cry_with_family",
+        "text": "Ôm mẹ và cùng nhau khóc",
+        "effects": [
+          { "type": "RELATIONSHIP_CHANGE", "relationshipPayload": { "target": "mother", "field": "closeness", "delta": 12 } },
+          { "type": "MEMORY_ADD", "memoryPayload": { "type": "loss", "tags": ["grandparent_death", "first_loss", "grief"], "emotionalWeight": -90, "importance": 82, "description": "Lần đầu tiên mất người thân." } },
+          { "type": "STAT_CHANGE", "field": "personality", "target": "empathy", "value": 5 }
+        ]
+      },
+      {
+        "id": "hold_it_together",
+        "text": "Cố gắng không khóc, muốn mạnh mẽ hơn",
+        "effects": [
+          { "type": "MEMORY_ADD", "memoryPayload": { "type": "loss", "tags": ["grandparent_death", "first_loss", "suppressed_grief"], "emotionalWeight": -80, "importance": 82 } },
+          { "type": "STAT_CHANGE", "field": "personality", "target": "neuroticism", "value": 3 }
+        ]
+      }
+    ],
+    "cooldownMonths": 9999, "tags": ["family", "death", "grief", "milestone"], "maxChainDepth": 5, "repeatable": false, "isWowMoment": true
+  },
+  {
+    "id": "evt_child_chores",
+    "schemaVersion": 1, "contentVersion": 1,
+    "category": "FAMILY", "importance": 28, "decisionType": "MORAL",
+    "title": "Việc nhà",
+    "description": "Ba mẹ giao cho bạn một số việc nhà mỗi tuần như quét nhà, rửa bát, tưới cây.",
+    "conditions": [{ "type": "age", "min": 7, "max": 11 }],
+    "weight": 90,
+    "choices": [
+      {
+        "id": "do_chores_well",
+        "text": "Làm đầy đủ và cẩn thận",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "conscientiousness", "value": 3 },
+          { "type": "RELATIONSHIP_CHANGE", "relationshipPayload": { "target": "father", "field": "respect", "delta": 5 } }
+        ]
+      },
+      {
+        "id": "avoid_chores",
+        "text": "Tìm cách trốn việc mỗi lần có thể",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "conscientiousness", "value": -2 },
+          { "type": "RELATIONSHIP_CHANGE", "relationshipPayload": { "target": "father", "field": "respect", "delta": -5 } }
+        ]
+      }
+    ],
+    "cooldownMonths": 6, "tags": ["family", "responsibility", "childhood"], "maxChainDepth": 3, "repeatable": true, "isWowMoment": false
+  },
+  {
+    "id": "evt_child_best_friend",
+    "schemaVersion": 1, "contentVersion": 1,
+    "category": "FRIENDSHIP", "importance": 60, "decisionType": "SOCIAL",
+    "title": "Người bạn thân nhất",
+    "description": "Bạn và một đứa trẻ trong xóm đã trở nên rất thân sau nhiều buổi chiều chơi đùa cùng nhau. Bạn đó đề nghị trở thành 'bạn thân nhất' của nhau.",
+    "conditions": [{ "type": "age", "min": 6, "max": 10 }],
+    "weight": 100,
+    "choices": [
+      {
+        "id": "agree_best_friend",
+        "text": "Đồng ý và ăn thề là bạn thân mãi mãi",
+        "effects": [
+          { "type": "RELATIONSHIP_CHANGE", "relationshipPayload": { "target": "npc_first_friend", "field": "closeness", "delta": 25 } },
+          { "type": "RELATIONSHIP_CHANGE", "relationshipPayload": { "target": "npc_first_friend", "field": "trust", "delta": 20 } },
+          { "type": "MEMORY_ADD", "memoryPayload": { "type": "friendship", "tags": ["best_friend_pact", "childhood_friend", "loyalty"], "emotionalWeight": 80, "importance": 60 } }
+        ]
+      },
+      {
+        "id": "just_friends",
+        "text": "Cười và nói 'Ừ, chúng mình là bạn thôi'",
+        "effects": [
+          { "type": "RELATIONSHIP_CHANGE", "relationshipPayload": { "target": "npc_first_friend", "field": "closeness", "delta": 10 } }
+        ]
+      }
+    ],
+    "cooldownMonths": 9999, "tags": ["friendship", "childhood", "bond"], "maxChainDepth": 3, "repeatable": false, "isWowMoment": false
+  },
+  {
+    "id": "evt_child_sick_hospital",
+    "schemaVersion": 1, "contentVersion": 1,
+    "category": "HEALTH", "importance": 55, "decisionType": "INSTANT",
+    "title": "Ốm nặng phải vào viện",
+    "description": "Bạn sốt cao 3 ngày không hạ. Ba mẹ lo lắng đưa bạn vào bệnh viện để kiểm tra. Mùi thuốc, tiếng beep của máy, mọi thứ đều đáng sợ.",
+    "conditions": [{ "type": "age", "min": 5, "max": 10 }],
+    "weight": 50,
+    "choices": [
+      {
+        "id": "brave_endure",
+        "text": "Cố gắng không khóc và tự nhắc mình cần phải mạnh",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "health", "target": "health", "value": -15 },
+          { "type": "STAT_CHANGE", "field": "personality", "target": "neuroticism", "value": -2 },
+          { "type": "MEMORY_ADD", "memoryPayload": { "type": "trauma", "tags": ["hospital", "illness", "childhood"], "emotionalWeight": -50, "importance": 55 } }
+        ]
+      },
+      {
+        "id": "cry_need_mom",
+        "text": "Khóc và không buông tay mẹ",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "health", "target": "health", "value": -15 },
+          { "type": "RELATIONSHIP_CHANGE", "relationshipPayload": { "target": "mother", "field": "closeness", "delta": 10 } },
+          { "type": "MEMORY_ADD", "memoryPayload": { "type": "trauma", "tags": ["hospital", "illness", "mom_beside_me"], "emotionalWeight": -30, "importance": 55 } }
+        ]
+      }
+    ],
+    "cooldownMonths": 24, "tags": ["health", "hospital", "childhood"], "maxChainDepth": 3, "repeatable": false, "isWowMoment": false
+  },
+  {
+    "id": "evt_child_move_house",
+    "schemaVersion": 1, "contentVersion": 1,
+    "category": "LIFE", "importance": 65, "decisionType": "INSTANT",
+    "title": "Chuyển nhà, trường mới",
+    "description": "Ba vừa có công việc mới ở thành phố khác. Cả gia đình phải chuyển đến nơi hoàn toàn lạ lẫm. Bạn phải rời xa ngôi trường cũ và những người bạn của mình.",
+    "conditions": [{ "type": "age", "min": 7, "max": 10 }],
+    "weight": 40,
+    "choices": [
+      {
+        "id": "excited_new_place",
+        "text": "Coi đó là một cuộc phiêu lưu mới",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "openness", "value": 4 },
+          { "type": "STAT_CHANGE", "field": "personality", "target": "risk_tolerance", "value": 3 },
+          { "type": "MEMORY_ADD", "memoryPayload": { "type": "life", "tags": ["moved_city", "new_start", "adaptation"], "emotionalWeight": 30, "importance": 65 } }
+        ]
+      },
+      {
+        "id": "sad_miss_friends",
+        "text": "Khóc vì nhớ bạn bè và ngôi nhà cũ",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "neuroticism", "value": 3 },
+          { "type": "STAT_CHANGE", "field": "happiness", "target": "happiness", "value": -10 },
+          { "type": "MEMORY_ADD", "memoryPayload": { "type": "loss", "tags": ["moved_city", "left_friends", "homesick"], "emotionalWeight": -60, "importance": 65 } }
+        ]
+      }
+    ],
+    "cooldownMonths": 9999, "tags": ["life", "moving", "milestone", "childhood"], "maxChainDepth": 5, "repeatable": false, "isWowMoment": false
+  },
+  {
+    "id": "evt_child_scholarship_test",
+    "schemaVersion": 1, "contentVersion": 1,
+    "category": "SCHOOL", "importance": 62, "decisionType": "STRATEGIC",
+    "title": "Kỳ thi học sinh giỏi",
+    "description": "Thầy cô đề cử bạn tham gia kỳ thi học sinh giỏi cấp quận. Đây là cơ hội để tỏa sáng nhưng cũng áp lực không nhỏ.",
+    "conditions": [
+      { "type": "age", "min": 9, "max": 11 },
+      { "type": "education", "minLevel": "primary", "completed": true }
+    ],
+    "weight": 80,
+    "choices": [
+      {
+        "id": "study_hard",
+        "text": "Ôn luyện nghiêm túc mỗi ngày",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "discipline", "value": 4 },
+          { "type": "STAT_CHANGE", "field": "education", "target": "education", "value": 8 },
+          { "type": "MEMORY_ADD", "memoryPayload": { "type": "school", "tags": ["scholarship_exam", "hardwork", "academic"], "emotionalWeight": 65, "importance": 62 } }
+        ]
+      },
+      {
+        "id": "just_try",
+        "text": "Đi thi cho vui, không ôn nhiều",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "risk_tolerance", "value": 2 }
+        ]
+      },
+      {
+        "id": "decline_too_much",
+        "text": "Từ chối vì sợ áp lực",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "neuroticism", "value": 2 },
+          { "type": "STAT_CHANGE", "field": "personality", "target": "conscientiousness", "value": -1 }
+        ]
+      }
+    ],
+    "cooldownMonths": 24, "tags": ["school", "exam", "academic"], "maxChainDepth": 5, "repeatable": false, "isWowMoment": false
+  },
+  {
+    "id": "evt_child_bully_victim",
+    "schemaVersion": 1, "contentVersion": 1,
+    "category": "FRIENDSHIP", "importance": 68, "decisionType": "MORAL",
+    "title": "Bị bắt nạt",
+    "description": "Một nhóm học sinh lớn hơn thường xuyên chặn bạn ở cổng trường, lấy đồ ăn và chế nhạo bạn. Mỗi sáng đến trường là một nỗi sợ hãi.",
+    "conditions": [{ "type": "age", "min": 7, "max": 11 }],
+    "weight": 60,
+    "choices": [
+      {
+        "id": "tell_teacher",
+        "text": "Báo cáo với giáo viên và ban giám hiệu",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "conscientiousness", "value": 2 },
+          { "type": "MEMORY_ADD", "memoryPayload": { "type": "trauma", "tags": ["bullied", "school_trauma", "asked_for_help"], "emotionalWeight": -65, "importance": 68 } }
+        ]
+      },
+      {
+        "id": "fight_back_alone",
+        "text": "Một mình đứng lên đánh lại",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "risk_tolerance", "value": 4 },
+          { "type": "STAT_CHANGE", "field": "personality", "target": "neuroticism", "value": -2 },
+          { "type": "MEMORY_ADD", "memoryPayload": { "type": "trauma", "tags": ["bullied", "fought_back", "school_conflict"], "emotionalWeight": -50, "importance": 68 } }
+        ]
+      },
+      {
+        "id": "endure_silently",
+        "text": "Chịu đựng một mình, không nói với ai",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "neuroticism", "value": 5 },
+          { "type": "STAT_CHANGE", "field": "happiness", "target": "happiness", "value": -15 },
+          { "type": "MEMORY_ADD", "memoryPayload": { "type": "trauma", "tags": ["bullied", "silence", "suppressed_pain"], "emotionalWeight": -80, "importance": 68 } }
+        ]
+      }
+    ],
+    "cooldownMonths": 18, "tags": ["school", "bully", "trauma", "friendship"], "maxChainDepth": 5, "repeatable": false, "isWowMoment": false
+  },
+  {
+    "id": "evt_child_family_trip",
+    "schemaVersion": 1, "contentVersion": 1,
+    "category": "FAMILY", "importance": 50, "decisionType": "SOCIAL",
+    "title": "Chuyến du lịch gia đình",
+    "description": "Hè này ba mẹ quyết định đưa cả nhà đi du lịch. Đây là lần đầu tiên gia đình bạn đi chơi xa như vậy.",
+    "conditions": [{ "type": "age", "min": 6, "max": 11 }],
+    "weight": 70,
+    "choices": [
+      {
+        "id": "explore_everything",
+        "text": "Chạy đi khám phá mọi ngóc ngách",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "curiosity", "value": 4 },
+          { "type": "STAT_CHANGE", "field": "personality", "target": "openness", "value": 3 },
+          { "type": "MEMORY_ADD", "memoryPayload": { "type": "family", "tags": ["family_trip", "adventure", "childhood_travel"], "emotionalWeight": 80, "importance": 50 } }
+        ]
+      },
+      {
+        "id": "stick_with_parents",
+        "text": "Ở bên ba mẹ, nghe kể về lịch sử địa danh",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "openness", "value": 2 },
+          { "type": "RELATIONSHIP_CHANGE", "relationshipPayload": { "target": "father", "field": "closeness", "delta": 8 } },
+          { "type": "MEMORY_ADD", "memoryPayload": { "type": "family", "tags": ["family_trip", "learning", "dad_stories"], "emotionalWeight": 65, "importance": 50 } }
+        ]
+      }
+    ],
+    "cooldownMonths": 24, "tags": ["family", "travel", "childhood"], "maxChainDepth": 3, "repeatable": true, "isWowMoment": false
+  },
+  {
+    "id": "evt_child_score_bad",
+    "schemaVersion": 1, "contentVersion": 1,
+    "category": "SCHOOL", "importance": 45, "decisionType": "MORAL",
+    "title": "Điểm kém về nhà",
+    "description": "Bạn nhận kết quả bài kiểm tra với điểm rất thấp. Về nhà mà lo lắng không biết ba mẹ sẽ phản ứng thế nào.",
+    "conditions": [{ "type": "age", "min": 7, "max": 11 }],
+    "weight": 100,
+    "choices": [
+      {
+        "id": "show_parents_honest",
+        "text": "Tự giác đưa cho ba mẹ xem và nhận lỗi",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "conscientiousness", "value": 2 },
+          { "type": "RELATIONSHIP_CHANGE", "relationshipPayload": { "target": "father", "field": "trust", "delta": 8 } }
+        ]
+      },
+      {
+        "id": "hide_paper",
+        "text": "Giấu bài đi và hy vọng ba mẹ không hỏi",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "conscientiousness", "value": -3 },
+          { "type": "STAT_CHANGE", "field": "personality", "target": "neuroticism", "value": 2 }
+        ]
+      },
+      {
+        "id": "study_harder",
+        "text": "Tự hứa sẽ học chăm hơn để gỡ điểm",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "discipline", "value": 3 },
+          { "type": "STAT_CHANGE", "field": "education", "target": "education", "value": 3 }
+        ]
+      }
+    ],
+    "cooldownMonths": 6, "tags": ["school", "grades", "childhood"], "maxChainDepth": 3, "repeatable": true, "isWowMoment": false
+  },
+  {
+    "id": "evt_child_mentor_teacher",
+    "schemaVersion": 1, "contentVersion": 1,
+    "category": "SCHOOL", "importance": 58, "decisionType": "SOCIAL",
+    "title": "Người thầy truyền cảm hứng",
+    "description": "Có một thầy/cô giáo đặc biệt dạy bạn năm này. Họ luôn kiên nhẫn giải thích và nhìn thấy điều gì đó ở bạn mà ngay cả bạn cũng chưa thấy.",
+    "conditions": [{ "type": "age", "min": 8, "max": 11 }],
+    "weight": 65,
+    "choices": [
+      {
+        "id": "embrace_mentorship",
+        "text": "Hỏi thêm và ở lại sau giờ học để học thêm",
+        "effects": [
+          { "type": "CREATE_NPC", "npcPayload": { "npcId": "npc_mentor_teacher", "name": "Thầy cô truyền cảm hứng", "relationshipType": "mentor", "initialCloseness": 50, "initialTrust": 60, "initialRespect": 70, "tier": 2 } },
+          { "type": "STAT_CHANGE", "field": "education", "target": "education", "value": 10 },
+          { "type": "STAT_CHANGE", "field": "personality", "target": "curiosity", "value": 5 },
+          { "type": "MEMORY_ADD", "memoryPayload": { "type": "school", "tags": ["mentor_teacher", "inspired", "learning"], "emotionalWeight": 85, "importance": 58 } }
+        ]
+      },
+      {
+        "id": "polite_but_distance",
+        "text": "Lịch sự nhưng không muốn thêm bài tập ngoài giờ",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "education", "target": "education", "value": 3 }
+        ]
+      }
+    ],
+    "cooldownMonths": 9999, "tags": ["school", "mentor", "childhood", "inspired"], "maxChainDepth": 5, "repeatable": false, "isWowMoment": false
+  },
+  {
+    "id": "evt_child_stealing_temptation",
+    "schemaVersion": 1, "contentVersion": 1,
+    "category": "RANDOM", "importance": 55, "decisionType": "MORAL",
+    "title": "Cám dỗ nhỏ",
+    "description": "Trong lúc đi siêu thị, bạn thấy một thứ mình thích nhưng ba mẹ nói không đủ tiền. Không ai nhìn. Bạn có thể bỏ vào túi.",
+    "conditions": [{ "type": "age", "min": 7, "max": 11 }],
+    "weight": 55,
+    "choices": [
+      {
+        "id": "put_it_back",
+        "text": "Không, đó không phải là điều đúng đắn",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "conscientiousness", "value": 3 },
+          { "type": "STAT_CHANGE", "field": "personality", "target": "agreeableness", "value": 2 }
+        ]
+      },
+      {
+        "id": "steal_it",
+        "text": "Nhanh chóng bỏ vào túi rồi đi",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "conscientiousness", "value": -4 },
+          { "type": "STAT_CHANGE", "field": "personality", "target": "risk_tolerance", "value": 2 },
+          { "type": "TRAIT_ADD", "target": "dishonest_tendency" }
+        ]
+      }
+    ],
+    "cooldownMonths": 36, "tags": ["moral", "crime", "childhood", "choice"], "maxChainDepth": 3, "repeatable": false, "isWowMoment": false
+  },
+  {
+    "id": "evt_child_rainy_afternoon",
+    "schemaVersion": 1, "contentVersion": 1,
+    "category": "RANDOM", "importance": 22, "decisionType": "INSTANT",
+    "title": "Buổi chiều mưa",
+    "description": "Mưa lớn cả buổi chiều, không ra ngoài được. Cả nhà ở trong nhà, không khí yên ắng.",
+    "conditions": [{ "type": "age", "min": 5, "max": 11 }],
     "weight": 120,
     "choices": [
       {
-        "id": "stand_up_friend",
-        "text": "Lao vào can ngăn và đứng ra bảo vệ bạn mình",
+        "id": "read_or_draw",
+        "text": "Lấy sách ra đọc hoặc vẽ nguệch ngoạc",
         "effects": [
-          {
-            "type": "RELATIONSHIP_CHANGE",
-            "relationshipPayload": { "target": "friend", "field": "trust", "delta": 20 }
-          },
-          {
-            "type": "MEMORY_ADD",
-            "memoryPayload": {
-              "type": "friendship",
-              "tags": ["protected_friend_youth", "loyalty"],
-              "emotionalWeight": 90,
-              "importance": 85
-            }
-          },
-          {
-            "type": "SCHEDULE_EVENT",
-            "schedulePayload": {
-              "eventId": "evt_friend_future_job_recommendation",
-              "targetAge": 23,
-              "priority": 2
-            }
-          }
+          { "type": "STAT_CHANGE", "field": "personality", "target": "openness", "value": 1 }
         ]
       },
       {
-        "id": "run_and_call_teacher",
-        "text": "Lặng lẽ chạy đi tìm bảo vệ và thầy cô trợ giúp",
+        "id": "help_mom_cook",
+        "text": "Vào bếp phụ mẹ nấu ăn",
         "effects": [
-          {
-            "type": "RELATIONSHIP_CHANGE",
-            "relationshipPayload": { "target": "friend", "field": "trust", "delta": 5 }
-          },
-          {
-            "type": "STAT_CHANGE",
-            "field": "personality",
-            "target": "discipline",
-            "value": 2
-          }
+          { "type": "SKILL_CHANGE", "target": "cooking", "value": 3 },
+          { "type": "RELATIONSHIP_CHANGE", "relationshipPayload": { "target": "mother", "field": "closeness", "delta": 5 } }
+        ]
+      },
+      {
+        "id": "watch_rain_daydream",
+        "text": "Nhìn ra cửa sổ ngắm mưa rơi, để trí tưởng tượng bay xa",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "openness", "value": 2 },
+          { "type": "STAT_CHANGE", "field": "personality", "target": "curiosity", "value": 1 }
         ]
       }
     ],
-    "cooldownMonths": 36,
-    "tags": ["friendship", "moral", "teen"],
-    "maxChainDepth": 5,
-    "repeatable": false,
-    "isWowMoment": true
+    "cooldownMonths": 3, "tags": ["random", "childhood", "daily_life"], "maxChainDepth": 2, "repeatable": true, "isWowMoment": false
   },
   {
-    "id": "evt_friend_future_job_recommendation",
-    "schemaVersion": 1,
-    "contentVersion": 1,
-    "category": "CAREER",
-    "importance": 70,
-    "decisionType": "STRATEGIC",
-    "title": "Lời đền đáp từ người bạn năm xưa",
-    "description": "Người bạn từng được bạn bảo vệ năm 14 tuổi nay đã là trưởng phòng và muốn giới thiệu bạn vào công ty họ.",
-    "conditions": [
-      { "type": "age", "min": 22, "max": 28 },
-      { "type": "relationship", "target": "friend", "field": "trust", "op": ">=", "value": 60 },
-      { "type": "memory", "tag": "protected_friend_youth" }
-    ],
-    "weight": 200,
+    "id": "evt_child_new_sibling",
+    "schemaVersion": 1, "contentVersion": 1,
+    "category": "FAMILY", "importance": 70, "decisionType": "SOCIAL",
+    "title": "Đứa em mới",
+    "description": "Mẹ sinh em bé. Giờ đây bạn không còn là con duy nhất và mọi sự chú ý đổ vào đứa bé đỏ hỏn kia.",
+    "conditions": [{ "type": "age", "min": 4, "max": 10 }],
+    "weight": 50,
     "choices": [
       {
-        "id": "accept_job_recommendation",
-        "text": "Nhận lời phỏng vấn và gia nhập công ty bạn",
+        "id": "welcome_sibling",
+        "text": "Hào hứng làm anh/chị, bảo vệ và chăm sóc em",
         "effects": [
-          {
-            "type": "CAREER_CHANGE",
-            "target": "career_sales_rep",
-            "field": "Senior Sales Representative",
-            "value": 1500
-          },
-          {
-            "type": "RELATIONSHIP_CHANGE",
-            "relationshipPayload": { "target": "friend", "field": "closeness", "delta": 15 }
-          }
+          { "type": "STAT_CHANGE", "field": "personality", "target": "agreeableness", "value": 4 },
+          { "type": "STAT_CHANGE", "field": "personality", "target": "empathy", "value": 3 },
+          { "type": "MEMORY_ADD", "memoryPayload": { "type": "family", "tags": ["new_sibling", "big_brother_sister", "family"], "emotionalWeight": 60, "importance": 70 } }
         ]
       },
       {
-        "id": "decline_job_recommendation",
-        "text": "Cảm ơn bạn nhưng quyết định tự tìm lối đi riêng",
+        "id": "jealous_sibling",
+        "text": "Ganh tị vì cảm thấy bị bỏ rơi",
         "effects": [
-          {
-            "type": "STAT_CHANGE",
-            "field": "personality",
-            "target": "ambition",
-            "value": 3
-          }
+          { "type": "STAT_CHANGE", "field": "personality", "target": "neuroticism", "value": 3 },
+          { "type": "RELATIONSHIP_CHANGE", "relationshipPayload": { "target": "sibling", "field": "conflict", "delta": 15 } },
+          { "type": "MEMORY_ADD", "memoryPayload": { "type": "family", "tags": ["new_sibling", "jealousy", "childhood_family"], "emotionalWeight": -40, "importance": 70 } }
         ]
       }
     ],
-    "cooldownMonths": 48,
-    "tags": ["career", "friendship", "consequence", "wow"],
-    "maxChainDepth": 5,
-    "repeatable": false,
-    "isWowMoment": true
+    "cooldownMonths": 9999, "tags": ["family", "sibling", "milestone", "childhood"], "maxChainDepth": 5, "repeatable": false, "isWowMoment": false
+  },
+  {
+    "id": "evt_child_science_project",
+    "schemaVersion": 1, "contentVersion": 1,
+    "category": "SCHOOL", "importance": 40, "decisionType": "STRATEGIC",
+    "title": "Dự án khoa học",
+    "description": "Cuộc thi khoa học cấp trường. Bạn cần nghĩ ra một dự án thú vị và thuyết phục hội đồng giám khảo.",
+    "conditions": [{ "type": "age", "min": 9, "max": 11 }],
+    "weight": 70,
+    "choices": [
+      {
+        "id": "ambitious_project",
+        "text": "Làm dự án đầy tham vọng dù tốn nhiều công sức",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "ambition", "value": 3 },
+          { "type": "SKILL_CHANGE", "target": "science", "value": 7 },
+          { "type": "STAT_CHANGE", "field": "education", "target": "education", "value": 5 }
+        ]
+      },
+      {
+        "id": "safe_project",
+        "text": "Làm dự án đơn giản để chắc chắn",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "risk_tolerance", "value": -1 },
+          { "type": "SKILL_CHANGE", "target": "science", "value": 3 }
+        ]
+      }
+    ],
+    "cooldownMonths": 12, "tags": ["school", "science", "academic"], "maxChainDepth": 3, "repeatable": false, "isWowMoment": false
+  },
+  {
+    "id": "evt_child_pocket_money",
+    "schemaVersion": 1, "contentVersion": 1,
+    "category": "MONEY", "importance": 30, "decisionType": "STRATEGIC",
+    "title": "Tiền tiêu vặt",
+    "description": "Ba cho bạn một ít tiền tiêu vặt mỗi tuần. Bạn tự quyết định dùng vào đâu.",
+    "conditions": [{ "type": "age", "min": 7, "max": 11 }],
+    "weight": 90,
+    "choices": [
+      {
+        "id": "save_all",
+        "text": "Để dành tất cả vào heo đất",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "discipline", "value": 2 },
+          { "type": "MONEY_CHANGE", "value": 50 }
+        ]
+      },
+      {
+        "id": "buy_snacks",
+        "text": "Mua đồ ăn vặt và chia với bạn bè",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "extraversion", "value": 1 },
+          { "type": "STAT_CHANGE", "field": "personality", "target": "agreeableness", "value": 1 }
+        ]
+      },
+      {
+        "id": "buy_book_or_toy",
+        "text": "Mua sách hoặc đồ chơi yêu thích",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "curiosity", "value": 2 }
+        ]
+      }
+    ],
+    "cooldownMonths": 6, "tags": ["money", "childhood", "decision"], "maxChainDepth": 2, "repeatable": true, "isWowMoment": false
+  },
+  {
+    "id": "evt_child_sports_team",
+    "schemaVersion": 1, "contentVersion": 1,
+    "category": "HOBBY", "importance": 48, "decisionType": "STRATEGIC",
+    "title": "Gia nhập đội thể thao",
+    "description": "Trường có đội bóng đá, bóng rổ và bơi lội. Huấn luyện viên đến tuyển chọn thành viên mới.",
+    "conditions": [{ "type": "age", "min": 8, "max": 11 }],
+    "weight": 75,
+    "choices": [
+      {
+        "id": "join_football",
+        "text": "Đăng ký đội bóng đá",
+        "effects": [
+          { "type": "SKILL_CHANGE", "target": "athletics", "value": 8 },
+          { "type": "STAT_CHANGE", "field": "personality", "target": "agreeableness", "value": 3 },
+          { "type": "STAT_CHANGE", "field": "health", "target": "health", "value": 10 }
+        ]
+      },
+      {
+        "id": "join_swimming",
+        "text": "Học bơi lội",
+        "effects": [
+          { "type": "SKILL_CHANGE", "target": "athletics", "value": 7 },
+          { "type": "STAT_CHANGE", "field": "health", "target": "health", "value": 12 },
+          { "type": "STAT_CHANGE", "field": "personality", "target": "discipline", "value": 3 }
+        ]
+      },
+      {
+        "id": "skip_sports",
+        "text": "Không tham gia, không thích thể thao",
+        "effects": [
+          { "type": "STAT_CHANGE", "field": "personality", "target": "openness", "value": -1 }
+        ]
+      }
+    ],
+    "cooldownMonths": 36, "tags": ["sport", "childhood", "hobby"], "maxChainDepth": 3, "repeatable": false, "isWowMoment": false
   }
 ]

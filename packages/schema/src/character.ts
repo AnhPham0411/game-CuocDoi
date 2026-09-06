@@ -28,6 +28,10 @@ export const RelationshipTypeSchema = z.enum([
   'teacher',
   'neighbor',
   'rival',
+  'romantic_interest',   // pre-committed relationship
+  'romantic_partner',    // committed relationship (non-spouse)
+  'mentor',              // formal/informal mentorship
+  'acquaintance',        // tier-4 NPCs, low-sim
 ]);
 export type RelationshipType = z.infer<typeof RelationshipTypeSchema>;
 
@@ -58,6 +62,11 @@ export const MemoryTypeSchema = z.enum([
   'milestone',
   'regret',
   'misc',
+  'life',      // general life moments
+  'trauma',    // traumatic experiences
+  'loss',      // grief and loss
+  'hobby',     // recreational activities
+  'sport',     // athletic activities
 ]);
 export type MemoryType = z.infer<typeof MemoryTypeSchema>;
 

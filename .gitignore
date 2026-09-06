@@ -1,8 +1,12 @@
 .anhcompass/
+.agent/cache/
 node_modules/
+**/node_modules/
 dist/
+**/dist/
 .turbo/
 coverage/
 *.tsbuildinfo
 .DS_Store
 *.log
+
