@@ -2,6 +2,7 @@
   "name": "life-monorepo",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@9.15.4",
   "type": "module",
   "scripts": {
     "build": "turbo run build",
@@ -11,6 +12,7 @@
     "sim": "pnpm --filter @life/sim start"
   },
   "devDependencies": {
+    "@types/node": "^26.4.1",
     "turbo": "^2.4.4",
     "typescript": "^5.7.3",
     "vitest": "^3.0.7"

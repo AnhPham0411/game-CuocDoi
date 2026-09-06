@@ -1,0 +1,8 @@
+{
+  "intentId": "content-is-data-only",
+  "status": "pass",
+  "confidence": 1,
+  "evidence": [],
+  "checkedAtCommit": "07c767b",
+  "engine": "deterministic"
+}

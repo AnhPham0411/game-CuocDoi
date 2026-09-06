@@ -1,0 +1,175 @@
+[
+  {
+    "id": "evt_child_visit_grandma",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "FAMILY",
+    "importance": 50,
+    "decisionType": "SOCIAL",
+    "title": "Chuyến đi thăm bà ngoại",
+    "description": "Năm bạn 9 tuổi, mẹ rủ bạn về quê thăm bà ngoại vào dịp cuối tuần.",
+    "conditions": [
+      { "type": "age", "min": 8, "max": 11 }
+    ],
+    "weight": 100,
+    "choices": [
+      {
+        "id": "go_with_mom",
+        "text": "Đồng ý đi cùng mẹ về quê thăm bà",
+        "effects": [
+          {
+            "type": "RELATIONSHIP_CHANGE",
+            "relationshipPayload": { "target": "mother", "field": "closeness", "delta": 10 }
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "family",
+              "tags": ["grandmother", "last_trip_with_grandmother", "childhood"],
+              "emotionalWeight": 85,
+              "importance": 80,
+              "description": "Kỷ niệm ngày hè câu cá bên bờ ao với bà ngoại."
+            }
+          }
+        ]
+      },
+      {
+        "id": "stay_home_play",
+        "text": "Từ chối, muốn ở nhà đi chơi với nhóm bạn xóm",
+        "effects": [
+          {
+            "type": "RELATIONSHIP_CHANGE",
+            "relationshipPayload": { "target": "mother", "field": "closeness", "delta": -5 }
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "extraversion",
+            "value": 2
+          }
+        ]
+      }
+    ],
+    "cooldownMonths": 24,
+    "tags": ["family", "grandmother", "childhood", "milestone"],
+    "maxChainDepth": 5,
+    "repeatable": false,
+    "isWowMoment": false
+  },
+  {
+    "id": "evt_child_friend_bully",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "FRIENDSHIP",
+    "importance": 65,
+    "decisionType": "MORAL",
+    "title": "Bảo vệ bạn bè",
+    "description": "Năm 14 tuổi, bạn thân của bạn bị một nhóm học sinh cá biệt chặn đường bắt nạt.",
+    "conditions": [
+      { "type": "age", "min": 12, "max": 15 },
+      { "type": "relationship", "target": "friend", "field": "closeness", "op": ">=", "value": 50 }
+    ],
+    "weight": 120,
+    "choices": [
+      {
+        "id": "stand_up_friend",
+        "text": "Lao vào can ngăn và đứng ra bảo vệ bạn mình",
+        "effects": [
+          {
+            "type": "RELATIONSHIP_CHANGE",
+            "relationshipPayload": { "target": "friend", "field": "trust", "delta": 20 }
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "friendship",
+              "tags": ["protected_friend_youth", "loyalty"],
+              "emotionalWeight": 90,
+              "importance": 85
+            }
+          },
+          {
+            "type": "SCHEDULE_EVENT",
+            "schedulePayload": {
+              "eventId": "evt_friend_future_job_recommendation",
+              "targetAge": 23,
+              "priority": 2
+            }
+          }
+        ]
+      },
+      {
+        "id": "run_and_call_teacher",
+        "text": "Lặng lẽ chạy đi tìm bảo vệ và thầy cô trợ giúp",
+        "effects": [
+          {
+            "type": "RELATIONSHIP_CHANGE",
+            "relationshipPayload": { "target": "friend", "field": "trust", "delta": 5 }
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "discipline",
+            "value": 2
+          }
+        ]
+      }
+    ],
+    "cooldownMonths": 36,
+    "tags": ["friendship", "moral", "teen"],
+    "maxChainDepth": 5,
+    "repeatable": false,
+    "isWowMoment": true
+  },
+  {
+    "id": "evt_friend_future_job_recommendation",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "CAREER",
+    "importance": 70,
+    "decisionType": "STRATEGIC",
+    "title": "Lời đền đáp từ người bạn năm xưa",
+    "description": "Người bạn từng được bạn bảo vệ năm 14 tuổi nay đã là trưởng phòng và muốn giới thiệu bạn vào công ty họ.",
+    "conditions": [
+      { "type": "age", "min": 22, "max": 28 },
+      { "type": "relationship", "target": "friend", "field": "trust", "op": ">=", "value": 60 },
+      { "type": "memory", "tag": "protected_friend_youth" }
+    ],
+    "weight": 200,
+    "choices": [
+      {
+        "id": "accept_job_recommendation",
+        "text": "Nhận lời phỏng vấn và gia nhập công ty bạn",
+        "effects": [
+          {
+            "type": "CAREER_CHANGE",
+            "target": "career_sales_rep",
+            "field": "Senior Sales Representative",
+            "value": 1500
+          },
+          {
+            "type": "RELATIONSHIP_CHANGE",
+            "relationshipPayload": { "target": "friend", "field": "closeness", "delta": 15 }
+          }
+        ]
+      },
+      {
+        "id": "decline_job_recommendation",
+        "text": "Cảm ơn bạn nhưng quyết định tự tìm lối đi riêng",
+        "effects": [
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "ambition",
+            "value": 3
+          }
+        ]
+      }
+    ],
+    "cooldownMonths": 48,
+    "tags": ["career", "friendship", "consequence", "wow"],
+    "maxChainDepth": 5,
+    "repeatable": false,
+    "isWowMoment": true
+  }
+]
