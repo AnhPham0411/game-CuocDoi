@@ -1,13 +1,13 @@
 # LIFE — AUTOMATED BALANCE REPORT
 
-Generated: 2026-09-06T16:39:17.860Z
-Lives Simulated: 10000 | Seed: 42 | Time: 26.68s
+Generated: 2026-09-07T01:01:12.315Z
+Lives Simulated: 10000 | Seed: 42 | Time: 29.45s
 
 > ⚠️ **Content only defines age conditions up to 26, but each life is simulated up to ~75 years. Every turn past age 26 falls through to the filler event, so wealth/happiness/career averages below are diluted by 49+ years of "nothing happens" and do not reflect the Birth→26 slice this project is currently balancing (ROADMAP Gate G2).**
 
 ## Sanity Metrics (§88, §90)
 - **Average Lifespan**: 75 years
-- **Average Peak Wealth**: $4034
+- **Average Peak Wealth**: $4027
 - **Average Happiness**: 53 / 100
 - **Childhood Mortality (<20 yo)**: 0.00% (Target: < 5%)
 - **Billionaire Rate**: 0.00% (Target: < 2%)

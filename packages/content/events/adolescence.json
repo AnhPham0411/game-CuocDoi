@@ -49,7 +49,7 @@
               ],
               "emotionalWeight": 85,
               "importance": 65,
-              "description": "Nhịp đập loạn nhịp đầu đời mà bạn sẽ không quên."
+              "description": "Run tay viết một bức thư tỏ tình gửi cho người ấy."
             }
           },
           {
@@ -87,7 +87,7 @@
               ],
               "emotionalWeight": 60,
               "importance": 65,
-              "description": "Nhịp đập loạn nhịp đầu đời mà bạn sẽ không quên."
+              "description": "Chỉ dám lặng lẽ nhìn theo người ấy từ xa, không nói nên lời."
             }
           }
         ]
@@ -173,7 +173,7 @@
               ],
               "emotionalWeight": 85,
               "importance": 65,
-              "description": "Nhịp đập loạn nhịp đầu đời mà bạn sẽ không quên."
+              "description": "Liều một lần nói thẳng cảm xúc, tim đập như trống hội."
             }
           },
           {
@@ -211,7 +211,7 @@
               ],
               "emotionalWeight": 60,
               "importance": 65,
-              "description": "Nhịp đập loạn nhịp đầu đời mà bạn sẽ không quên."
+              "description": "Giữ rung động đầu đời cho riêng mình, không ai hay biết."
             }
           }
         ]
@@ -308,7 +308,7 @@
               ],
               "emotionalWeight": 50,
               "importance": 85,
-              "description": "Kỷ niệm ngày đi học: thi vào trường chuyên — học nặng nhưng mở nhiều cửa đại học."
+              "description": "Chọn thi vào trường chuyên, chấp nhận áp lực học hành nặng nề."
             }
           }
         ]
@@ -339,7 +339,7 @@
               ],
               "emotionalWeight": 40,
               "importance": 85,
-              "description": "Kỷ niệm ngày đi học: trường phổ thông bình thường — cân bằng học và sống."
+              "description": "Chọn trường phổ thông bình thường, muốn cân bằng học và sống."
             }
           }
         ]
@@ -375,7 +375,7 @@
               ],
               "emotionalWeight": 35,
               "importance": 85,
-              "description": "Kỷ niệm ngày đi học: trường nghề — học kỹ năng thực tế và đi làm sớm."
+              "description": "Chọn học nghề để sớm có kỹ năng thực tế và đi làm."
             }
           }
         ]
@@ -453,7 +453,7 @@
               ],
               "emotionalWeight": 50,
               "importance": 85,
-              "description": "Kỷ niệm ngày đi học: thi vào trường chuyên — học nặng nhưng mở nhiều cửa đại học."
+              "description": "Đánh cược vào trường chuyên, tin rằng con đường này mở nhiều cửa hơn."
             }
           }
         ]
@@ -484,7 +484,7 @@
               ],
               "emotionalWeight": 40,
               "importance": 85,
-              "description": "Kỷ niệm ngày đi học: trường phổ thông bình thường — cân bằng học và sống."
+              "description": "Không chạy theo trường chuyên, chỉ cần một chỗ học vừa sức."
             }
           }
         ]
@@ -520,7 +520,7 @@
               ],
               "emotionalWeight": 35,
               "importance": 85,
-              "description": "Kỷ niệm ngày đi học: trường nghề — học kỹ năng thực tế và đi làm sớm."
+              "description": "Rẽ hướng học nghề, muốn tự lập sớm hơn bạn bè cùng lứa."
             }
           }
         ]
@@ -599,7 +599,7 @@
               ],
               "emotionalWeight": 90,
               "importance": 85,
-              "description": "Một kỷ niệm khó quên: bảo vệ bạn bè."
+              "description": "Lao vào can ngăn, đứng ra bảo vệ bạn dù có thể bị vạ lây."
             }
           },
           {
@@ -661,7 +661,7 @@
               ],
               "emotionalWeight": -70,
               "importance": 65,
-              "description": "Một kỷ niệm khó quên: bảo vệ bạn bè."
+              "description": "Sợ hãi quay lưng bước đi, giả vờ như không nhìn thấy gì."
             }
           }
         ]
@@ -727,7 +727,7 @@
               ],
               "emotionalWeight": -75,
               "importance": 72,
-              "description": "Một kỷ niệm khó quên: lần chia tay đầu tiên."
+              "description": "Cho phép mình khóc thật to rồi tâm sự hết với bạn bè."
             }
           }
         ]
@@ -753,7 +753,7 @@
               ],
               "emotionalWeight": -80,
               "importance": 72,
-              "description": "Một kỷ niệm khó quên: lần chia tay đầu tiên."
+              "description": "Giả vờ ổn, chôn chặt nỗi buồn chia tay vào trong lòng."
             }
           }
         ]
@@ -785,7 +785,7 @@
               ],
               "emotionalWeight": -40,
               "importance": 72,
-              "description": "Một kỷ niệm khó quên: lần chia tay đầu tiên."
+              "description": "Dồn hết tâm trí vào học hành để quên đi cuộc chia tay."
             }
           }
         ]
@@ -1018,6 +1018,12 @@
         "type": "age",
         "min": 15,
         "max": 17
+      },
+      {
+        "type": "personality",
+        "axis": "ambition",
+        "op": ">=",
+        "value": 55
       }
     ],
     "weight": 90,
@@ -1052,7 +1058,7 @@
               ],
               "emotionalWeight": 55,
               "importance": 58,
-              "description": "Một kỷ niệm khó quên: công việc bán thời gian đầu tiên."
+              "description": "Buổi làm đầu tiên khiến bạn hiểu thế nào là tự kiếm ra đồng tiền."
             }
           }
         ]
@@ -1143,7 +1149,7 @@
               ],
               "emotionalWeight": 40,
               "importance": 78,
-              "description": "Khoảnh khắc bạn phải đối mặt với thử thách cám dỗ."
+              "description": "Dứt khoát từ chối và rời khỏi bữa tiệc ngay lập tức."
             }
           }
         ]
@@ -1179,7 +1185,7 @@
               ],
               "emotionalWeight": -60,
               "importance": 78,
-              "description": "Khoảnh khắc bạn phải đối mặt với thử thách cám dỗ."
+              "description": "Tò mò thử một lần, dù trong lòng có chút bất an."
             }
           }
         ]
@@ -1264,7 +1270,7 @@
               ],
               "emotionalWeight": 40,
               "importance": 78,
-              "description": "Khoảnh khắc bạn phải đối mặt với thử thách cám dỗ."
+              "description": "Nói không và bước ra khỏi đám đông đang cổ vũ."
             }
           }
         ]
@@ -1300,7 +1306,7 @@
               ],
               "emotionalWeight": -60,
               "importance": 78,
-              "description": "Khoảnh khắc bạn phải đối mặt với thử thách cám dỗ."
+              "description": "Nhượng bộ trước áp lực bạn bè, thử một lần cho biết."
             }
           }
         ]
@@ -1385,7 +1391,7 @@
               ],
               "emotionalWeight": 80,
               "importance": 80,
-              "description": "Cầm tấm bằng trên tay, tự hào và đầy hy vọng."
+              "description": "Tốt nghiệp cấp 2 giữa tiếng cười và bạn bè vây quanh."
             }
           }
         ]
@@ -1417,7 +1423,7 @@
               ],
               "emotionalWeight": 65,
               "importance": 80,
-              "description": "Cầm tấm bằng trên tay, tự hào và đầy hy vọng."
+              "description": "Ngồi một mình sau lễ tốt nghiệp, nghĩ về những gì sắp tới."
             }
           }
         ]
@@ -1489,7 +1495,7 @@
               ],
               "emotionalWeight": 80,
               "importance": 80,
-              "description": "Cầm tấm bằng trên tay, tự hào và đầy hy vọng."
+              "description": "Một buổi tốt nghiệp ồn ào, ai cũng muốn chụp ảnh cùng bạn."
             }
           }
         ]
@@ -1521,7 +1527,7 @@
               ],
               "emotionalWeight": 65,
               "importance": 80,
-              "description": "Cầm tấm bằng trên tay, tự hào và đầy hy vọng."
+              "description": "Trong lúc mọi người reo hò, bạn lặng lẽ tận hưởng khoảnh khắc riêng."
             }
           }
         ]
@@ -1551,6 +1557,12 @@
         "type": "age",
         "min": 13,
         "max": 17
+      },
+      {
+        "type": "personality",
+        "axis": "extraversion",
+        "op": ">=",
+        "value": 55
       }
     ],
     "weight": 65,
@@ -1653,7 +1665,7 @@
               ],
               "emotionalWeight": -85,
               "importance": 90,
-              "description": "Một kỷ niệm khó quên: ba mẹ ly hôn."
+              "description": "Chọn ở lại với mẹ sau khi ba mẹ chia tay."
             }
           },
           {
@@ -1695,7 +1707,7 @@
               ],
               "emotionalWeight": -85,
               "importance": 90,
-              "description": "Một kỷ niệm khó quên: ba mẹ ly hôn."
+              "description": "Chọn ở lại với ba sau khi ba mẹ chia tay."
             }
           },
           {
@@ -1733,7 +1745,7 @@
               ],
               "emotionalWeight": -75,
               "importance": 90,
-              "description": "Một kỷ niệm khó quên: ba mẹ ly hôn."
+              "description": "Tự nguyện chia thời gian ở với cả ba lẫn mẹ mỗi tuần."
             }
           }
         ]
@@ -1883,7 +1895,7 @@
               ],
               "emotionalWeight": 65,
               "importance": 65,
-              "description": "Khoảnh khắc nhận ra đam mê thực sự của mình."
+              "description": "Lần đầu nói to ước mơ làm bác sĩ để cứu người."
             }
           }
         ]
@@ -1914,7 +1926,7 @@
               ],
               "emotionalWeight": 60,
               "importance": 65,
-              "description": "Khoảnh khắc nhận ra đam mê thực sự của mình."
+              "description": "Mơ về việc tự tay xây nên những công trình lớn."
             }
           }
         ]
@@ -1946,7 +1958,7 @@
               ],
               "emotionalWeight": 50,
               "importance": 65,
-              "description": "Khoảnh khắc nhận ra đam mê thực sự của mình."
+              "description": "Muốn làm nghệ sĩ, dù trong lòng vẫn sợ ba mẹ phản đối."
             }
           }
         ]
@@ -1977,7 +1989,7 @@
               ],
               "emotionalWeight": 65,
               "importance": 65,
-              "description": "Khoảnh khắc nhận ra đam mê thực sự của mình."
+              "description": "Nhen nhóm ý định tự làm chủ, không muốn làm thuê cho ai."
             }
           }
         ]
@@ -2049,7 +2061,7 @@
               ],
               "emotionalWeight": 65,
               "importance": 65,
-              "description": "Khoảnh khắc nhận ra đam mê thực sự của mình."
+              "description": "Ước mơ khoác áo blouse trắng lớn dần trong bạn từng ngày."
             }
           }
         ]
@@ -2080,7 +2092,7 @@
               ],
               "emotionalWeight": 60,
               "importance": 65,
-              "description": "Khoảnh khắc nhận ra đam mê thực sự của mình."
+              "description": "Bạn bắt đầu mơ về những bản vẽ kỹ thuật của riêng mình."
             }
           }
         ]
@@ -2112,7 +2124,7 @@
               ],
               "emotionalWeight": 50,
               "importance": 65,
-              "description": "Khoảnh khắc nhận ra đam mê thực sự của mình."
+              "description": "Niềm đam mê nghệ thuật thắng thế, dù chưa biết ba mẹ nghĩ gì."
             }
           }
         ]
@@ -2143,7 +2155,7 @@
               ],
               "emotionalWeight": 65,
               "importance": 65,
-              "description": "Khoảnh khắc nhận ra đam mê thực sự của mình."
+              "description": "Ý tưởng khởi nghiệp cứ len lỏi trong đầu bạn suốt học kỳ đó."
             }
           }
         ]
@@ -2174,6 +2186,12 @@
         "type": "age",
         "min": 13,
         "max": 17
+      },
+      {
+        "type": "personality",
+        "axis": "agreeableness",
+        "op": ">=",
+        "value": 55
       }
     ],
     "weight": 90,
@@ -2221,7 +2239,7 @@
               ],
               "emotionalWeight": -40,
               "importance": 55,
-              "description": "Một kỷ niệm khó quên: mâu thuẫn trong nhóm bạn."
+              "description": "Buộc phải chọn một phe trong nhóm bạn, dù biết sẽ mất lòng bên còn lại."
             }
           }
         ]
@@ -2403,7 +2421,7 @@
               ],
               "emotionalWeight": -30,
               "importance": 68,
-              "description": "Bài học đầu tiên về giá trị của đồng tiền."
+              "description": "Xin đi làm thêm để phụ ba mẹ khi nhà gặp khó khăn tiền bạc."
             }
           }
         ]
@@ -2449,7 +2467,7 @@
               ],
               "emotionalWeight": -20,
               "importance": 68,
-              "description": "Bài học đầu tiên về giá trị của đồng tiền."
+              "description": "Lặng lẽ chấp nhận cảnh nhà eo hẹp, không đòi hỏi gì thêm."
             }
           }
         ]
@@ -2526,7 +2544,7 @@
               ],
               "emotionalWeight": -30,
               "importance": 68,
-              "description": "Bài học đầu tiên về giá trị của đồng tiền."
+              "description": "Tự nguyện nhịn tiêu vặt để đỡ đần gia đình lúc túng thiếu."
             }
           }
         ]
@@ -2572,7 +2590,7 @@
               ],
               "emotionalWeight": -20,
               "importance": 68,
-              "description": "Bài học đầu tiên về giá trị của đồng tiền."
+              "description": "Học cách sống thiếu thốn mà không một lời than vãn."
             }
           }
         ]
@@ -2722,7 +2740,7 @@
               ],
               "emotionalWeight": 90,
               "importance": 92,
-              "description": "Bắt đầu chương mới của cuộc đời tại giảng đường."
+              "description": "Điểm thi cao đủ để bước vào ngôi trường đại học mơ ước."
             }
           }
         ]
@@ -2753,7 +2771,7 @@
               ],
               "emotionalWeight": 50,
               "importance": 92,
-              "description": "Bắt đầu chương mới của cuộc đời tại giảng đường."
+              "description": "Điểm thi vừa đủ, bạn chọn ngôi trường gần nhà hơn là mơ ước."
             }
           }
         ]
@@ -2785,7 +2803,7 @@
               ],
               "emotionalWeight": -85,
               "importance": 92,
-              "description": "Bắt đầu chương mới của cuộc đời tại giảng đường."
+              "description": "Kỳ thi đại học không như mong đợi — phải nghĩ lại mọi kế hoạch."
             }
           }
         ]
@@ -2858,7 +2876,7 @@
               ],
               "emotionalWeight": 90,
               "importance": 92,
-              "description": "Bắt đầu chương mới của cuộc đời tại giảng đường."
+              "description": "Nhìn bảng điểm, bạn biết mình đã mở được cánh cửa đại học top."
             }
           }
         ]
@@ -2889,7 +2907,7 @@
               ],
               "emotionalWeight": 50,
               "importance": 92,
-              "description": "Bắt đầu chương mới của cuộc đời tại giảng đường."
+              "description": "Không phải trường mơ ước, nhưng đủ để bắt đầu một chương mới."
             }
           }
         ]
@@ -2921,7 +2939,7 @@
               ],
               "emotionalWeight": -85,
               "importance": 92,
-              "description": "Bắt đầu chương mới của cuộc đời tại giảng đường."
+              "description": "Ngồi trước kết quả thi, bạn phải học cách chấp nhận và làm lại."
             }
           }
         ]
@@ -3073,7 +3091,7 @@
               ],
               "emotionalWeight": 85,
               "importance": 85,
-              "description": "Một cuộc gặp gỡ tình cờ thay đổi mọi thứ."
+              "description": "Mở lòng kể hết những điều bạn giấu kín bấy lâu."
             }
           }
         ]
@@ -3158,7 +3176,7 @@
               ],
               "emotionalWeight": 85,
               "importance": 85,
-              "description": "Một cuộc gặp gỡ tình cờ thay đổi mọi thứ."
+              "description": "Bất ngờ trải lòng với một người xa lạ vừa gặp."
             }
           }
         ]
@@ -3201,6 +3219,12 @@
         "type": "age",
         "min": 14,
         "max": 16
+      },
+      {
+        "type": "personality",
+        "axis": "risk_tolerance",
+        "op": ">=",
+        "value": 55
       }
     ],
     "weight": 60,
@@ -3238,7 +3262,7 @@
               ],
               "emotionalWeight": 30,
               "importance": 58,
-              "description": "Một kỷ niệm khó quên: nổi loạn học đường."
+              "description": "Cắt học, phá luật, sống ngược lại mọi quy tắc — một giai đoạn bạn không hối hận."
             }
           }
         ]
@@ -3340,7 +3364,7 @@
               ],
               "emotionalWeight": 85,
               "importance": 88,
-              "description": "Cầm tấm bằng trên tay, tự hào và đầy hy vọng."
+              "description": "Cầm tấm bằng cấp 3, bạn thấy nhẹ nhõm và sẵn sàng cho chương mới."
             }
           }
         ]
@@ -3372,7 +3396,7 @@
               ],
               "emotionalWeight": 70,
               "importance": 88,
-              "description": "Cầm tấm bằng trên tay, tự hào và đầy hy vọng."
+              "description": "Rời trường cấp 3 với một nỗi buồn khó gọi tên, nhưng vẫn bước tiếp."
             }
           }
         ]
@@ -3445,7 +3469,7 @@
               ],
               "emotionalWeight": 85,
               "importance": 88,
-              "description": "Cầm tấm bằng trên tay, tự hào và đầy hy vọng."
+              "description": "Bước ra khỏi cổng trường lần cuối, lòng đầy háo hức hơn là tiếc nuối."
             }
           }
         ]
@@ -3477,7 +3501,7 @@
               ],
               "emotionalWeight": 70,
               "importance": 88,
-              "description": "Cầm tấm bằng trên tay, tự hào và đầy hy vọng."
+              "description": "Ba năm cấp 3 khép lại trong một buổi chiều lặng lẽ và nhiều cảm xúc."
             }
           }
         ]
@@ -3489,6 +3513,362 @@
       "graduation",
       "milestone",
       "teen"
+    ],
+    "maxChainDepth": 3,
+    "repeatable": false,
+    "isWowMoment": false
+  },
+  {
+    "id": "evt_teen_part_time_job_branch_alt",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "CAREER",
+    "importance": 58,
+    "decisionType": "STRATEGIC",
+    "title": "Công việc bán thời gian đầu tiên (vì cần tiền)",
+    "description": "Một người quen giới thiệu việc làm thêm cuối tuần. Bạn không hào hứng lắm, nhưng nhà đang cần thêm một khoản thu nhập.",
+    "conditions": [
+      {
+        "type": "age",
+        "min": 15,
+        "max": 17
+      },
+      {
+        "type": "personality",
+        "axis": "ambition",
+        "op": "<",
+        "value": 55
+      }
+    ],
+    "weight": 90,
+    "choices": [
+      {
+        "id": "take_the_job",
+        "text": "Nhận việc làm thêm, dù vất vả",
+        "effects": [
+          {
+            "type": "MONEY_CHANGE",
+            "value": 500
+          },
+          {
+            "type": "SKILL_CHANGE",
+            "target": "work_ethic",
+            "value": 8
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "conscientiousness",
+            "value": 3
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "career",
+              "tags": [
+                "first_job",
+                "part_time",
+                "responsibility"
+              ],
+              "emotionalWeight": 55,
+              "importance": 58,
+              "description": "Nhận việc không vì đam mê, chỉ vì gia đình cần thêm một khoản tiền."
+            }
+          }
+        ]
+      },
+      {
+        "id": "focus_on_school",
+        "text": "Từ chối, cần tập trung vào học",
+        "effects": [
+          {
+            "type": "STAT_CHANGE",
+            "field": "education",
+            "target": "education",
+            "value": 5
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "discipline",
+            "value": 2
+          }
+        ]
+      }
+    ],
+    "cooldownMonths": 24,
+    "tags": [
+      "career",
+      "work",
+      "teen",
+      "money"
+    ],
+    "maxChainDepth": 5,
+    "repeatable": false,
+    "isWowMoment": false
+  },
+  {
+    "id": "evt_teen_school_rebellion_branch_alt",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "SCHOOL",
+    "importance": 58,
+    "decisionType": "MORAL",
+    "title": "Nổi loạn học đường (trong im lặng)",
+    "description": "Bạn cảm thấy chán ghét hệ thống trường lớp, nhưng không đủ can đảm để công khai chống đối — sự nổi loạn của bạn âm thầm hơn nhiều.",
+    "conditions": [
+      {
+        "type": "age",
+        "min": 14,
+        "max": 16
+      },
+      {
+        "type": "personality",
+        "axis": "risk_tolerance",
+        "op": "<",
+        "value": 55
+      }
+    ],
+    "weight": 60,
+    "choices": [
+      {
+        "id": "full_rebellion",
+        "text": "Cắt học, tụ tập bạn bè và sống ngược lại mọi quy tắc",
+        "effects": [
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "risk_tolerance",
+            "value": 5
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "education",
+            "target": "education",
+            "value": -10
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "conscientiousness",
+            "value": -4
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "life",
+              "tags": [
+                "school_rebellion",
+                "teen_identity",
+                "risk"
+              ],
+              "emotionalWeight": 30,
+              "importance": 58,
+              "description": "Âm thầm chống đối theo cách riêng, không ồn ào nhưng vẫn là nổi loạn."
+            }
+          }
+        ]
+      },
+      {
+        "id": "express_through_art",
+        "text": "Nổi loạn qua nghệ thuật và sáng tạo",
+        "effects": [
+          {
+            "type": "SKILL_CHANGE",
+            "target": "art",
+            "value": 6
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "openness",
+            "value": 4
+          }
+        ]
+      },
+      {
+        "id": "channel_into_study",
+        "text": "Thay đổi trong giới hạn cho phép, vẫn đến trường",
+        "effects": [
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "agreeableness",
+            "value": 2
+          }
+        ]
+      }
+    ],
+    "cooldownMonths": 18,
+    "tags": [
+      "school",
+      "teen",
+      "rebellion",
+      "identity"
+    ],
+    "maxChainDepth": 3,
+    "repeatable": false,
+    "isWowMoment": false
+  },
+  {
+    "id": "evt_teen_friend_group_conflict_branch_alt",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "FRIENDSHIP",
+    "importance": 55,
+    "decisionType": "SOCIAL",
+    "title": "Mâu thuẫn trong nhóm bạn (đứng ngoài cuộc)",
+    "description": "Nhóm bạn thân của bạn đang mâu thuẫn lớn. Bạn bị kéo vào giữa, nhưng thứ bạn muốn nhất lúc này là không phải chọn phe.",
+    "conditions": [
+      {
+        "type": "age",
+        "min": 13,
+        "max": 17
+      },
+      {
+        "type": "personality",
+        "axis": "agreeableness",
+        "op": "<",
+        "value": 55
+      }
+    ],
+    "weight": 90,
+    "choices": [
+      {
+        "id": "mediate",
+        "text": "Cố gắng hòa giải hai bên",
+        "effects": [
+          {
+            "type": "SKILL_CHANGE",
+            "target": "communication",
+            "value": 5
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "agreeableness",
+            "value": 3
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "stress",
+            "target": "stress",
+            "value": 10
+          }
+        ]
+      },
+      {
+        "id": "choose_one_side",
+        "text": "Chọn một phe và trung thành với họ",
+        "effects": [
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "conscientiousness",
+            "value": 2
+          },
+          {
+            "type": "MEMORY_ADD",
+            "memoryPayload": {
+              "type": "friendship",
+              "tags": [
+                "friend_conflict",
+                "loyalty_tested"
+              ],
+              "emotionalWeight": -40,
+              "importance": 55,
+              "description": "Miễn cưỡng ngả về một phía chỉ vì bị dồn ép quá nhiều."
+            }
+          }
+        ]
+      },
+      {
+        "id": "stay_neutral",
+        "text": "Tuyên bố trung lập và tránh xa cả hai",
+        "effects": [
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "risk_tolerance",
+            "value": -2
+          }
+        ]
+      }
+    ],
+    "cooldownMonths": 12,
+    "tags": [
+      "friendship",
+      "conflict",
+      "teen"
+    ],
+    "maxChainDepth": 3,
+    "repeatable": false,
+    "isWowMoment": false
+  },
+  {
+    "id": "evt_teen_social_media_fame_branch_alt",
+    "schemaVersion": 1,
+    "contentVersion": 1,
+    "category": "SOCIAL",
+    "importance": 48,
+    "decisionType": "STRATEGIC",
+    "title": "Nổi tiếng trên mạng xã hội (không mong muốn)",
+    "description": "Một bài đăng của bạn bất ngờ lan truyền. Bạn chưa từng muốn sự chú ý này và không biết phải phản ứng thế nào.",
+    "conditions": [
+      {
+        "type": "age",
+        "min": 13,
+        "max": 17
+      },
+      {
+        "type": "personality",
+        "axis": "extraversion",
+        "op": "<",
+        "value": 55
+      }
+    ],
+    "weight": 65,
+    "choices": [
+      {
+        "id": "build_audience",
+        "text": "Tận dụng cơ hội xây dựng kênh nội dung",
+        "effects": [
+          {
+            "type": "SKILL_CHANGE",
+            "target": "communication",
+            "value": 8
+          },
+          {
+            "type": "STAT_CHANGE",
+            "field": "personality",
+            "target": "extraversion",
+            "value": 3
+          },
+          {
+            "type": "MONEY_CHANGE",
+            "value": 200
+          }
+        ]
+      },
+      {
+        "id": "enjoy_then_move_on",
+        "text": "Thích thú rồi quên đi, không muốn áp lực",
+        "effects": [
+          {
+            "type": "STAT_CHANGE",
+            "field": "happiness",
+            "target": "happiness",
+            "value": 5
+          }
+        ]
+      }
+    ],
+    "cooldownMonths": 18,
+    "tags": [
+      "social",
+      "teen",
+      "fame",
+      "media"
     ],
     "maxChainDepth": 3,
     "repeatable": false,
